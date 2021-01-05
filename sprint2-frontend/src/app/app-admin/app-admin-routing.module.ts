@@ -13,6 +13,7 @@ import { StatisticTicketComponent } from './statistic/statistic-ticket/statistic
 import { StatisticSalesComponent } from './statistic/statistic-sales/statistic-sales.component';
 import { StatisticCarComponent } from './statistic/statistic-car/statistic-car.component';
 import { StatisticCustomerComponent } from './statistic/statistic-customer/statistic-customer.component';
+import { ListParkingSlotComponent } from './parking-slot/list-parking-slot/list-parking-slot.component';
 
 
 export const routes: Routes = [
@@ -30,6 +31,10 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
-  declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent, StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent]
+  declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent,
+    EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent,
+    StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent,
+    ListParkingSlotComponent
+  ]
 })
 export class AppAdminRoutingModule { }
