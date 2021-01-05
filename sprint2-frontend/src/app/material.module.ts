@@ -11,9 +11,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 // @ts-ignore
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   imports: [
