@@ -10,12 +10,17 @@ import {AuthenticationModule} from './authentication/authentication.module';
 import {AppCustomerModule} from './app-customer/app-customer.module';
 import {AppEmployeeModule} from './app-employee/app-employee.module';
 import {AppAdminModule} from './app-admin/app-admin.module';
+import {MaterialModule} from './material.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
+        CommonModule,
+        ReactiveFormsModule,
         BrowserModule,
         RouterModule,
         AppRoutingModule,
@@ -24,7 +29,8 @@ import {AppAdminModule} from './app-admin/app-admin.module';
         AuthenticationModule,
         AppCustomerModule,
         AppEmployeeModule,
-        AppAdminModule
+        AppAdminModule,
+        MaterialModule
     ],
     providers: [],
     bootstrap: [AppComponent]

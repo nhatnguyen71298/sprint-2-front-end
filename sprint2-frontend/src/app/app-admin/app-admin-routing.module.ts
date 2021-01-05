@@ -29,6 +29,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  // tslint:disable-next-line:max-line-length
   declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent, StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent]
 })
 export class AppAdminRoutingModule { }
