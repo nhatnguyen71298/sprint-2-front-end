@@ -41,9 +41,21 @@
         <thead>
         <tr>
           <th>STT</th>
-          <th (click)="sort('floor')">Tầng</th>
-          <th (click)="sort('slotNumber')">Vị trí</th>
-          <th (click)="sort('reserved')">Tình trạng</th>
+          <th [class.active]="key === 'floor'"
+            (click)="sort('floor')">Tầng
+            <span [hidden]="reverse">▼</span>
+            <span [hidden]="!reverse">▲</span>
+          </th>
+          <th [class.active]="key === 'slotNumber'"
+            (click)="sort('slotNumber')">Vị trí
+            <span [hidden]="reverse">▼</span>
+            <span [hidden]="!reverse">▲</span>
+          </th>
+          <th [class.active]="key === 'reserved'"
+            (click)="sort('reserved')">Tình trạng
+            <span [hidden]="reverse">▼</span>
+            <span [hidden]="!reverse">▲</span>
+          </th>
           <th>Thao tác</th>
         </tr>
         </thead>

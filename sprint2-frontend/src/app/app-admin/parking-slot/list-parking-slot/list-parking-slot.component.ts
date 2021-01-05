@@ -14,6 +14,7 @@ export class ListParkingSlotComponent implements OnInit {
   public reverse = true;
   public key;
   public test = 'first';
+  public position;
 
   constructor(
     public parkingSlotService: MaiService,
