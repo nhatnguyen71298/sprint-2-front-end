@@ -1,0 +1,19 @@
+footer .copyright {
+    /*padding: 15px 0;*/
+    /*margin-top: 20px;*/
+    font-size: 15px;
+}
+
+/*footer .copyright span {*/
+/*    color: blue;*/
+/*}*/
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    color: blue;
+    text-align: center;
+}
+
