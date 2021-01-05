@@ -1,11 +1,6 @@
-// @ts-ignore
 import { Component, OnInit } from '@angular/core';
-import {ParkingSlotService} from "../../../service/parking-slot.service";
-import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute} from "@angular/router";
-import {DetailParkingSlotComponent} from "../detail-parking-slot/detail-parking-slot.component";
+import {MaiService} from "../../../service/mai.service";
 
-// @ts-ignore
 @Component({
   selector: 'app-list-parking-slot',
   templateUrl: './list-parking-slot.component.html',
@@ -19,44 +14,61 @@ export class ListParkingSlotComponent implements OnInit {
   public reverse = true;
   public key;
   public test = 'first';
-  constructor(private parkingSlotService: ParkingSlotService,
-              public dialog: MatDialog,
-              private route: ActivatedRoute
-  ) { }
+
+  constructor(
+    public parkingSlotService: MaiService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.parkingSlotService.getAllParkingLotService().subscribe(data => {
       this.list = data;
-      console.log(this.list);
     });
+    this.keywordSearch = '';
   }
 
-  changePage(p: number) {
+  searchFloor() {
+    if (this.keywordSearch !== '') {
+      if (this.keywordSearch.match('^([0-9]+)*$')) {
+        this.keywordSearch = this.keywordSearch.trim();
+        this.parkingSlotService.searchParkingLotFloorService(this.keywordSearch).subscribe(data => {
+          this.list = data;
+          if (this.list.length === 0) {
+            this.checkList = 'false';
+          }
+        });
+      } else {
+        alert('Vui lòng nhập từ khóa không có khoảng trắng thừa!');
+        this.resetSearch();
+      }
+    } else {
+      alert('Vui lòng nhập từ khóa tìm kiếm');
+    }
+  }
+
+  keyDownFunction(event) {
+    if (event.keyCode === 13) {
+      console.log(event.keyCode);
+      this.searchFloor();
+    }
+  }
+
+  resetSearch() {
+    this.keywordSearch = '';
+    this.checkList = 'true';
+    this.ngOnInit();
+  }
+
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+  changePage(p) {
     if (p !== 1) {
       this.test = 'second';
     } else {
       this.test = 'first';
     }
-  }
-
-  keyDownFunction(event: KeyboardEvent) {
-    if (event.keyCode === 13) {
-      console.log(event.keyCode);
-    }
-  }
-
-  openViewDialog(id: number): void {
-    this.parkingSlotService.getById(id).subscribe(dataFromServer =>{
-      const dialogRef = this.dialog.open(DetailParkingSlotComponent, {
-        width: '850px',
-        disableClose: true,
-        data: {data1: dataFromServer}
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        this.ngOnInit();
-      });
-    });
   }
 }

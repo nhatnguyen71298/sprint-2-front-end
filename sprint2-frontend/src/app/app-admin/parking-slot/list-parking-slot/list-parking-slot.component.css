@@ -46,7 +46,6 @@ body {
 
 .table-title .btn {
   color: #fff;
-  /*float: right;*/
   font-size: 13px;
   border: none;
   min-width: 50px;
@@ -72,10 +71,6 @@ table.table tr th, table.table tr td {
   padding: 12px 15px;
   vertical-align: middle;
 }
-
-/*table.table tr th:first-child {*/
-/*    width: 60px;*/
-/*}*/
 
 table.table tr th:last-child {
   width:160px;
@@ -160,7 +155,4 @@ table.table .avatar {
 
 .hint-text {
   float: left;
-}
-table td a:hover {
-  color: #2196F3;
 }
