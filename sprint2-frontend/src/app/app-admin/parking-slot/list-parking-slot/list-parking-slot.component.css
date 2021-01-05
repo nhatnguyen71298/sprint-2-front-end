@@ -27,11 +27,11 @@ body {
   border-radius: 3px 3px 0 0;
 }
 
-.table-title .row .col-4 input{
+.table-title .row .col-4 input {
   margin: 5px 0 0;
 }
 
-.table-title .row .col-2 button{
+.table-title .row .col-2 button {
   height: 90%;
 }
 
@@ -73,7 +73,7 @@ table.table tr th, table.table tr td {
 }
 
 table.table tr th:last-child {
-  width:160px;
+  width: 160px;
 }
 
 table.table-striped tbody tr:nth-of-type(odd) {
@@ -156,3 +156,16 @@ table.table .avatar {
 .hint-text {
   float: left;
 }
+
+th span {
+  visibility: hidden;
+}
+
+.active {
+  color: #000;
+}
+
+.active span {
+  visibility: visible;
+}
+
