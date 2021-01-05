@@ -1,1 +1,86 @@
-<p>list-parking-slot works!</p>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Danh sách vị trí xe trong bãi ô tô</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container p-0">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row m-0">
+          <div class="col-4 m-0 p-0">
+            <h2><b>Danh sách bãi xe ô tô</b></h2>
+          </div>
+          <div class="col-8 m-0 p-0"></div>
+        </div>
+        <div class="row m-0">
+          <div class="col-2 mt-3 m-0 p-0">
+            <a href="#" class="btn btn-success" [routerLink]="['/admin/create-parking-slot']">
+              <i class="material-icons">&#xE147;</i>
+              <span>Thêm mới vị trí </span></a>
+          </div>
+          <div class="col-5 mt-3 m-0 p-0"></div>
+          <div class="col-1 m-0 p-0 mt-3">Tầng:</div>
+          <div class="col-2 m-0 p-0 mt-3">
+            <input type="text" class="form-control form-control-sm rounded"
+                   placeholder="Tìm kiếm tầng" (keydown)="keyDownFunction($event)"
+                   [(ngModel)]="keywordSearch" style="width: 150px">
+          </div>
+          <div class="col-2 m-0 p-0 mt-3">
+            <button class="fa fa-search btn btn-success m-0 ml-2" (click)="searchFloor()"></button>
+            <button class="fas fa-undo-alt btn btn-success m-0 ml-1" (click)="resetSearch()"></button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>STT</th>
+          <th (click)="sort('floor')">Tầng</th>
+          <th (click)="sort('slotNumber')">Vị trí</th>
+          <th (click)="sort('reserved')">Tình trạng</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let parkingSlot of list | orderBy: key : reverse
+                                            |paginate: { itemsPerPage: 5, currentPage: p}
+                                             let i = index">
+          <td>
+            <span *ngIf="test == 'first'">{{i + 1}}</span>
+            <span *ngIf="test != 'first'">{{(i + 1) + (p - 1) * 5}}</span>
+          </td>
+          <td>{{parkingSlot.floor}}</td>
+          <td>{{parkingSlot.slotNumber}}</td>
+          <td>
+            <span *ngIf="parkingSlot.reserved == 0">Chưa đăng ký</span>
+            <span *ngIf="parkingSlot.reserved == 1">Đã đăng ký</span>
+          </td>
+          <td>
+            <i class="material-icons text-info" title="Detail">remove_red_eye</i>
+            <i class="material-icons text-warning" title="Edit">&#xE254;</i>
+            <i class="material-icons text-danger" title="Delete">&#xE872;</i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="checkList === 'false'">
+        <h1 class="text-danger text-center">Không tìm thấy kết quả</h1>
+        <div align="center">
+          <button class="btn btn-primary mt-3 mb-3" (click)="resetSearch()">Quay Lại</button>
+        </div>
+      </div>
+
+      <div align="center" *ngIf="this.list.length !== 0">
+        <pagination-controls (click)="changePage(p)" (pageChange)="p = $event" previousLabel="Trước" nextLabel="Sau"
+                             responsive="true"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
