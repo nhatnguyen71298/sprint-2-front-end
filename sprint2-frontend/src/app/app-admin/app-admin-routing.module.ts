@@ -19,6 +19,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderModule} from 'ngx-order-pipe';
 import {CommonModule} from '@angular/common';
 import { CreateParkingSlotComponent } from './parking-slot/create-parking-slot/create-parking-slot.component';
+import { EditParkingSlotComponent } from './parking-slot/edit-parking-slot/edit-parking-slot.component';
+import { ListCarExpiredComponent } from './parking-slot/list-car-expired/list-car-expired.component';
+import { DetailCarExpiredComponent } from './parking-slot/detail-car-expired/detail-car-expired.component';
+import {DetailParkingSlotComponent} from './parking-slot/detail-parking-slot/detail-parking-slot.component';
 
 
 export const routes: Routes = [
@@ -30,6 +34,10 @@ export const routes: Routes = [
       // {path: 'page-not-found', component: PageNotFoundComponent},
       {path: 'list-parking-slot', component: ListParkingSlotComponent},
       {path: 'create-parking-slot', component: CreateParkingSlotComponent},
+      {path: 'list-parking-slot', component: ListParkingSlotComponent},
+      {path: 'list-car-expired', component: ListCarExpiredComponent},
+      {path: 'list-parking-slot/edit-parking-slot/:id', component: EditParkingSlotComponent},
+
     ]
   },
 ];
@@ -42,7 +50,9 @@ export const routes: Routes = [
     EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent,
     StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent,
     ListParkingSlotComponent,
-    CreateParkingSlotComponent
-  ]
+    CreateParkingSlotComponent,
+    ListParkingSlotComponent, DetailParkingSlotComponent, EditParkingSlotComponent, ListCarExpiredComponent, DetailCarExpiredComponent
+  ],
+  entryComponents: [DetailParkingSlotComponent]
 })
 export class AppAdminRoutingModule { }

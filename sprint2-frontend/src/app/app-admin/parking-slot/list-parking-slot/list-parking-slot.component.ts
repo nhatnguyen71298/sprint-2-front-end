@@ -17,6 +17,8 @@ export class ListParkingSlotComponent implements OnInit {
 
   constructor(
     public parkingSlotService: MaiService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -70,5 +72,19 @@ export class ListParkingSlotComponent implements OnInit {
     } else {
       this.test = 'first';
     }
+  }
+  openViewDialog(id: number): void {
+    this.parkingSlotService.getById(id).subscribe(dataFromServer =>{
+      const dialogRef = this.dialog.open(DetailParkingSlotComponent, {
+        width: '850px',
+        disableClose: true,
+        data: {data1: dataFromServer}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
   }
 }
