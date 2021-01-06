@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {SuccessfullyPayComponent} from "../successfully-pay/successfully-pay.component";
 import {PayService} from "../../../service/pay.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-pay',
@@ -20,11 +21,13 @@ export class PayComponent implements OnInit {
   public isChecked: boolean;
   private signature;
   private requestID;
+  private idCustomer;
 
   constructor(
     private payService: PayService,
     private dialog: MatDialog,
     protected http: HttpClient,
+    private activedRouter: ActivatedRoute,
   ) {
   }
 
@@ -34,7 +37,10 @@ export class PayComponent implements OnInit {
   }
 
   getListMemberCard() {
-    this.payService.getListMemberCardByIDCustomer(2).subscribe(
+    this.activedRouter.params.subscribe(data => {
+      this.idCustomer = data.idCustomer;
+    });
+    this.payService.getListMemberCardByIDCustomer(this.idCustomer).subscribe(
       (data) => {
         this.memberCardList = data;
       },
