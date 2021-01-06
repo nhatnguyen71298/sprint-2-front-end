@@ -1,8 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {HttpClient} from "@angular/common/http";
-import {SuccessfullyPayComponent} from "../successfully-pay/successfully-pay.component";
-import {PayService} from "../../../service/pay.service";
+// @ts-ignore
+import {MatDialog} from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http';
+import {SuccessfullyPayComponent} from '../successfully-pay/successfully-pay.component';
+import {PayService} from '../../../service/pay.service';
 
 @Component({
   selector: 'app-pay',
