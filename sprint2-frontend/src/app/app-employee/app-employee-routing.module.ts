@@ -21,6 +21,14 @@ import { SalesEditComponent } from './sales-management/sales-edit/sales-edit.com
 import { SalesViewComponent } from './sales-management/sales-view/sales-view.component';
 import { SalesDeleteComponent } from './sales-management/sales-delete/sales-delete.component';
 import {CameraManagementComponent} from './camera/camera-management/camera-management.component';
+import { MemberCardListComponent } from './member-card/member-card-list/member-card-list.component';
+import {CommonModule} from '@angular/common';
+import { MemberCardCreateComponent } from './member-card/member-card-create/member-card-create.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 export const routes: Routes = [
@@ -29,17 +37,19 @@ export const routes: Routes = [
     children: [
       // {path: 'registered-car', component: RegisteredCarComponent},
       {path: 'camera-control', component: CameraManagementComponent},
+
+      {path: 'member-card-list', component: MemberCardListComponent},
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, MatInputModule, MatSelectModule, NgxPaginationModule, MatDatepickerModule, FormsModule],
   exports: [RouterModule],
   declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent]
+    SalesViewComponent, SalesDeleteComponent, MemberCardListComponent, MemberCardCreateComponent]
 })
 export class AppEmployeeRoutingModule { }
