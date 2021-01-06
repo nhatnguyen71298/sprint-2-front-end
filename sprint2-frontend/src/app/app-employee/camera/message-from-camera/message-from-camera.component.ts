@@ -25,14 +25,20 @@ export class MessageFromCameraComponent implements OnInit {
         this.message = 'Xe ' + this.data.data1.plateNumber + ' chưa đăng kí thành viên !';
         break;
       case 'Database error':
-        this.message = 'Cảnh báo: Xe ' + this.data.data1.plateNumber + ' đang có nhiều hơn hai thẻ member còn hạn !';
+        this.message = 'Cảnh báo: Xe ' + this.data.data1.plateNumber + ' đang có thẻ member không hơp lệ !';
         break;
       case 'Member not in expiry':
         this.message = 'Cảnh báo: Xe ' + this.data.data1.plateNumber + ' đã hết hạn thẻ member ! \nKhông được cho ra khỏi bãi !';
         break;
       case 'Member ok':
-        this.message = 'Xe ' + this.data.data1.plateNumber + ' checking thành công !'
-          + '\nThẻ thành viên có thời hạn đến ngày: ';
+        if (this.data.data1.status === false){
+          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa ra khỏi bãi!'
+            + '\nThẻ thành viên có thời hạn đến ngày: ';
+        }
+        if (this.data.data1.status === true){
+          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa vào bãi!'
+            + '\nThẻ thành viên có thời hạn đến ngày: ';
+        }
         break;
     }
   }
