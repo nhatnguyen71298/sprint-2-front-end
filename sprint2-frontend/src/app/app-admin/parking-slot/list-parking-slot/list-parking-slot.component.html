@@ -84,7 +84,6 @@
           <button class="btn btn-primary mt-3 mb-3" (click)="resetSearch()">Quay Lại</button>
         </div>
       </div>
-
       <div align="center" *ngIf="this.list.length !== 0">
         <pagination-controls (click)="changePage(p)" (pageChange)="p = $event" previousLabel="Trước" nextLabel="Sau"
                              responsive="true"></pagination-controls>
