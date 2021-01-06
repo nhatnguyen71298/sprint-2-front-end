@@ -1,0 +1,16 @@
+img {
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+#momo {
+  color: red;
+}
+
+#paypal {
+  color: blue;
+}
+
+#message {
+  margin: -2% 0;
+}

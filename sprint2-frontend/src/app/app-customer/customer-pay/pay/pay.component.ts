@@ -89,7 +89,8 @@ export class PayComponent implements OnInit {
 
         onError: (data, actions) => {
           this.refresh();
-          alert('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. Mong quý khách thông cảm! Xin cảm ơn!');
+          alert('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. ' +
+            'Mong quý khách thông cảm! Xin cảm ơn!');
           console.log('Lỗi hệ thống.');
         }
       }
@@ -102,15 +103,21 @@ export class PayComponent implements OnInit {
     if (this.isChecked) {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal + memberCard.price / 23000);
       this.totalMoneyMoMo = this.totalMoneyMoMo + memberCard.price;
+      console.log(this.totalMoneyMoMo);
+      console.log(this.totalMoneyPayPal);
       this.memberCardListPay.push(memberCard.id);
+      console.log(this.memberCardListPay);
     } else {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal - memberCard.price / 23000 - 1);
       this.totalMoneyMoMo = this.totalMoneyMoMo - memberCard.price;
+      console.log(this.totalMoneyMoMo);
+      console.log(this.totalMoneyPayPal);
       for (let i = 0; i < this.memberCardListPay.length; i++) {
         if (this.memberCardListPay[i] === memberCard.id) {
           this.memberCardListPay.splice(i, i + 1);
         }
       }
+      console.log(this.memberCardListPay);
     }
   }
 
@@ -140,7 +147,8 @@ export class PayComponent implements OnInit {
 
   openSuccessfullyPay(message): void {
     const dialogRef = this.dialog.open(SuccessfullyPayComponent, {
-      width: '500px',
+      width: '525px',
+      height: '505px',
       data: {notification: message},
       disableClose: true
     });
@@ -151,11 +159,14 @@ export class PayComponent implements OnInit {
   }
 
   payByMoMo() {
+    console.log('MoMo start');
     this.payService.payByMoMoService(this.totalMoneyMoMo)
       .subscribe(
         (data) => {
           this.signature = data.message.split(',').shift();
+          console.log(this.signature);
           this.requestID = data.message.split(',').splice(1);
+          console.log(this.requestID);
         },
         (data) => {
         },
@@ -190,6 +201,8 @@ export class PayComponent implements OnInit {
           //   '&orderId=' + this.requestID +
           //   '&signature=' + this.signature +
           //   '&requestType=captureMoMoWallet';
+
+          this.openSuccessfullyPay('MoMo fail');
         });
   }
 }
