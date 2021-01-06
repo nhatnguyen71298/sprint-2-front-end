@@ -1,0 +1,11 @@
+#close{
+  margin-left: 30%;
+  width: 40%;
+  color: white;
+}
+#close:hover{
+  margin-left: 30%;
+  width: 40%;
+  background-color: black;
+  border-color: black;
+}

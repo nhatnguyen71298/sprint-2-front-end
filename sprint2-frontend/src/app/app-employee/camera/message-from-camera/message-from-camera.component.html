@@ -1,0 +1,15 @@
+<div style="text-align: center">
+  <div mat-dialog-title>Cập nhật mới</div>
+  <div mat-dialog-content>
+    <i style="color: red">{{message}}
+      <i *ngIf="data.data1.message == 'Member ok'" style="color: red">
+        {{data.data1.expirationDate | date: 'dd/mm/yyyy'}}
+      </i>
+    </i>
+  </div>
+  <br>
+  <br>
+</div>
+<button mat-dialog-close class="btn btn-warning" id="close" (click)="close()">Xác nhận</button>
+
+
