@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class DetailParkingSlotComponent implements OnInit {
   public ele;
-  constructor(public dialogRef : MatDialogRef<DetailParkingSlotComponent>,
+  constructor(public dialogRef: MatDialogRef<DetailParkingSlotComponent>,
               @Inject(MAT_DIALOG_DATA)
               public data: any) { }
 

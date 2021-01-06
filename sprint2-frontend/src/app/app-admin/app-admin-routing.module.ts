@@ -34,10 +34,8 @@ export const routes: Routes = [
       // {path: 'page-not-found', component: PageNotFoundComponent},
       {path: 'list-parking-slot', component: ListParkingSlotComponent},
       {path: 'create-parking-slot', component: CreateParkingSlotComponent},
-      {path: 'list-parking-slot', component: ListParkingSlotComponent},
       {path: 'list-car-expired', component: ListCarExpiredComponent},
       {path: 'list-parking-slot/edit-parking-slot/:id', component: EditParkingSlotComponent},
-
     ]
   },
 ];
