@@ -1,0 +1,126 @@
+<head xmlns="http://www.w3.org/1999/html">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <title>Thêm vị trí đỗ xe trong bãi</title>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="signup-form col-sm-10">
+      <form [formGroup]="formCreateNew" (keydown)="keyDownFunction($event)">
+        <h2>Thêm mới vị trí</h2>
+        <div class="form-row">
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
+            <label>Tầng <span style="color: red"> (*)</span></label>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+            <input class="form-control" type="text"
+                   formControlName="floor"/>
+
+            <p class="text-danger" style=" margin-left: -29%;"
+               *ngIf="formCreateNew.get('floor').hasError('required')
+                                      && (formCreateNew.controls.floor?.dirty
+                                      || formCreateNew.controls.floor?.touched)">
+              Vui lòng nhập số tầng.
+            </p>
+
+            <p class="text-danger" style=" margin-left: -5%;"
+               *ngIf="formCreateNew.get('floor').hasError('pattern')
+                                      && (formCreateNew.controls.floor?.dirty
+                                      || formCreateNew.controls.floor?.touched)">
+              Số tầng phải là số.
+            </p>
+
+            <p class="text-danger" style=" margin-left: -80%;"
+               *ngIf="formCreateNew.get('floor').hasError('max')
+                                      && (formCreateNew.controls.floor?.dirty
+                                      || formCreateNew.controls.floor?.touched)">
+              Số tầng không vượt quá 5 tầng.
+            </p>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
+            <label>Chiều dài (mm)</label>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+            <p class="form-control">{{height}}</p>
+          </div>
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+        </div>
+
+        <div class="form-row mt-4">
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
+            <label>Vị trí <span style="color: red"> (*)</span></label>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+            <input class="form-control" type="text" formControlName="slotNumber"/>
+            <p class="text-danger" style="margin-left: -11%;"
+               *ngIf="formCreateNew.get('slotNumber').hasError('required')
+                                      && (formCreateNew.controls.slotNumber?.dirty
+                                      || formCreateNew.controls.slotNumber?.touched)">
+              Vui lòng nhập vị trí.
+            </p>
+
+            <p class="text-danger" style=" margin-left: 12%;"
+               *ngIf="formCreateNew.get('slotNumber').hasError('pattern')
+                                      && (formCreateNew.controls.slotNumber?.dirty
+                                      || formCreateNew.controls.slotNumber?.touched)">
+              Vị trí phải là số.
+            </p>
+
+            <p class="text-danger" style=" margin-left: -77%;"
+               *ngIf="formCreateNew.get('slotNumber').hasError('max')
+                                      && (formCreateNew.controls.slotNumber?.dirty
+                                      || formCreateNew.controls.slotNumber?.touched)">
+              Vị trí không quá 50 chỗ/ tầng.
+            </p>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
+            <label>Chiều rộng (mm)</label>
+          </div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
+            <p class="form-control">{{width}}</p>
+          </div>
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+        </div>
+
+        <div class="form-row mt-4">
+          <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
+          <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
+            <label>Loại xe<span style="color: red"> (*)</span></label>
+          </div>
+          <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
+            <input type="radio" name="slotType" (click)="displayHeightWidth('S')"> 4 - 7 chỗ
+          </div>
+
+          <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
+            <input type="radio" name="slotType" (click)="displayHeightWidth('M')"> 9 chỗ - bán tải
+          </div>
+
+          <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
+            <input type="radio" name="slotType" (click)="displayHeightWidth('L')"> > Tải 500 kg
+          </div>
+        </div>
+
+        <div class="form-row mt-4">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2 mt-3">
+            <button type="submit" class="btn btn-secondary" [routerLink]="['/admin/list-parking-slot']">Quay Lại</button>
+          </div>
+          <div class="col-sm-2 mt-3">
+            <button type="submit" class="btn btn-success" (click)="createParkingSlot()">Thêm Mới</button>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+</body>
