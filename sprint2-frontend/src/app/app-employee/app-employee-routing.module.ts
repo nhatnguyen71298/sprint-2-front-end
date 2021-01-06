@@ -20,6 +20,7 @@ import { SalesAddComponent } from './sales-management/sales-add/sales-add.compon
 import { SalesEditComponent } from './sales-management/sales-edit/sales-edit.component';
 import { SalesViewComponent } from './sales-management/sales-view/sales-view.component';
 import { SalesDeleteComponent } from './sales-management/sales-delete/sales-delete.component';
+import {CameraManagementComponent} from './camera/camera-management/camera-management.component';
 
 
 export const routes: Routes = [
@@ -27,6 +28,7 @@ export const routes: Routes = [
     path: 'employee',
     children: [
       // {path: 'registered-car', component: RegisteredCarComponent},
+      {path: 'camera-control', component: CameraManagementComponent},
     ]
   }
 ];
@@ -34,6 +36,10 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent, EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent, RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent, RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent, SalesViewComponent, SalesDeleteComponent]
+  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
+    EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
+    RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
+    RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
+    SalesViewComponent, SalesDeleteComponent]
 })
 export class AppEmployeeRoutingModule { }
