@@ -1,3 +1,4 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,9 +13,12 @@ import {MatInputModule} from '@angular/material/input';
 // @ts-ignore
 import {MatDialogModule} from '@angular/material/dialog';
 import {NgxPaginationModule} from 'ngx-pagination';
+// @ts-ignore
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
-import {MatButtonModule} from "@angular/material/button";
+// @ts-ignore
+import {MatButtonModule} from '@angular/material/button';
 
+// @ts-ignore
 @NgModule({
   imports: [
     MatDatepickerModule,
