@@ -8,7 +8,7 @@
         crossorigin="anonymous">
 </head>
 <body>
-<div class="container p-0">
+<div class="container-fluid p-0">
   <div class="table-responsive">
     <div class="table-wrapper">
       <div class="table-title">
@@ -41,18 +41,15 @@
         <thead>
         <tr>
           <th>STT</th>
-          <th [class.active]="key === 'floor'"
-            (click)="sort('floor')">Tầng
+          <th [class.active]="key === 'floor'" (click)="sort('floor')">Tầng
             <span [hidden]="reverse">▼</span>
             <span [hidden]="!reverse">▲</span>
           </th>
-          <th [class.active]="key === 'slotNumber'"
-            (click)="sort('slotNumber')">Vị trí
+          <th [class.active]="key === 'slotNumber'" (click)="sort('slotNumber')">Vị trí
             <span [hidden]="reverse">▼</span>
             <span [hidden]="!reverse">▲</span>
           </th>
-          <th [class.active]="key === 'reserved'"
-            (click)="sort('reserved')">Tình trạng
+          <th [class.active]="key === 'reserved'" (click)="sort('reserved')">Tình trạng
             <span [hidden]="reverse">▼</span>
             <span [hidden]="!reverse">▲</span>
           </th>
@@ -70,8 +67,8 @@
           <td>{{parkingSlot.floor}}</td>
           <td>{{parkingSlot.slotNumber}}</td>
           <td>
-            <span *ngIf="parkingSlot.reserved == 0">Chưa đăng ký</span>
-            <span *ngIf="parkingSlot.reserved == 1">Đã đăng ký</span>
+            <span *ngIf="parkingSlot.reversed == 0">Chưa đăng ký</span>
+            <span *ngIf="parkingSlot.reversed == 1">Đã đăng ký</span>
           </td>
           <td>
             <i class="material-icons text-info" title="Detail">remove_red_eye</i>

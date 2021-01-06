@@ -14,7 +14,7 @@ export class ListParkingSlotComponent implements OnInit {
   public reverse = true;
   public key;
   public test = 'first';
-  public position;
+  public position: string;
 
   constructor(
     public parkingSlotService: MaiService,
@@ -24,6 +24,7 @@ export class ListParkingSlotComponent implements OnInit {
   ngOnInit(): void {
     this.parkingSlotService.getAllParkingLotService().subscribe(data => {
       this.list = data;
+      console.log(data);
     });
     this.keywordSearch = '';
   }

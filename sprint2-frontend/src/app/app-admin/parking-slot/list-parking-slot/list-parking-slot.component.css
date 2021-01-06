@@ -1,3 +1,7 @@
+.container-fluid{
+  margin-top: -3%;
+}
+
 body {
   color: #435d7d;
   font-family: 'Open Sans', sans-serif;
