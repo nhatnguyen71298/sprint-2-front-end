@@ -10,9 +10,9 @@
 }
 #image{
   position: absolute;
-  bottom: 30px;
+  bottom: 50px;
   left: -370px;
-  height: 430px;
+  height: 490px;
   width: 940px;
 }
 #divInput{
@@ -20,7 +20,7 @@
   position: absolute;
   /*height: 20%;*/
   /*bottom: -30px;*/
-  left: -165px
+  left: -165px;
 }
 
 #formFileLg {
