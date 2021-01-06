@@ -1,53 +1,35 @@
-// @ts-ignore
 import { Component, OnInit } from '@angular/core';
 import {ParkingSlotService} from "../../../service/parking-slot.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
 import {DetailParkingSlotComponent} from "../detail-parking-slot/detail-parking-slot.component";
+import {DetailCarExpiredComponent} from "../detail-car-expired/detail-car-expired.component";
 
-// @ts-ignore
 @Component({
-  selector: 'app-list-parking-slot',
-  templateUrl: './list-parking-slot.component.html',
-  styleUrls: ['./list-parking-slot.component.css']
+  selector: 'app-list-car-expired',
+  templateUrl: './list-car-expired.component.html',
+  styleUrls: ['./list-car-expired.component.css']
 })
-export class ListParkingSlotComponent implements OnInit {
-  p: number;
+export class ListCarExpiredComponent implements OnInit {
   public list = [];
-  public keywordSearch: string;
-  public checkList = 'true';
-  public reverse = true;
-  public key;
+  p: number;
   public test = 'first';
+  public checkList = 'true';
   constructor(private parkingSlotService: ParkingSlotService,
               public dialog: MatDialog,
               private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.parkingSlotService.getAllParkingLotService().subscribe(data => {
+    this.parkingSlotService.getAllCarExpiredService().subscribe(data => {
       this.list = data;
       console.log(this.list);
     });
   }
 
-  changePage(p: number) {
-    if (p !== 1) {
-      this.test = 'second';
-    } else {
-      this.test = 'first';
-    }
-  }
-
-  keyDownFunction(event: KeyboardEvent) {
-    if (event.keyCode === 13) {
-      console.log(event.keyCode);
-    }
-  }
-
   openViewDialog(id: number): void {
-    this.parkingSlotService.getById(id).subscribe(dataFromServer =>{
-      const dialogRef = this.dialog.open(DetailParkingSlotComponent, {
+    this.parkingSlotService.getDetailCardExpired(id).subscribe(dataFromServer =>{
+      const dialogRef = this.dialog.open(DetailCarExpiredComponent, {
         width: '850px',
         disableClose: true,
         data: {data1: dataFromServer}
@@ -58,5 +40,12 @@ export class ListParkingSlotComponent implements OnInit {
         this.ngOnInit();
       });
     });
+  }
+  changePage(p: number) {
+    if (p !== 1) {
+      this.test = 'second';
+    } else {
+      this.test = 'first';
+    }
   }
 }

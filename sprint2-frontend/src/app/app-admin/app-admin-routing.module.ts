@@ -14,6 +14,15 @@ import { StatisticSalesComponent } from './statistic/statistic-sales/statistic-s
 import { StatisticCarComponent } from './statistic/statistic-car/statistic-car.component';
 import { StatisticCustomerComponent } from './statistic/statistic-customer/statistic-customer.component';
 import { ListParkingSlotComponent } from './parking-slot/list-parking-slot/list-parking-slot.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxPaginationModule} from "ngx-pagination";
+import {CommonModule} from "@angular/common";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MaterialModule} from "../material.module";
+import {DetailParkingSlotComponent} from "./parking-slot/detail-parking-slot/detail-parking-slot.component";
+import { EditParkingSlotComponent } from './parking-slot/edit-parking-slot/edit-parking-slot.component';
+import { ListCarExpiredComponent } from './parking-slot/list-car-expired/list-car-expired.component';
+import { DetailCarExpiredComponent } from './parking-slot/detail-car-expired/detail-car-expired.component';
 
 
 export const routes: Routes = [
@@ -21,6 +30,10 @@ export const routes: Routes = [
     path: 'admin',
     children: [
       {path: 'employee-list', component: EmployeeListComponent},
+      {path: 'list-parking-slot', component: ListParkingSlotComponent},
+      //QUOC
+      {path: 'list-car-expired', component: ListCarExpiredComponent},
+      {path: 'list-parking-slot/edit-parking-slot/:id', component: EditParkingSlotComponent},
       // {path: 'sign-up', component: SignUpComponent},
       // {path: 'page-not-found', component: PageNotFoundComponent},
     ]
@@ -28,13 +41,14 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, MatDialogModule, MaterialModule, ReactiveFormsModule],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
   declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent,
     EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent,
     StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent,
-    ListParkingSlotComponent
-  ]
+    ListParkingSlotComponent, DetailParkingSlotComponent, EditParkingSlotComponent, ListCarExpiredComponent, DetailCarExpiredComponent
+  ],
+  entryComponents: [DetailParkingSlotComponent]
 })
 export class AppAdminRoutingModule { }
