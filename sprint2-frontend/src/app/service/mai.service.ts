@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, timer} from 'rxjs';
+import {Observable} from 'rxjs';
 
 const URL = 'http://localhost:8080/parking-slot';
 
@@ -35,27 +35,4 @@ export class MaiService {
   searchValidate(slotNumber, floorInput): Observable<any> {
     return this.http.get(this.API + '/find-parking-slot-by-slot-number-floor/' + slotNumber + '/' + floorInput);
   }
-
-  // validateId(): AsyncValidatorFn {
-  //   return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
-  //     return this.search(control.value)
-  //       .pipe(
-  //         map(res => {
-  //           if (res.length) {
-  //             return {idExists: true};
-  //           }
-  //         })
-  //       );
-  //   };
-  // }
-  //
-  // search(text) {
-  //   console.log(text);
-  //   return timer(100)
-  //     .pipe(
-  //       switchMap(() => {
-  //         return this.http.get<any>(`${URL}/find-id/${text}`);
-  //       })
-  //     );
-  // }
 }

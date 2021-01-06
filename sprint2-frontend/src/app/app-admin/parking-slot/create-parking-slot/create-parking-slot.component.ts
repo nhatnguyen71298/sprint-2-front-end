@@ -29,8 +29,7 @@ export class CreateParkingSlotComponent implements OnInit {
     });
     this.formCreateNew = this.formBuilder.group({
       floor: ['', [Validators.required, Validators.pattern('^\\d+$'), Validators.max(5)]],
-      slotNumber: ['', [Validators.required, Validators.pattern('^\\d+$'),
-        Validators.max(50)]],
+      slotNumber: ['', [Validators.required, Validators.pattern('^\\d+$'), Validators.max(50)]],
       slotType: [this.slotTypeInput]
     });
   }
