@@ -14,6 +14,11 @@ import { StatisticSalesComponent } from './statistic/statistic-sales/statistic-s
 import { StatisticCarComponent } from './statistic/statistic-car/statistic-car.component';
 import { StatisticCustomerComponent } from './statistic/statistic-customer/statistic-customer.component';
 import { ListParkingSlotComponent } from './parking-slot/list-parking-slot/list-parking-slot.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {OrderModule} from 'ngx-order-pipe';
+import {CommonModule} from '@angular/common';
+import { CreateParkingSlotComponent } from './parking-slot/create-parking-slot/create-parking-slot.component';
 
 
 export const routes: Routes = [
@@ -23,18 +28,21 @@ export const routes: Routes = [
       {path: 'employee-list', component: EmployeeListComponent},
       // {path: 'sign-up', component: SignUpComponent},
       // {path: 'page-not-found', component: PageNotFoundComponent},
+      {path: 'list-parking-slot', component: ListParkingSlotComponent},
+      {path: 'create-parking-slot', component: CreateParkingSlotComponent},
     ]
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, OrderModule, ReactiveFormsModule],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
   declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent,
     EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent,
     StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent,
-    ListParkingSlotComponent
+    ListParkingSlotComponent,
+    CreateParkingSlotComponent
   ]
 })
 export class AppAdminRoutingModule { }
