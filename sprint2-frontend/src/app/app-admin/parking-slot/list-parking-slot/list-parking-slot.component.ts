@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MaiService} from "../../../service/mai.service";
+import {MaiService} from '../../../service/mai.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute} from '@angular/router';
+import {ParkingSlotService} from '../../../service/parking-slot.service';
+import {DetailParkingSlotComponent} from '../detail-parking-slot/detail-parking-slot.component';
 
 @Component({
   selector: 'app-list-parking-slot',
@@ -17,6 +21,9 @@ export class ListParkingSlotComponent implements OnInit {
 
   constructor(
     public parkingSlotService: MaiService,
+    public parkingSlotService1: ParkingSlotService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -70,5 +77,19 @@ export class ListParkingSlotComponent implements OnInit {
     } else {
       this.test = 'first';
     }
+  }
+  openViewDialog(id: number): void {
+    this.parkingSlotService1.getById(id).subscribe(dataFromServer => {
+      const dialogRef = this.dialog.open(DetailParkingSlotComponent, {
+        width: '850px',
+        disableClose: true,
+        data: {data1: dataFromServer}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
   }
 }

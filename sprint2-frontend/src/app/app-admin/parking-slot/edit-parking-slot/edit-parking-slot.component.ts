@@ -14,7 +14,7 @@ export class EditParkingSlotComponent implements OnInit {
   public slotTypeList;
   public width;
   public height;
-  private eleId: number
+  private eleId: number;
   public slotTypeInput = 0;
 
   constructor(private parkingSlotService: ParkingSlotService,
@@ -59,7 +59,6 @@ export class EditParkingSlotComponent implements OnInit {
               si: true
             }
           });
-          console.log(this.formUpdate.controls);
         this.toat.success('Thao Tác Thành Công','Thông Báo');
         } else{
           this.toat.error('Thao Tác Thất Bại', 'Thông Báo');
