@@ -1,12 +1,19 @@
 <h3 class="text-primary text-center">C06Parking kính thông báo</h3>
 <hr>
 <div *ngIf="message == 'complete'">
-  <p>Quý khách đã gia hạn vé thành công.</p>
+  <img id="succeed" src="https://i.pinimg.com/originals/14/9f/64/149f641c95e40c2296372b86a6e7fcf2.gif" alt="succeed"/>
+  <p id="messageSucceed">Quý khách đã gia hạn vé thành công.</p>
   <p>Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!</p>
 </div>
 <div *ngIf="message == 'failed'">
   <p>Đã có lỗi xảy ra.</p>
   <p>Quý khách vui lòng liên hệ nhân viên để khắc phục sự cố. Mong quý khách thông cảm! Xin cảm ơn!</p>
+</div>
+<div *ngIf="message == 'MoMo fail'">
+  <img src="../../../../assets/repair.jpg" alt="repair"/>
+  <p>Hệ thống tích hợp thanh toán bằng <span id="momo">MoMo</span> hiện đang bảo trì.</p><br>
+  <p id="message">Quý khách vui lòng thanh toán bằng <span id="paypal">PayPal</span> hoặc liên hệ nhân viên để gia hạn.
+    Mong quý khách thông cảm! Xin cảm ơn!</p>
 </div>
 <br>
 <div class="row d-flex justify-content-end">
