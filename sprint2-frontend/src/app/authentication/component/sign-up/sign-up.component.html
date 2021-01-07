@@ -30,91 +30,77 @@
             <h3 class="text-center mt-3">Đăng ký tài khoản</h3>
           </div>
 
-          <div class="row input-group mx-auto mt-2 d-flex justify-content-center">
-            <div class="input-group-prepend">
-               <span class="input-group-text" id="username-addon">&nbsp;
-                 <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
-               </span>
-            </div>
-            <input type="text" class="form-control" formControlName="username" placeholder="Tài khoản"
-                   style="height: 45px">
-          </div>
-          <div class="row d-flex justify-content-center ">
-            <p *ngIf="signUpForm.controls.username.errors?.required &&
-              signUpForm.controls.username.touched"
-               class="text-danger">
-              Vui lòng nhập tên tên khoản và không để trống
-            </p>
-          </div>
-
-
-          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
-            <div class="input-group-prepend">
-              <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
-            </div>
-            <input type="password" class="form-control" formControlName="password" placeholder="Mật khẩu"
-                   style="height: 45px">
-          </div>
-          <div class="row d-flex justify-content-center ">
-            <p *ngIf="signUpForm.controls.password.errors?.required &&
-              signUpForm.controls.password.touched"
-               class="text-danger">
-              Vui lòng nhập mật khẩu và không để trống
-            </p>
-          </div>
-          <div class="row d-flex justify-content-center mt-1">
-            <p *ngIf="signUpForm.controls.password.errors?.pattern &&
-              signUpForm.controls.password.touched"
-               class="text-danger">
-              Mật khẩu tổi thiểu 8 kí tự, 1 chữ thườmg, 1 chữ in hoa và 1 số
-            </p>
-          </div>
-
-
-          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
-            <div class="input-group-prepend">
-              <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
-            </div>
-            <input type="password" class="form-control" formControlName="password1"
-                   placeholder="Nhập lại mật khẩu"
-                   style="height: 45px">
-          </div>
-          <div class="row d-flex justify-content-center mt-1 ">
-            <p *ngIf="signUpForm.controls.password1.errors?.required &&
-              signUpForm.controls.password1.touched"
-               class="text-danger">
-              Vui lòng nhập mật khẩu và không để trống
-            </p>
-          </div>
-          <div class="row d-flex justify-content-center mt-1">
-            <p *ngIf="signUpForm.controls.password1.errors?.pattern &&
-              signUpForm.controls.password1.touched"
-               class="text-danger">
-              Mật khẩu tổi thiểu 8 kí tự, 1 chữ thườmg, 1 chữ in hoa và 1 số
-            </p>
-          </div>
-
           <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
             <div class="input-group-prepend">
               <span class="input-group-text">&nbsp;<i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;</span>
             </div>
-            <input type="password" class="form-control" formControlName="email" placeholder="Email"
+            <input type="text" class="form-control" formControlName="username" placeholder="Email"
                    style="height: 45px">
           </div>
           <div class="row d-flex justify-content-center mt-1 ">
-            <p *ngIf="signUpForm.controls.email.errors?.required &&
-              signUpForm.controls.email.touched"
+            <p *ngIf="signUpForm.controls.username.errors?.required &&
+              signUpForm.controls.username.touched"
                class="text-danger">
               Vui lòng nhập email và không để trống
             </p>
           </div>
+          <p>{{messageError}}</p>
           <div class="row d-flex justify-content-center mt-1">
-            <p *ngIf="signUpForm.controls.email.errors?.pattern &&
-              signUpForm.controls.email.touched"
+            <p *ngIf="signUpForm.controls.username.errors?.pattern &&
+              signUpForm.controls.username.touched"
                class="text-danger">
               Nhập đúng định dạng email
             </p>
           </div>
+
+
+          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
+            <div class="input-group-prepend">
+              <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
+            </div>
+            <input type="password" class="form-control" formControlName="passwordNew" placeholder="Mật khẩu"
+                   style="height: 45px">
+          </div>
+          <div class="row d-flex justify-content-center ">
+            <p *ngIf="signUpForm.controls.passwordNew.errors?.required &&
+              signUpForm.controls.passwordNew.touched"
+               class="text-danger">
+              Vui lòng nhập mật khẩu và không để trống
+            </p>
+          </div>
+          <div class="row d-flex justify-content-center mt-1">
+            <p *ngIf="signUpForm.controls.passwordNew.errors?.pattern &&
+              signUpForm.controls.passwordNew.touched"
+               class="text-danger">
+              Mật khẩu yêu cầu phải lớn hơn 6 ký tự và không có ký tự đặc biệt.
+            </p>
+          </div>
+
+
+          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
+            <div class="input-group-prepend">
+              <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
+            </div>
+            <input type="password" class="form-control" formControlName="confirmPassword"
+                   placeholder="Nhập lại mật khẩu"
+                   style="height: 45px">
+          </div>
+          <div class="row d-flex justify-content-center mt-1 ">
+            <p *ngIf="signUpForm.controls.confirmPassword.errors?.required &&
+              signUpForm.controls.confirmPassword.touched"
+               class="text-danger">
+              Vui lòng nhập mật khẩu và không để trống
+            </p>
+          </div>
+          <div class="row d-flex justify-content-center mt-1">
+            <p *ngIf="signUpForm.controls.confirmPassword.errors?.pattern &&
+              signUpForm.controls.confirmPassword.touched"
+               class="text-danger">
+              Mật khẩu yêu cầu phải lớn hơn 6 ký tự và không có ký tự đặc biệt.
+            </p>
+          </div>
+          <div class="text-danger" role="alert" *ngIf="signUpForm.hasError('passwordNotMatch')">Mật khẩu không chính xác.</div>
+
 
           <div class="row mt-2">
 
@@ -122,7 +108,7 @@
               <button type="submit" class=" rounded btn btn-danger mr-3">
                 Đăng ký
               </button>
-              <button type="button" class="rounded btn btn-dark " [routerLink]="['/authentication/login']">
+              <button type="button" class="rounded btn btn-dark " [routerLink]="['/login']">
                 Quay lại
               </button>
             </div>
