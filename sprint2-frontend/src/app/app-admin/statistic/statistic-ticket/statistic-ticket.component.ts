@@ -89,7 +89,7 @@ export class StatisticTicketComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   openStatisticMemberCard() {
     // get type report statistic
     this.typeReport = this.formStatisticMemberCard.controls.typeReport.value;

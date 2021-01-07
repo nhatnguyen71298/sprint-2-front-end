@@ -58,19 +58,21 @@
     </div>
   </form>
 
-</div>
-<div class="statistics mr-0">
-  <div class=" row container-fluid p-0 m-0">
-    <div class=" row mr-2">
-      <div *ngIf="typeReport === 'week'">
-        <canvas id="statistic-member-card-week" style="position: relative; height:60vh; width:70vw"></canvas>
-      </div>
-      <div *ngIf="typeReport === 'month'">
-        <canvas id="statistic-member-card-month" style="position: relative; height:60vh; width:70vw"></canvas>
-      </div>
-      <div *ngIf="typeReport === 'year'">
-        <canvas id="statistic-member-card-year" style="position: relative; height:60vh; width:70vw"></canvas>
+  <div class="statistics mr-0">
+    <div class="row container-fluid p-0 m-0">
+      <div class="row mr-2">
+        <div *ngIf="typeReport === 'week'">
+          <canvas id="statistic-member-card-week" style="position: relative; height:60vh; width:70vw"></canvas>
+        </div>
+        <div *ngIf="typeReport === 'month'">
+          <canvas id="statistic-member-card-month" style="position: relative; height:60vh; width:70vw"></canvas>
+        </div>
+        <div *ngIf="typeReport === 'year'">
+          <canvas id="statistic-member-card-year" style="position: relative; height:60vh; width:70vw"></canvas>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
+
