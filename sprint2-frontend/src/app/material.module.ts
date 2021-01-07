@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {EmployeeViewComponent} from './app-admin/employee-management/employee-view/employee-view.component';
 
 @NgModule({
   imports: [

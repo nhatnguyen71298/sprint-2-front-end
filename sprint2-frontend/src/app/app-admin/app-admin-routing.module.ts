@@ -13,6 +13,9 @@ import { StatisticTicketComponent } from './statistic/statistic-ticket/statistic
 import { StatisticSalesComponent } from './statistic/statistic-sales/statistic-sales.component';
 import { StatisticCarComponent } from './statistic/statistic-car/statistic-car.component';
 import { StatisticCustomerComponent } from './statistic/statistic-customer/statistic-customer.component';
+import {CommonModule} from '@angular/common';
+import {MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 export const routes: Routes = [
@@ -20,6 +23,8 @@ export const routes: Routes = [
     path: 'admin',
     children: [
       {path: 'employee-list', component: EmployeeListComponent},
+      {path: 'employee-list/employee-add', component: EmployeeAddComponent},
+      // {path: 'employee-list/employee-edit', component: EmployeeEditComponent}
       // {path: 'sign-up', component: SignUpComponent},
       // {path: 'page-not-found', component: PageNotFoundComponent},
     ]
@@ -27,7 +32,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  // tslint:disable-next-line:max-line-length
+  imports: [RouterModule.forChild(routes), CommonModule, MatDialogModule, MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule, MatOptionModule, MatSelectModule],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
   declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent, StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent]

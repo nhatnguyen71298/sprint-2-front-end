@@ -1,15 +1,87 @@
 import { Component, OnInit } from '@angular/core';
-
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EmployeeService} from '../../../service/employee.service';
+import {EmployeeViewComponent} from '../employee-view/employee-view.component';
+import {MatDialog} from '@angular/material';
+import {EmployeeDeleteComponent} from '../employee-delete/employee-delete.component';
+import {EmployeeAddComponent} from '../employee-add/employee-add.component';
+import {EmployeeEditComponent} from '../employee-edit/employee-edit.component';
+class Employee {
+  id: number;
+  employeeCode: string;
+  fullName: string;
+  birthday: string;
+  email: string;
+  gender: string;
+  phoneNumber: string;
+  password: string;
+  role: string;
+}
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent implements OnInit {
 
-  constructor() { }
+export class EmployeeListComponent implements OnInit {
+  public list;
+  public checkList = 'true';
+  key: string;
+  p: number;
+  constructor(
+    public employeeService: EmployeeService,
+    public dialog: MatDialog
+
+  ) { }
 
   ngOnInit(): void {
+    this.employeeService.getAllEmployeeService().subscribe(data => {
+      this.list = data;
+    });
+  }
+  openDialogDelete(id: any): void {
+    this.employeeService.findEmployeeByIdService(id).subscribe(varialble => {
+      const dialogRef = this.dialog.open(EmployeeDeleteComponent, {
+        width: '750px',
+        data: {dataNeed: varialble},
+        disableClose: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.ngOnInit();
+      });
+    });
+  }
+  resetFind() {
+    this.key = '';
+    this.checkList = 'true';
+    this.ngOnInit();
+  }
+  openDialogCreate(): void {
+    const dialogRef = this.dialog.open(EmployeeAddComponent, {
+      width: '700px',
+      maxHeight: '90vh',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+  openDialogEdit(id): void {
+    this.employeeService.findEmployeeByIdService(id).subscribe(dataUser => {
+      const dialogRef = this.dialog.open(EmployeeEditComponent, {
+        width: '600px',
+        maxHeight: '90vh',
+        data: {dataC: dataUser.idUser, dataD: dataUser.gender},
+        disableClose: true
+      });
+      console.log('data:' + dataUser.idUser);
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
   }
 
 }
