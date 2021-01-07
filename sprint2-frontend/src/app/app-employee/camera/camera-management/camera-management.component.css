@@ -39,13 +39,13 @@
 }
 
 #formFileLg::-webkit-file-upload-button{
-  color: darkred;
+  color: orange;
   -webkit-animation: glowing 1500ms infinite;
   -moz-animation: glowing 1500ms infinite;
   -o-animation: glowing 1500ms infinite;
   animation: glowing 1500ms infinite;
   background-color: black;
-  border-color: orange;
+  border-color: darkred;
 }
 
 #label {
