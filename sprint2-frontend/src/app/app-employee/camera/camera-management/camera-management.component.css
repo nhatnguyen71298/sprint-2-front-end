@@ -12,17 +12,9 @@
   position: absolute;
   bottom: 161px;
   height: 192px;
-  right: 42px;
+  right: 64px;
   width: 398px;
 }
-#divInput{
-  text-align:center;
-  position: absolute;
-  /*height: 20%;*/
-  /*bottom: -30px;*/
-  left: -485px;
-}
-
 #formFileLg {
   background:black;
   font-size:14px;
@@ -30,7 +22,7 @@
   width: 273px;
   bottom: 86px;
   position: relative;
-  right: 111px;
+  right: 127px;
   /*-webkit-animation: my 700ms infinite;*/
   /*-moz-animation: my 700ms infinite;*/
   /*-o-animation: my 700ms infinite;*/
@@ -39,18 +31,18 @@
 }
 
 #formFileLg::-webkit-file-upload-button{
-  color: darkred;
+  color: orange;
   -webkit-animation: glowing 1500ms infinite;
   -moz-animation: glowing 1500ms infinite;
   -o-animation: glowing 1500ms infinite;
   animation: glowing 1500ms infinite;
   background-color: black;
-  border-color: orange;
+  border-color: darkred;
 }
 
 #label {
   position: absolute;
-  right: 147px;
+  right: 165px;
   bottom: 112px;
   width: 181px;
   font-size:14px;
@@ -66,7 +58,7 @@
   margin: 0;
   position: absolute;
   bottom: 231px;
-  left: -134px;
+  left: -155px;
   background: black;
   font-size: 37px;
   font-weight:bold;

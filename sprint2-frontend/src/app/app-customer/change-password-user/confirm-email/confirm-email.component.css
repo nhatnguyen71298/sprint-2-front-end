@@ -1,0 +1,15 @@
+#change{
+  position: relative;
+  left: 12px;
+  width: 75px;
+  color: white;
+}
+#backHome{
+  position: relative;
+  right: 10px;
+  background: #424e5d;
+  color: white;
+}
+.sao{
+  color: red;
+}

@@ -32,15 +32,14 @@ export class MessageFromCameraComponent implements OnInit {
         break;
       case 'Member ok':
         if (this.data.data1.status === false){
-          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa ra khỏi bãi!'
-            + '\nThẻ thành viên có thời hạn đến ngày: ';
+          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa ra khỏi bãi lúc: ';
         }
         if (this.data.data1.status === true){
-          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa vào bãi!'
-            + '\nThẻ thành viên có thời hạn đến ngày: ';
+          this.message = 'Xe ' + this.data.data1.plateNumber + ' vừa vào lúc: ';
         }
         break;
     }
+    console.log(this.data.data1);
   }
   close() {
     this.dialogMessage.close();
