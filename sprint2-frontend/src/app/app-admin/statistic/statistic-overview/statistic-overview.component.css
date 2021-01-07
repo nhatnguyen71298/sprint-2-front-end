@@ -1,0 +1,61 @@
+.statistics h5 {
+  color: #435d7d;
+  font-weight: bolder;
+  font-size: 22px;
+}
+
+.statistics h6 {
+  color: #435d7d;
+  font-weight: bolder;
+}
+
+.statistics p {
+  color: #076b97;
+}
+
+.statistics span {
+  color: #435d7d;
+  font-weight: bolder;
+}
+
+.statistics li {
+  color: #ff2c51;
+  font-weight: bolder;
+}
+
+.statistics .pcx {
+  font-weight: bolder;
+  font-size: 15px;
+  color: #435d7d;
+  margin-right: 24px;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.statistics-integrated {
+  background-image: url("https://userscontent2.emaze.com/images/3fb92ced-e07c-43f9-a1e3-eed08d15eeca/611856779bb15f9361a0fa2865abd54b.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.statistics-overview {
+  background-image: url("https://www.ubudu.com/wp-content/uploads/2016/10/parking.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 1200px) {
+  .statistics {
+    width: 95%;
+    margin-left: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .statistics {
+    width: 100%;
+    background: transparent;
+    padding: 10px 20px;
+  }
+}
