@@ -1,0 +1,65 @@
+
+@media (min-width: 1200px){
+  div.infor {
+    margin-top: 100px;
+  }
+}
+
+
+@media (max-width: 1080px) {
+  div.infor {
+    margin-top: 100px;
+  }
+}
+@media (max-width: 768px){
+  div.container-fluid {
+    margin-top: 50px;
+  }
+  div.infor {
+    margin-top: 100px;
+  }
+  p,input[value] {
+    word-wrap: break-word;
+  }
+}
+
+@media (max-width: 340px){
+  button.btn.btn-light.camera.rounded-circle {
+    left: 164px !important;
+    top: 129px !important;
+  }
+  div.vw-100.d-flex.justify-content-center {
+    bottom: 102px !important;
+    right: 27px !important;
+  }
+}
+@media (max-width: 480px) {
+  div.btn-group.account-info {
+    display: inline !important;
+  }
+  a.btn.dropdown-toggle.text-primary {
+    width: 100% !important;
+    margin: auto !important;
+  }
+}
+div.vw-100.d-flex.justify-content-center {
+  position: relative;
+  bottom: 90px;
+}
+label.btn.btn-light.camera.rounded-circle{
+  position: absolute;
+  margin-right: auto;
+  margin-left: auto;
+  left: 159px;
+  right: 0px;
+  width: 43px;
+  height: 40px;
+  top: 140px;
+}
+img {
+  border-radius: 80%;
+  max-width: 200px !important;
+  max-height: 200px !important;
+  width: 200px !important;
+  height: 200px !important;
+}
