@@ -16,7 +16,7 @@ export const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
       {path: 'page-not-found', component: PageNotFoundComponent},
-      {path: 'pay', component: PayComponent},
+      {path: 'pay/:idCustomer', component: PayComponent},
     ]
   }
 ];

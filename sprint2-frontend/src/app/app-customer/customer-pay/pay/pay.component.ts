@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-// @ts-ignore
-import {MatDialog} from '@angular/material/dialog';
-import {HttpClient} from '@angular/common/http';
-import {SuccessfullyPayComponent} from '../successfully-pay/successfully-pay.component';
-import {PayService} from '../../../service/pay.service';
+import {MatDialog} from "@angular/material/dialog";
+import {HttpClient} from "@angular/common/http";
+import {SuccessfullyPayComponent} from "../successfully-pay/successfully-pay.component";
+import {PayService} from "../../../service/pay.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-pay',
@@ -21,11 +21,13 @@ export class PayComponent implements OnInit {
   public isChecked: boolean;
   private signature;
   private requestID;
+  private idCustomer;
 
   constructor(
     private payService: PayService,
     private dialog: MatDialog,
     protected http: HttpClient,
+    private activedRouter: ActivatedRoute,
   ) {
   }
 
@@ -35,7 +37,10 @@ export class PayComponent implements OnInit {
   }
 
   getListMemberCard() {
-    this.payService.getListMemberCardByIDCustomer(2).subscribe(
+    this.activedRouter.params.subscribe(data => {
+      this.idCustomer = data.idCustomer;
+    });
+    this.payService.getListMemberCardByIDCustomer(this.idCustomer).subscribe(
       (data) => {
         this.memberCardList = data;
       },
@@ -84,7 +89,8 @@ export class PayComponent implements OnInit {
 
         onError: (data, actions) => {
           this.refresh();
-          alert('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. Mong quý khách thông cảm! Xin cảm ơn!');
+          alert('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. ' +
+            'Mong quý khách thông cảm! Xin cảm ơn!');
           console.log('Lỗi hệ thống.');
         }
       }
@@ -97,15 +103,21 @@ export class PayComponent implements OnInit {
     if (this.isChecked) {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal + memberCard.price / 23000);
       this.totalMoneyMoMo = this.totalMoneyMoMo + memberCard.price;
+      console.log(this.totalMoneyMoMo);
+      console.log(this.totalMoneyPayPal);
       this.memberCardListPay.push(memberCard.id);
+      console.log(this.memberCardListPay);
     } else {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal - memberCard.price / 23000 - 1);
       this.totalMoneyMoMo = this.totalMoneyMoMo - memberCard.price;
+      console.log(this.totalMoneyMoMo);
+      console.log(this.totalMoneyPayPal);
       for (let i = 0; i < this.memberCardListPay.length; i++) {
         if (this.memberCardListPay[i] === memberCard.id) {
           this.memberCardListPay.splice(i, i + 1);
         }
       }
+      console.log(this.memberCardListPay);
     }
   }
 
@@ -135,7 +147,8 @@ export class PayComponent implements OnInit {
 
   openSuccessfullyPay(message): void {
     const dialogRef = this.dialog.open(SuccessfullyPayComponent, {
-      width: '500px',
+      width: '555px',
+      height: '525px',
       data: {notification: message},
       disableClose: true
     });
@@ -146,45 +159,49 @@ export class PayComponent implements OnInit {
   }
 
   payByMoMo() {
-    this.payService.payByMoMoService(this.totalMoneyMoMo)
-      .subscribe(
-        (data) => {
-          this.signature = data.message.split(',').shift();
-          this.requestID = data.message.split(',').splice(1);
-        },
-        (data) => {
-        },
-        () => {
-          // this.http.post('https://test-payment.momo.vn/gw_payment/transactionProcessor',
-          //   {
-          //     "accessKey": "klm05TvNBzhg7h7j",
-          //     "partnerCode": "MOMOBKUN20180529",
-          //     "requestType": "captureMoMoWallet",
-          //     "notifyUrl": "https://momo.vn",
-          //     "returnUrl": "https://momo.vn",
-          //     "orderId": this.requestID,
-          //     "amount": this.totalMoneyMoMo,
-          //     "orderInfo": "test thanh toan",
-          //     "requestId": this.requestID,
-          //     "extraData": "merchantName=Payment",
-          //     "signature": this.signature,
-          //   }, "application/json").subscribe({
-          //   next: data => {
-          //     console.log(data);
-          //   },
-          //   error: error => {
-          //   }
-          // });
-
-
-          // window.location.href = 'https://test-payment.momo.vn/gw_payment/payment/qr?' +
-          //   'partnerCode=MOMOBKUN20180529' +
-          //   '&accessKey=klm05TvNBzhg7h7j' +
-          //   '&requestId=' + this.requestID +
-          //   '&amount=' + this.totalMoneyMoMo +
-          //   '&orderId=' + this.requestID +
-          //   '&signature=' + this.signature +
-          //   '&requestType=captureMoMoWallet';
-        });
+    console.log('MoMo start');
+    this.openSuccessfullyPay('MoMo fail');
+    // this.payService.payByMoMoService(this.totalMoneyMoMo)
+    //   .subscribe(
+    //     (data) => {
+    //       this.signature = data.message.split(',').shift();
+    //       console.log(this.signature);
+    //       this.requestID = data.message.split(',').splice(1);
+    //       console.log(this.requestID);
+    //     },
+    //     (data) => {
+    //     },
+    //     () => {
+    //       // this.http.post('https://test-payment.momo.vn/gw_payment/transactionProcessor',
+    //       //   {
+    //       //     "accessKey": "klm05TvNBzhg7h7j",
+    //       //     "partnerCode": "MOMOBKUN20180529",
+    //       //     "requestType": "captureMoMoWallet",
+    //       //     "notifyUrl": "https://momo.vn",
+    //       //     "returnUrl": "https://momo.vn",
+    //       //     "orderId": this.requestID,
+    //       //     "amount": this.totalMoneyMoMo,
+    //       //     "orderInfo": "test thanh toan",
+    //       //     "requestId": this.requestID,
+    //       //     "extraData": "merchantName=Payment",
+    //       //     "signature": this.signature,
+    //       //   }, "application/json").subscribe({
+    //       //   next: data => {
+    //       //     console.log(data);
+    //       //   },
+    //       //   error: error => {
+    //       //   }
+    //       // });
+    //
+    //
+    //       // window.location.href = 'https://test-payment.momo.vn/gw_payment/payment/qr?' +
+    //       //   'partnerCode=MOMOBKUN20180529' +
+    //       //   '&accessKey=klm05TvNBzhg7h7j' +
+    //       //   '&requestId=' + this.requestID +
+    //       //   '&amount=' + this.totalMoneyMoMo +
+    //       //   '&orderId=' + this.requestID +
+    //       //   '&signature=' + this.signature +
+    //       //   '&requestType=captureMoMoWallet';
+    //     });
   }
 }
