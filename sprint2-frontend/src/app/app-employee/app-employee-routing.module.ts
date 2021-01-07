@@ -21,7 +21,13 @@ import { SalesEditComponent } from './sales-management/sales-edit/sales-edit.com
 import { SalesViewComponent } from './sales-management/sales-view/sales-view.component';
 import { SalesDeleteComponent } from './sales-management/sales-delete/sales-delete.component';
 import {CameraManagementComponent} from './camera/camera-management/camera-management.component';
-
+import { ListMemberCardComponent } from './member-card/list-member-card/list-member-card.component';
+import { DeleteMemberCardDialogComponent } from './member-card/delete-member-card-dialog/delete-member-card-dialog.component';
+import { UpdateMemberCardDialogComponent } from './member-card/update-member-card-dialog/update-member-card-dialog.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from '../material.module';
+import {HttpClientModule} from '@angular/common/http';
+import {CommonModule} from '@angular/common';
 
 export const routes: Routes = [
   {
@@ -29,17 +35,21 @@ export const routes: Routes = [
     children: [
       // {path: 'registered-car', component: RegisteredCarComponent},
       {path: 'camera-control', component: CameraManagementComponent},
+      {path: 'member-card-list', component: ListMemberCardComponent},
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), ReactiveFormsModule, MaterialModule, HttpClientModule, CommonModule, FormsModule],
   exports: [RouterModule],
-  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
+  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent,
+    CustomerDeleteComponent,
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent]
+    SalesViewComponent, SalesDeleteComponent,
+    ListMemberCardComponent, DeleteMemberCardDialogComponent, UpdateMemberCardDialogComponent],
+  entryComponents: [DeleteMemberCardDialogComponent]
 })
 export class AppEmployeeRoutingModule { }

@@ -13,6 +13,7 @@ import {AppAdminModule} from './app-admin/app-admin.module';
 import {MaterialModule} from './material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import {CommonModule} from '@angular/common';
         AppCustomerModule,
         AppEmployeeModule,
         AppAdminModule,
-        MaterialModule
+        MaterialModule,
+      MatFormFieldModule
     ],
     providers: [],
     bootstrap: [AppComponent]

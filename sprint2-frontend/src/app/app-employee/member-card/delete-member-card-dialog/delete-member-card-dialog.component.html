@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <h5>Xác nhận xóa</h5>
+  </div>
+  <hr>
+  <div class="row">
+      <h5>Bạn có chắc chắn muốn xóa vé có thông tin:</h5>
+  </div>
+  <div class="row">
+    <label>Biển số xe: {{memberCar.car.plateNumber}}</label>
+  </div>
+  <div class="row">
+    <label>Tên khách hàng: {{memberCar.car.customer.fullName}}</label>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    <p class="warning">Lưu ý: Hành động này không thể hoàn tác.</p>
+  </div>
+  <div class="row justify-content-center">
+    <button class="back" (click)="close()">Hủy</button>
+    <button class="accept" (click)="delete()">Xác Nhận</button>
+  </div>
+</div>
