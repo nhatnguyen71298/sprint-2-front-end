@@ -25,7 +25,6 @@ export class InfoOfCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.customerService.getCustomerByAccount(1).subscribe(data => {
-      console.log(data);
       if (data.imageAvatar != null) {
         this.imgSrc = data.imageAvatar;
       }
