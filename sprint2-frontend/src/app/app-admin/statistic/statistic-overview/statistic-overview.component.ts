@@ -94,10 +94,11 @@ export class StatisticOverviewComponent implements OnInit {
         },
         title: {
           display: true,
-          text: 'Biểu đồ thống kê số lượng hãng xe',
+          text: 'Biểu đồ số lượng hãng xe',
           position: 'bottom',
           fontSize: 15,
           fontColor: '#435d7d',
+          padding: 10
         },
         responsive: true,
       }
