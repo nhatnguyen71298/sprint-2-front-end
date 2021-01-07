@@ -24,6 +24,13 @@ import {CameraManagementComponent} from './camera/camera-management/camera-manag
 import {AppEmployeeModule} from './app-employee.module';
 import {MessageFromCameraComponent} from './camera/message-from-camera/message-from-camera.component';
 import {CommonModule} from '@angular/common';
+import { MemberCardListComponent } from './member-card/member-card-list/member-card-list.component';
+import { MemberCardCreateComponent } from './member-card/member-card-create/member-card-create.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 export const routes: Routes = [
@@ -34,18 +41,20 @@ export const routes: Routes = [
       {path: 'entry-view', component: EntryViewComponent},
       {path: 'parking-map', component: ParkingMapComponent},
       {path: 'camera', component: CameraManagementComponent},
+      {path: 'camera-control', component: CameraManagementComponent},
+
+      {path: 'member-card-list', component: MemberCardListComponent},
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), CommonModule],
+  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, MatInputModule, MatSelectModule, NgxPaginationModule, MatDatepickerModule, FormsModule],
   exports: [RouterModule],
   declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent
-  ]
+    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent, MemberCardListComponent, MemberCardCreateComponent]
 })
 export class AppEmployeeRoutingModule { }
