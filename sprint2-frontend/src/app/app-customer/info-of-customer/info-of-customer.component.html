@@ -1,0 +1,62 @@
+<div class="container-fluid" *ngIf="customer">
+  <div class="row">
+    <div class="col-lg-12 infor">
+      <div class="rounded border bg-white mx-3 px-5 pb-5 row">
+        <div class="vw-100 d-flex justify-content-center">
+          <img [src]="imgSrc"
+               alt="avatar"
+               class="img-fluid" *ngIf="imgSrc">
+          <label for="update-photo" class="btn btn-light camera rounded-circle" id="choose-photo"><i
+            class="fa fa-camera"></i>
+          </label>
+          <input type="file" id="update-photo" accept="image/*" hidden (change)="choosePhoto($event.target)" #avatar>
+          <div style="position: absolute;top: 211px;white-space: nowrap" id="save" [hidden]="checkAvatar">
+            <button class="btn btn-primary mr-2" style="width: 150px" id="saveAvatar" (click)="upFireBase(avatar)">Lưu
+              ảnh đại diện
+            </button>
+            <button class="btn btn-primary" style="width: 150px" id="close" (click)="reset(avatar)">Hủy</button>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <h2 class="font-weight-bold text-center">Thông tin tài khoản</h2>
+          <div class="row">
+            <div class="col-lg-12">
+              <p class="font-weight-bold">Họ và tên:</p>
+              <p class="border-bottom border-dark">{{customer.fullName}}</p>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-lg-6">
+              <p class="font-weight-bold">Ngày sinh:</p>
+              <p class="border-bottom border-dark">{{customer.birthday | date: "dd-MM-yyyy"}}</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="font-weight-bold">Giới tính:</p>
+              <p class="border-bottom border-dark" [innerText]="customer.gender ? 'Nam' : 'Nữ'"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="font-weight-bold">CMND:</p>
+              <p class="border-bottom border-dark">{{customer.identityNumber}}</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="font-weight-bold">Số điện thoại:</p>
+              <p class="border-bottom border-dark">{{customer.phone}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <p class="font-weight-bold">Email:</p>
+              <p class="border-bottom border-dark">{{customer.email}}</p>
+            </div>
+            <div class="col-lg-6">
+              <p class="font-weight-bold">Địa chỉ:</p>
+              <p class="border-bottom border-dark">{{customer.address}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
