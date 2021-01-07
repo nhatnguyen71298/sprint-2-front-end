@@ -31,14 +31,14 @@ export class ListParkingSlotComponent implements OnInit {
     if (this.keywordSearch !== '') {
       if (this.keywordSearch.match('^([0-9]+)*$')) {
         this.keywordSearch = this.keywordSearch.trim();
-        this.parkingSlotService.searchParkingLotFloorService(this.keywordSearch).subscribe(data => {
+        this.parkingSlotService.searchParkingSlotFloorService(this.keywordSearch).subscribe(data => {
           this.list = data;
           if (this.list.length === 0) {
             this.checkList = 'false';
           }
         });
       } else {
-        alert('Vui lòng nhập từ khóa không có khoảng trắng thừa!');
+        alert('Vui lòng chỉ nhập số tầng bạn muốn tìm kiếm!');
         this.resetSearch();
       }
     } else {
@@ -48,7 +48,6 @@ export class ListParkingSlotComponent implements OnInit {
 
   keyDownFunction(event) {
     if (event.keyCode === 13) {
-      console.log(event.keyCode);
       this.searchFloor();
     }
   }

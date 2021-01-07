@@ -28,7 +28,7 @@ export class MaiService {
     return this.http.post(this.API + '/create', parkingSlot);
   }
 
-  searchParkingLotFloorService(idSearch: any): Observable<any> {
+  searchParkingSlotFloorService(idSearch: any): Observable<any> {
     return this.http.get(this.API + '/search-floor/' + idSearch);
   }
 
