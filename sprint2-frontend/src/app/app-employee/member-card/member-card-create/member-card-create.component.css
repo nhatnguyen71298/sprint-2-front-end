@@ -1,0 +1,32 @@
+sup {
+  color: red;
+}
+div.groove {
+  border-style: groove;
+}
+
+div.container-fluid {
+  margin: 1%;
+}
+
+body {
+  /*background-image: url("https://wallpaperset.com/w/full/7/a/b/70196.jpg");*/
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+  font-size: 110%;
+}
+
+html{
+  height: 100%;
+}
+
+label {
+  color: black;
+}
+
+.odd a.ui-state-default {
+  color:white;
+  background-color: red;
+  background: red;
+}
