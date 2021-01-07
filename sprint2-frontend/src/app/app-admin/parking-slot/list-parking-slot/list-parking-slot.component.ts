@@ -38,15 +38,15 @@ export class ListParkingSlotComponent implements OnInit {
           }
         });
       } else {
-        alert('Vui lòng chỉ nhập số tầng bạn muốn tìm kiếm!');
+        alert('Vui lòng chỉ nhập số tầng (> 0) và không có khoảng trắng thừa.');
         this.resetSearch();
       }
     } else {
-      alert('Vui lòng nhập từ khóa tìm kiếm');
+      alert('Vui lòng nhập từ khóa tìm kiếm.');
     }
   }
 
-  keyDownFunction(event) {
+  keyDownFunctionSearch(event) {
     if (event.keyCode === 13) {
       this.searchFloor();
     }

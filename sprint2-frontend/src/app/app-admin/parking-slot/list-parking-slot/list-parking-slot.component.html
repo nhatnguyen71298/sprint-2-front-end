@@ -21,7 +21,7 @@
 
         <div class="row m-0">
           <div class="col-2 mt-3 m-0 p-0">
-            <a href="#" class="btn btn-success" [routerLink]="['/admin/create-parking-slot']">
+            <a class="btn btn-success" [routerLink]="['/admin/create-parking-slot']">
               <i class="material-icons">&#xE147;</i>
               <span>Thêm mới vị trí </span></a>
           </div>
@@ -29,7 +29,7 @@
           <div class="col-1 m-0 p-0 mt-3">Tầng:</div>
           <div class="col-2 m-0 p-0 mt-3">
             <input type="text" class="form-control form-control-sm rounded"
-                   placeholder="Tìm kiếm tầng" (keydown)="keyDownFunction($event)"
+                   placeholder="Tìm kiếm tầng" (keydown)="keyDownFunctionSearch($event)"
                    [(ngModel)]="keywordSearch" style="width: 150px">
           </div>
           <div class="col-2 m-0 p-0 mt-3">
@@ -82,7 +82,8 @@
       </table>
 
       <div *ngIf="checkList === 'false'">
-        <h1 class="text-danger text-center">Không tìm thấy kết quả</h1>
+        <h1 class="text-danger text-center">Không tìm thấy kết quả.</h1>
+        <p class="text-center">Hiện có từ 1 - 5 tầng.</p>
         <div align="center">
           <button class="btn btn-primary mt-3 mb-3" (click)="resetSearch()">Quay Lại</button>
         </div>
