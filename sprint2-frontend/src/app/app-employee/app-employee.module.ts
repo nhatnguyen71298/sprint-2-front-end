@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import { AppEmployeeRoutingModule } from './app-employee-routing.module';
 import {MaterialModule} from '../material.module';
@@ -12,6 +12,7 @@ import {MaterialModule} from '../material.module';
   imports: [
     AppEmployeeRoutingModule,
     MaterialModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class AppEmployeeModule { }

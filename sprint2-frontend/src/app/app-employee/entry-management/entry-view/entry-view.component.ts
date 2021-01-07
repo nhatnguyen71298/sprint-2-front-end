@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TicketService} from '../../../service/ticket.service';
+import {DatePipe} from '@angular/common';
+
 
 @Component({
   selector: 'app-entry-view',
@@ -13,7 +15,8 @@ export class EntryViewComponent implements OnInit {
   message;
 
   constructor(private formBuilder: FormBuilder,
-              private ticketService: TicketService
+              private ticketService: TicketService,
+              private datePipe: DatePipe,
   ) {
   }
 
@@ -77,6 +80,17 @@ export class EntryViewComponent implements OnInit {
         this.message = '';
         this.patchForm(next);
         this.message = 'Tìm xe thành công';
+        const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
+        if (next.parkingSlot != null) {
+          const ticketList = next.parkingSlot.car.ticketList;
+          const enterDateNew = ticketList[ticketList.length - 1].enterDate;
+          this.ticketForm.patchValue({enterDate: enterDateNew});
+          this.ticketForm.patchValue({exitDate: currentDate});
+        } else {
+          this.ticketForm.patchValue({enterDate: currentDate});
+          this.ticketForm.patchValue({exitDate: null});
+        }
+
       }
     }, error => {
       console.log(error);
@@ -118,7 +132,9 @@ export class EntryViewComponent implements OnInit {
       fullName: null,
       email: null,
       carType: next.carType.carTypeName,
-      floor: null, slot: null
+      floor: null,
+      slot: null,
+      enterDate: null,
     };
     if (next.parkingSlot) {
       ticket.floor = next.parkingSlot.floor;
@@ -127,6 +143,9 @@ export class EntryViewComponent implements OnInit {
     if (next.customer) {
       ticket.fullName = next.customer.fullName;
       ticket.email = next.customer.email;
+    }
+    if (next.enterDate) {
+      ticket.enterDate = next.enterDate;
     }
     this.ticketForm.patchValue(ticket);
   }
