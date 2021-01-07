@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -12,8 +12,12 @@ export class TicketService {
   API_SLOT_FIND_BY_FLOOR_SLOT = 'http://localhost:8080/parking-slot/find-by-floor-slot-number';
   API_CAR_FIND_BY_PLATE = 'http://localhost:8080/car/get-info';
   API_CAR_TYPE_ALL = 'http://localhost:8080/car/find-all-type';
+  API_MEMBER_CARD_LIST = 'http://localhost:8080/car/find-all-member-card';
+  API_PARK_CAR = 'http://localhost:8080/parking-slot/park-registered-car';
+  API_CHECKOUT = 'http://localhost:8080/parking-slot/checkout-registered-car';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   saveTicket(ticket): Observable<any> {
     return this.http.post(this.API_TICKET_SAVE, ticket);
@@ -37,5 +41,17 @@ export class TicketService {
 
   findAllCarType(): Observable<any> {
     return this.http.get(this.API_CAR_TYPE_ALL);
+  }
+
+  findMemberCardsByCar(car): Observable<any> {
+    return this.http.post(this.API_MEMBER_CARD_LIST, car);
+  }
+
+  parkRegisteredCar(car): Observable<any> {
+    return this.http.post(this.API_PARK_CAR, car);
+  }
+
+  checkoutRegisteredCar(car): Observable<any> {
+    return this.http.post(this.API_CHECKOUT, car);
   }
 }
