@@ -24,8 +24,8 @@ export const routes: Routes = [
       {path: 'sign-up', component: SignUpComponent},
       {path: 'page-not-found', component: PageNotFoundComponent},
       {path: 'pay/:idCustomer', component: PayComponent},
-      {path:'changePassword', component: ChangePasswordUserComponent},
-      {path: 'carList',component: CarListComponent},
+      {path: 'changePassword', component: ChangePasswordUserComponent},
+      {path: 'carList', component: CarListComponent},
       {path: 'historyPayment', component: HistoryPaymentComponent}
     ]
   }
