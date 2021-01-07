@@ -1,13 +1,20 @@
 <div style="text-align: center">
-  <div mat-dialog-title>Cập nhật mới</div>
-  <div mat-dialog-content>
+  <div class="card-title"><h3>Cập nhật mới</h3></div>
+  <div class="card-body">
     <i style="color: red">{{message}}
+      <i *ngIf="data.data1.message == 'Member ok'" style="color: red">
+        {{data.data1.entryLog | date: 'h:mm a'}}
+      </i>
+    </i>
+      <br>
+      <i *ngIf="data.data1.message == 'Member ok'" style="color: red">
+        Thẻ thành viên có thời hạn đến ngày:
+      </i>
       <i *ngIf="data.data1.message == 'Member ok'" style="color: red">
         {{data.data1.expirationDate | date: 'dd/mm/yyyy'}}
       </i>
-    </i>
   </div>
-  <br>
+  <br> 
   <br>
 </div>
 <button mat-dialog-close class="btn btn-warning" id="close" (click)="close()">Xác nhận</button>
