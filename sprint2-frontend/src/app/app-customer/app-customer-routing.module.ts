@@ -23,7 +23,7 @@ export const routes: Routes = [
   {
     path: 'customer',
     children: [
-      {path: '', component: InfoOfCustomerComponent},
+      {path: 'info', component: InfoOfCustomerComponent},
       {path: 'login', component: LoginComponent},
       {path: 'sign-up', component: SignUpComponent},
       {path: 'page-not-found', component: PageNotFoundComponent},

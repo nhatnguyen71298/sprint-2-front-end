@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
-import {HistoryPaymentService} from "../../../service/nqkhanh/history-payment.service";
-import {CustomerService} from "../../../service/nqkhanh/customer.service";
+
+import {map, tap} from 'rxjs/operators';
+import {HistoryPaymentService} from '../../../service/nqkhanh/history-payment.service';
+import {CustomerService} from '../../../service/nqkhanh/customer.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-history-payment',

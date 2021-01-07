@@ -4,7 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {SuccessComponent} from '../alert/success/success.component';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {CustomerService} from "../../service/lvq-din/customer.service";
+import {CustomerService} from '../../service/lvq-din/customer.service';
+
 
 @Component({
   selector: 'app-update-customer',

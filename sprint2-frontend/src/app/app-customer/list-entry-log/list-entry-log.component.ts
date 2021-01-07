@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerService} from "../../service/lvq-din/customer.service";
+import {CustomerService} from '../../service/lvq-din/customer.service';
 
 @Component({
   selector: 'app-list-entry-log',
