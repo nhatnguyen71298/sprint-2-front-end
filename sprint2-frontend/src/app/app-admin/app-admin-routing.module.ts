@@ -23,6 +23,13 @@ import { EditParkingSlotComponent } from './parking-slot/edit-parking-slot/edit-
 import { ListCarExpiredComponent } from './parking-slot/list-car-expired/list-car-expired.component';
 import { DetailCarExpiredComponent } from './parking-slot/detail-car-expired/detail-car-expired.component';
 import {DetailParkingSlotComponent} from './parking-slot/detail-parking-slot/detail-parking-slot.component';
+import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
+import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MaterialModule} from "../material.module";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
+
 
 
 export const routes: Routes = [
@@ -36,12 +43,15 @@ export const routes: Routes = [
       {path: 'create-parking-slot', component: CreateParkingSlotComponent},
       {path: 'list-car-expired', component: ListCarExpiredComponent},
       {path: 'list-parking-slot/edit-parking-slot/:id', component: EditParkingSlotComponent},
+      {path: 'customer-list', component: CustomerListComponent},
+      {path: 'customer-add', component: CustomerAddComponent}
     ]
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, OrderModule, ReactiveFormsModule],
+  imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, OrderModule, ReactiveFormsModule,
+    Ng2SearchPipeModule, MaterialModule, MatIconModule, MatSelectModule],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
   declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent,
@@ -49,7 +59,8 @@ export const routes: Routes = [
     StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent,
     ListParkingSlotComponent,
     CreateParkingSlotComponent,
-    ListParkingSlotComponent, DetailParkingSlotComponent, EditParkingSlotComponent, ListCarExpiredComponent, DetailCarExpiredComponent
+    // tslint:disable-next-line:max-line-length
+    ListParkingSlotComponent, DetailParkingSlotComponent, EditParkingSlotComponent, ListCarExpiredComponent, DetailCarExpiredComponent, CustomerAddComponent, CustomerListComponent
   ],
   entryComponents: [DetailParkingSlotComponent]
 })

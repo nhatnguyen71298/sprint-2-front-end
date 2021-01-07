@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="col-9">
+    <form [formGroup]="formAddNew" class="form-group" style="background-color: white; align-content: center; margin-left: 200px">
+      <div class="modal-body">
+        <h4 class="modal-title text-success ">THÊM THÔNG TIN KHÁCH HÀNG</h4>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>Họ Tên</mat-label>
+              <input matInput type="text" id="fullName" formControlName="fullName" required>
+              <mat-error *ngIf="formAddNew.get('fullName').invalid && formAddNew.get('fullName').touched"
+                 class="text-danger">Tên khách hàng không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>Giới tính:*</mat-label>
+              <mat-select formControlName="gender">
+                <mat-option value=true>Nam</mat-option>
+                <mat-option value=false>Nữ</mat-option>
+              </mat-select>
+<!--              <mat-form-field appearance="fill">-->
+<!--                <mat-label >Giới tính:*</mat-label>-->
+<!--                <mat-select>-->
+<!--                  <mat-option  name= "gender" value=true>-->
+<!--                    {{food.viewValue}}-->
+<!--                  </mat-option>-->
+<!--                </mat-select>-->
+<!--              </mat-form-field>-->
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>Email</mat-label>
+              <input matInput type="text" formControlName="email" required>
+              <mat-error *ngIf="formAddNew.get('email').invalid && formAddNew.get('email').touched"
+                 class="text-danger">Vui lòng nhập Email đúng định dạng: abc@gmail.com</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <mat-form-field>
+              <mat-label>Ngày sinh</mat-label>
+<!--              <input type="date" class="form-control" id="birthday" formControlName="birthday">-->
+                <input [max]="startAge" matInput [matDatepicker]="picker" id="birthday" formControlName="birthday" required>
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startAge"></mat-datepicker>
+                <mat-error *ngIf="formAddNew.get('birthday').invalid && formAddNew.get('birthday').touched"
+                           class="text-danger">Ngày sinh không được để trống. Khách hàng phải lớn hơn 18 tuổi.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label for="phone">Số điện thoại</mat-label>
+              <input  matInput type="text" id="phone" formControlName="phone" required>
+              <mat-error *ngIf="formAddNew.get('phone').invalid && formAddNew.get('phone').touched"
+                 class="text-danger">Số điện thoại không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label for="address">Địa chỉ</mat-label>
+              <input matInput type="text" id="address" formControlName="address" required>
+              <mat-error *ngIf="formAddNew.get('address').invalid && formAddNew.get('address').touched"
+                 class="text-danger">Địa chỉ không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label for="identityNumber">Số CMND</mat-label>
+              <input matInput type="text" id="identityNumber" formControlName="identityNumber" required>
+              <mat-error *ngIf="formAddNew.get('identityNumber').invalid && formAddNew.get('identityNumber').touched"
+                 class="text-danger">Số CMND không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>ID khách hàng</mat-label>
+              <input matInput type="text" id="customerCode" formControlName="customerCode" required>
+              <mat-error *ngIf="formAddNew.get('customerCode').invalid && formAddNew.get('customerCode').touched"
+                 class="text-danger">Mã khách hàng không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <h4 class="modal-title text-success ">THÊM THÔNG TIN XE</h4>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>Loại xe</mat-label>
+              <mat-select formControlName="carType" required>
+                <mat-option *ngFor="let option of carTypeList" [value]="option.id">
+                  {{option.carTypeName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="formAddNew.get('carType').invalid && formAddNew.get('carType').touched"
+                 class="text-danger">Loại xe không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label for="identityNumber">Tên xe</mat-label>
+              <input matInput type="text"  id="brandName" formControlName="brandName" required>
+              <mat-error *ngIf="formAddNew.get('brandName').invalid && formAddNew.get('brandName').touched"
+                 class="text-danger">Tên xe không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+          <mat-form-field class="form-group">
+            <mat-label>Loại vé</mat-label>
+            <mat-select formControlName="memberCardType" required>
+              <mat-option *ngFor="let option of memberTypeList" [value]="option.id">
+                {{option.memberTypeName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formAddNew.get('memberCardType').invalid && formAddNew.get('memberCardType').touched"
+                       class="text-danger">Loại vé không được để trống.</mat-error>
+          </mat-form-field>
+        </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+              <mat-label>Biển kiểm soát</mat-label>
+              <input matInput type="text" formControlName="plateNumber" required>
+              <mat-error *ngIf="formAddNew.get('plateNumber').invalid && formAddNew.get('plateNumber').touched"
+                 class="text-danger">Biển kiểm soát không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+                <input (dateChange)="changeStartDate(startDate)" [min]="startDateMin"
+                       matInput [matDatepicker]="startDate"
+                       formControlName="startDate" placeholder="Chọn ngày bắt đầu thẻ thành viên"/>
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              <mat-error *ngIf="formAddNew.get('startDate').invalid && formAddNew.get('startDate').touched"
+                                           class="text-danger">Ngày bắt đầu không được để trống.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-form-field class="form-group">
+                <input [min]="startDateTS" matInput [matDatepicker]="endDate"
+                       formControlName="endDate" placeholder="Chọn ngày kết thúc thẻ"/>
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              <mat-error *ngIf="formAddNew.get('endDate').invalid && formAddNew.get('endDate').touched"
+                         class="text-danger">Ngày kết thúc phải lớn hơn ngày bắt đầu ít nhất 7 ngày.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6" style="margin-left: 150px">
+            <button type="submit" class="btn btn-secondary mr-3" (click)="comeBack()">Quay lại</button>
+            <button type="submit" [disabled]="formAddNew.invalid" class="btn btn-success" (click)="addNewCustomer()">Thêm mới</button>
+<!--            last change 6:20PM-->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
