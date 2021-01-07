@@ -50,7 +50,6 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   update() {
-    console.log(this.customer);
     if (this.customer.invalid === false) {
       this.customerService.updateCustomer(this.customer.value).subscribe(data => {
         const dialogRef = this.dialog.open(SuccessComponent, {
@@ -92,7 +91,6 @@ export class UpdateCustomerComponent implements OnInit {
         fileRef.getDownloadURL().subscribe((url) => {
           this.imageUrl = url;
           this.customer.value.imageAvatar = this.imageUrl;
-          console.log(this.customer);
           this.customerService.updateCustomer(this.customer.value).subscribe(() => dialogRef.close(
             this.dialog.open(SuccessComponent, {
               width: 'auto',
