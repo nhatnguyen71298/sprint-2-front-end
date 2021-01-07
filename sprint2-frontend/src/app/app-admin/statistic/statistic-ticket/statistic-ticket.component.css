@@ -1,0 +1,20 @@
+.statistics-overview {
+  background-image: url("https://msmobile.com.vn/upload_images/images/hinh-nen-powerpoint-mau-xanh-da-troi-9.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.statistics {
+  background-image: url("https://msmobile.com.vn/upload_images/images/hinh-nen-powerpoint-mau-xanh-da-troi-9.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.statistics .pcx {
+  font-weight: bolder;
+  font-size: 15px;
+  color: #435d7d;
+  margin-right: 24px;
+  outline: none;
+  border: none;
+  background: none;
+}
