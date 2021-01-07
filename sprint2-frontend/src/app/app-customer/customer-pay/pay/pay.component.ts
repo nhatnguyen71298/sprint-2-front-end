@@ -15,12 +15,9 @@ export class PayComponent implements OnInit {
   public memberCardList = [];
   public memberCardListPay = [];
   @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
-  public checked = [];
   public totalMoneyPayPal = 0;
   public totalMoneyMoMo = 0;
   public isChecked: boolean;
-  private signature;
-  private requestID;
   private idCustomer;
 
   constructor(
@@ -97,39 +94,30 @@ export class PayComponent implements OnInit {
     ).render(this.paypalRef.nativeElement);
   }
 
+  payNothing() {
+    alert('Vui lòng chọn vé trước khi thanh toán!');
+  }
+
   onCheckboxChange($event: Event, memberCard) {
     // @ts-ignore
     this.isChecked = $event.target.checked;
     if (this.isChecked) {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal + memberCard.price / 23000);
       this.totalMoneyMoMo = this.totalMoneyMoMo + memberCard.price;
-      console.log(this.totalMoneyMoMo);
-      console.log(this.totalMoneyPayPal);
       this.memberCardListPay.push(memberCard.id);
-      console.log(this.memberCardListPay);
     } else {
       this.totalMoneyPayPal = Math.ceil(this.totalMoneyPayPal - memberCard.price / 23000 - 1);
       this.totalMoneyMoMo = this.totalMoneyMoMo - memberCard.price;
-      console.log(this.totalMoneyMoMo);
-      console.log(this.totalMoneyPayPal);
       for (let i = 0; i < this.memberCardListPay.length; i++) {
         if (this.memberCardListPay[i] === memberCard.id) {
           this.memberCardListPay.splice(i, i + 1);
         }
       }
-      console.log(this.memberCardListPay);
     }
   }
 
-  payNothing() {
-    alert('Vui lòng chọn vé trước khi thanh toán!');
-  }
-
-  refresh() {
-    this.memberCardListPay.splice(0, this.memberCardListPay.length);
-    this.totalMoneyPayPal = 0;
-    this.totalMoneyMoMo = 0;
-    this.getListMemberCard();
+  payByMoMo() {
+    this.openSuccessfullyPay('MoMo fail');
   }
 
   updateMemberCard() {
@@ -158,50 +146,10 @@ export class PayComponent implements OnInit {
     });
   }
 
-  payByMoMo() {
-    console.log('MoMo start');
-    this.openSuccessfullyPay('MoMo fail');
-    // this.payService.payByMoMoService(this.totalMoneyMoMo)
-    //   .subscribe(
-    //     (data) => {
-    //       this.signature = data.message.split(',').shift();
-    //       console.log(this.signature);
-    //       this.requestID = data.message.split(',').splice(1);
-    //       console.log(this.requestID);
-    //     },
-    //     (data) => {
-    //     },
-    //     () => {
-    //       // this.http.post('https://test-payment.momo.vn/gw_payment/transactionProcessor',
-    //       //   {
-    //       //     "accessKey": "klm05TvNBzhg7h7j",
-    //       //     "partnerCode": "MOMOBKUN20180529",
-    //       //     "requestType": "captureMoMoWallet",
-    //       //     "notifyUrl": "https://momo.vn",
-    //       //     "returnUrl": "https://momo.vn",
-    //       //     "orderId": this.requestID,
-    //       //     "amount": this.totalMoneyMoMo,
-    //       //     "orderInfo": "test thanh toan",
-    //       //     "requestId": this.requestID,
-    //       //     "extraData": "merchantName=Payment",
-    //       //     "signature": this.signature,
-    //       //   }, "application/json").subscribe({
-    //       //   next: data => {
-    //       //     console.log(data);
-    //       //   },
-    //       //   error: error => {
-    //       //   }
-    //       // });
-    //
-    //
-    //       // window.location.href = 'https://test-payment.momo.vn/gw_payment/payment/qr?' +
-    //       //   'partnerCode=MOMOBKUN20180529' +
-    //       //   '&accessKey=klm05TvNBzhg7h7j' +
-    //       //   '&requestId=' + this.requestID +
-    //       //   '&amount=' + this.totalMoneyMoMo +
-    //       //   '&orderId=' + this.requestID +
-    //       //   '&signature=' + this.signature +
-    //       //   '&requestType=captureMoMoWallet';
-    //     });
+  refresh() {
+    this.memberCardListPay.splice(0, this.memberCardListPay.length);
+    this.totalMoneyPayPal = 0;
+    this.totalMoneyMoMo = 0;
+    this.getListMemberCard();
   }
 }
