@@ -49,7 +49,7 @@
   font-size: 13px;
   min-width: 30px;
   min-height: 30px;
-  color: #999;
+  color: black;
   margin: 0 2px;
   line-height: 30px;
   border-radius: 2px !important;
@@ -61,6 +61,7 @@
 }
 .pagination li.active a, .pagination li.active a.page-link {
   background: #03A9F4;
+  color: white;
 }
 .pagination li.active a:hover {
   background: #0397d6;
@@ -71,4 +72,13 @@
 .pagination li i {
   font-size: 16px;
   padding-top: 6px
+}
+.not-available-not-register {
+  background-color: lightgray;
+}
+.available-register {
+  background-color: lightcoral;
+}
+.not-available-register {
+  background-color: lightgreen;
 }
