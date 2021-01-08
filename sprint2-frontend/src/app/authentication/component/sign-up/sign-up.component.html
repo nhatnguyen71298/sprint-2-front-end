@@ -25,27 +25,26 @@
       <div class="col-lg-4 container-fluid shadow-lg p-3 mb-5 bg-white rounded  my-5"
            style="background-color: white; border-radius: 5px">
         <form (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
-
+          <p class="text-danger d-flex justify-content-center">{{messageError}}</p>
           <div class="row d-flex justify-content-center">
             <h3 class="text-center mt-3">Đăng ký tài khoản</h3>
           </div>
 
-          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
+          <div class="row input-group mt-3 mx-auto d-flex justify-content-center">
             <div class="input-group-prepend">
               <span class="input-group-text">&nbsp;<i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;</span>
             </div>
             <input type="text" class="form-control" formControlName="username" placeholder="Email"
                    style="height: 45px">
           </div>
-          <div class="row d-flex justify-content-center mt-1 ">
+          <div class="row d-flex justify-content-center  ">
             <p *ngIf="signUpForm.controls.username.errors?.required &&
               signUpForm.controls.username.touched"
                class="text-danger">
               Vui lòng nhập email và không để trống
             </p>
           </div>
-          <p>{{messageError}}</p>
-          <div class="row d-flex justify-content-center mt-1">
+          <div class="row d-flex justify-content-center ">
             <p *ngIf="signUpForm.controls.username.errors?.pattern &&
               signUpForm.controls.username.touched"
                class="text-danger">
@@ -54,7 +53,7 @@
           </div>
 
 
-          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
+          <div class="row input-group mt-3 mx-auto d-flex justify-content-center">
             <div class="input-group-prepend">
               <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
             </div>
@@ -68,7 +67,7 @@
               Vui lòng nhập mật khẩu và không để trống
             </p>
           </div>
-          <div class="row d-flex justify-content-center mt-1">
+          <div class="row d-flex justify-content-center ">
             <p *ngIf="signUpForm.controls.passwordNew.errors?.pattern &&
               signUpForm.controls.passwordNew.touched"
                class="text-danger">
@@ -77,7 +76,7 @@
           </div>
 
 
-          <div class="row input-group mt-2 mx-auto d-flex justify-content-center">
+          <div class="row input-group mt-3 mx-auto d-flex justify-content-center">
             <div class="input-group-prepend">
               <span class="input-group-text">&nbsp;<i class="fa fa-key" aria-hidden="true"></i>&nbsp;</span>
             </div>
@@ -85,14 +84,14 @@
                    placeholder="Nhập lại mật khẩu"
                    style="height: 45px">
           </div>
-          <div class="row d-flex justify-content-center mt-1 ">
+          <div class="row d-flex justify-content-center  ">
             <p *ngIf="signUpForm.controls.confirmPassword.errors?.required &&
               signUpForm.controls.confirmPassword.touched"
                class="text-danger">
               Vui lòng nhập mật khẩu và không để trống
             </p>
           </div>
-          <div class="row d-flex justify-content-center mt-1">
+          <div class="row d-flex justify-content-center ">
             <p *ngIf="signUpForm.controls.confirmPassword.errors?.pattern &&
               signUpForm.controls.confirmPassword.touched"
                class="text-danger">
@@ -102,7 +101,7 @@
           <div class="text-danger" role="alert" *ngIf="signUpForm.hasError('passwordNotMatch')">Mật khẩu không chính xác.</div>
 
 
-          <div class="row mt-2">
+          <div class="row mt-4">
 
             <div class="col-lg-12 d-flex justify-content-center">
               <button type="submit" class=" rounded btn btn-danger mr-3">
