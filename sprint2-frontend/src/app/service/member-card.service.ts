@@ -5,13 +5,13 @@ import {MemberCardAddDTO} from '../model/MemberCardAddDTO';
 import {AbstractControl, AsyncValidatorFn} from '@angular/forms';
 import {map, switchMap} from 'rxjs/operators';
 
-const URL = 'http://localhost:8080/api';
+const URL = 'http://localhost:8080/lanh/member-card';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberCardService {
-  private readonly API = 'http://localhost:8080/api';
+  private readonly API = 'http://localhost:8080/lanh/member-card';
 
   private options = {
     headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class MemberCardService {
   }
 
   createNewMemberCard(memberCardAddDTO: MemberCardAddDTO): Observable<any> {
-    return this.http.post(`${this.API}/member-cards`, memberCardAddDTO);
+    return this.http.post(`${this.API}/add`, memberCardAddDTO);
   }
 
   getMemberCardType(): Observable<any[]> {
@@ -78,5 +78,10 @@ export class MemberCardService {
     return (control.value.match(specialCharacter)) ? {
       specialCharacter: true
     } : null;
+  }
+
+
+  searchPlateNumber(idSearch: any): Observable<any> {
+    return this.http.get(this.API + '/search-plate-number/' + idSearch);
   }
 }

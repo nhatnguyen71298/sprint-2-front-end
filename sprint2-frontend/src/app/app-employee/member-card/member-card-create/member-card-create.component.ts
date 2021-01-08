@@ -44,7 +44,7 @@ export class MemberCardCreateComponent implements OnInit {
   ngOnInit(): void {
     this.memberCardForm = this.formBuilder.group({
       plateNumber: ['',
-        [Validators.required, Validators.pattern('^\\d{2}[A-Z]\\d{1}-\\d{5}$')],
+        [Validators.required, Validators.pattern('^([A-Z]|\\d){6,10}$')],
         [this.memberCardService.validatePlateNumber()], {updateOn: 'blur'}
       ],
 

@@ -3,7 +3,7 @@ import {MemberCardService} from '../../../service/member-card.service';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {FormBuilder} from '@angular/forms';
-import {MemberCardCreateComponent} from "../member-card-create/member-card-create.component";
+import {MemberCardCreateComponent} from '../member-card-create/member-card-create.component';
 
 @Component({
   selector: 'app-member-card-list',
@@ -11,8 +11,10 @@ import {MemberCardCreateComponent} from "../member-card-create/member-card-creat
   styleUrls: ['./member-card-list.component.css']
 })
 export class MemberCardListComponent implements OnInit {
-  memberCardList: any[];
+  memberCardList = [];
   p: number;
+  public keywordSearch: string;
+  public checkList = 'true';
 
   constructor(private memberCardService: MemberCardService,
               private httpClient: HttpClient,
@@ -29,6 +31,7 @@ export class MemberCardListComponent implements OnInit {
       this.memberCardList = data;
       console.log(data);
     });
+    this.keywordSearch = '';
   }
 
   openAddNew() {
@@ -42,4 +45,38 @@ export class MemberCardListComponent implements OnInit {
     });
   }
 
+  searchPlateNumber() {
+    if (this.keywordSearch !== '') {
+      if (this.keywordSearch.match('^([A-Z]|\\d){6,10}$')) {
+        console.log(this.keywordSearch);
+        this.keywordSearch = this.keywordSearch.trim();
+        this.memberCardService.searchPlateNumber(this.keywordSearch).subscribe(data => {
+          console.log(data);
+          this.memberCardList = data;
+          console.log(this.memberCardList);
+          if (this.memberCardList.length === 0) {
+            this.checkList = 'false';
+          }
+        });
+      } else {
+        alert('Biến số xe không tồn tại.');
+        this.resetSearch();
+      }
+    } else {
+      alert('Vui lòng nhập từ khóa tìm kiếm.');
+    }
+  }
+
+  resetSearch() {
+    this.keywordSearch = '';
+    this.checkList = 'true';
+    this.ngOnInit();
+  }
+
+  keyDownFunctionSearch(event) {
+    if (event.keyCode === 13) {
+      this.searchPlateNumber();
+    }
+  }
 }
+

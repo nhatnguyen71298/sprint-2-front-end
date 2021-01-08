@@ -29,6 +29,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MessageNoticeMemberCardComponent } from './message-notice-member-card/message-notice-member-card.component';
 
 
 export const routes: Routes = [
@@ -44,12 +45,13 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, MatInputModule, MatSelectModule, NgxPaginationModule, MatDatepickerModule, FormsModule],
+  imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, MatInputModule,
+    MatSelectModule, NgxPaginationModule, MatDatepickerModule, FormsModule],
   exports: [RouterModule],
   declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent, MemberCardListComponent, MemberCardCreateComponent]
+    SalesViewComponent, SalesDeleteComponent, MemberCardListComponent, MemberCardCreateComponent, MessageNoticeMemberCardComponent]
 })
 export class AppEmployeeRoutingModule { }
