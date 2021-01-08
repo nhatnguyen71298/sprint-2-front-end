@@ -115,21 +115,39 @@ export class EntryViewComponent implements OnInit {
           // car registered
           this.ticketService.findMemberCardsByCar(car).subscribe(next2 => {
             let memberCard = next2[next2.length - 1];
-            const parkingSlot = memberCard.car.parkingSlot;
-            const memberCardList = memberCard.car.memberCardList;
-            memberCard = memberCardList[memberCardList.length - 1];
-            const entryLogList = memberCard.entryLogList;
-            const entryLog = entryLogList[entryLogList.length - 1];
-            const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddThh:mm');
-            // car registered parked
-            if (parkingSlot.status) {
-              this.ticketForm.patchValue({enterDate});
-              this.ticketForm.patchValue({exitDate: currentDate});
-            } else {
-              // car registered not parked
-              this.ticketForm.patchValue({enterDate: currentDate});
-              this.ticketForm.patchValue({exitDate: null});
-            }
+            this.ticketService.findSlotByCarId(memberCard.car).subscribe(next3 => {
+              const parkingSlot = next3;
+              console.log(parkingSlot);
+              const memberCardList = parkingSlot.car.memberCardList;
+              memberCard = memberCardList[memberCardList.length - 1];
+              const entryLogList = memberCard.entryLogList;
+              const entryLog = entryLogList[entryLogList.length - 1];
+              const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddThh:mm');
+              // car registered parked
+              if (parkingSlot.status) {
+                this.ticketForm.patchValue({enterDate});
+                this.ticketForm.patchValue({exitDate: currentDate});
+              } else {
+                // car registered not parked
+                this.ticketForm.patchValue({enterDate: currentDate});
+                this.ticketForm.patchValue({exitDate: null});
+              }
+            });
+            // const parkingSlot = memberCard.car.parkingSlot;
+            // const memberCardList = memberCard.car.memberCardList;
+            // memberCard = memberCardList[memberCardList.length - 1];
+            // const entryLogList = memberCard.entryLogList;
+            // const entryLog = entryLogList[entryLogList.length - 1];
+            // const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddThh:mm');
+            // // car registered parked
+            // if (parkingSlot.status) {
+            //   this.ticketForm.patchValue({enterDate});
+            //   this.ticketForm.patchValue({exitDate: currentDate});
+            // } else {
+            //   // car registered not parked
+            //   this.ticketForm.patchValue({enterDate: currentDate});
+            //   this.ticketForm.patchValue({exitDate: null});
+            // }
           });
         } else {
           // car not parked
