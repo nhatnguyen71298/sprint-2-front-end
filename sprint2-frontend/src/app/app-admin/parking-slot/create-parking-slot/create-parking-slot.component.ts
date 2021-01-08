@@ -29,8 +29,7 @@ export class CreateParkingSlotComponent implements OnInit {
     });
     this.formCreateNew = this.formBuilder.group({
       floor: ['', [Validators.required, Validators.pattern('^\\d+$'), Validators.max(5)]],
-      slotNumber: ['', [Validators.required, Validators.pattern('^\\d+$'),
-        Validators.max(50)]],
+      slotNumber: ['', [Validators.required, Validators.pattern('^\\d+$'), Validators.max(50)]],
       slotType: [this.slotTypeInput]
     });
   }
@@ -55,6 +54,8 @@ export class CreateParkingSlotComponent implements OnInit {
         });
     } else if (this.slotTypeInput === 0) {
       alert('Vui lòng nhập loại xe!');
+    } else {
+      console.log(this.formCreateNew);
       for (const KEY of Object.keys(this.formCreateNew.controls)) {
         if (this.formCreateNew.controls[KEY].invalid) {
           const INVALID_CONTROL = this.el.nativeElement.querySelector('[formControlName="' + KEY + '"]');
@@ -62,8 +63,6 @@ export class CreateParkingSlotComponent implements OnInit {
           break;
         }
       }
-    } else {
-      console.log(this.formCreateNew);
     }
   }
 

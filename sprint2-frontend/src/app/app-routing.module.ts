@@ -1,5 +1,8 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
+// @ts-ignore
 import {RouterModule, Routes} from '@angular/router';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { FooterComponent } from './shared/footer/footer.component';

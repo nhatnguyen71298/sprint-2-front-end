@@ -60,7 +60,7 @@ export class CameraManagementComponent implements OnInit {
             dialogMessage.close();
           }, 3600);
         });
-        if (message.message !== 'Can\'t read'){
+        if (message.message !== 'Can\'t read' && message.message !== 'Not member'){
           dialogMessage.afterClosed().subscribe(result => {
             this.url = '';
             this.msg = 'Hãy chọn một ảnh !';

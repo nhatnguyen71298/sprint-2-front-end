@@ -1,0 +1,30 @@
+<mat-dialog-content class="mat-typography">
+  <div class="bg-white p-4">
+    <form [formGroup]="savePassWordForm">
+      <h1 style="color: blue; text-align: center;font-size: 40px"> Mã xác nhận </h1>
+      <b>
+        <hr>
+      </b>
+      <p><b>Mã xác nhận được gửi tới email của bạn đó bạn thân mến <3</b></p>
+      <br>
+      <br>
+      <p style="font-weight: bold">Vui Lòng Nhập Mã Xác Nhận<span class="sao">(*)</span>:</p>
+      <div class="form-group">
+        <input id="verify" type="text" class="form-control" formControlName="verificationCode" required="required">
+        <p class="text-danger"
+           *ngIf="savePassWordForm.controls.verificationCode.errors?.required && savePassWordForm.get('verificationCode').touched">
+          Vui lòng nhập mã xác nhận
+        </p>
+        <p class="text-danger" *ngIf="messageFalse">{{messageFalse}}</p>
+      </div>
+      <br>
+      <br>
+      <div class="btn-group d-flex">
+        <button type="button" mat-dialog-close class="btn btn-warning " routerLink="" id="backHome">Hủy</button>
+        <button type="button" class="btn btn-warning" id="change " (click)="savePassword()">Xác Nhận
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+

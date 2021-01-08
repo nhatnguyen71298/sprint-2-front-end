@@ -30,7 +30,7 @@ import {CommonModule} from '@angular/common';
         AppCustomerModule,
         AppEmployeeModule,
         AppAdminModule,
-        MaterialModule
+        MaterialModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

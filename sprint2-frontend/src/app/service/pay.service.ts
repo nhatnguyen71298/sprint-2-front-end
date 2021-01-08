@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
@@ -20,10 +20,6 @@ export class PayService {
    */
   getListMemberCardByIDCustomer(idFind): Observable<any> {
     return this.http.get(this.API + '/list/' + idFind);
-  }
-
-  payByMoMoService(money): Observable<any> {
-    return this.http.get(this.API + '/create-signature/' + money);
   }
 
   updateMemberCardAfterPay(money, memberCardList): Observable<any> {
