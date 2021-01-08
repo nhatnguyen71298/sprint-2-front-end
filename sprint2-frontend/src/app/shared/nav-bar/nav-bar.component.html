@@ -6,11 +6,11 @@
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav ml-auto">
-			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> Đăng nhập</a>
-			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>
+<!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> Đăng nhập</a>-->
+<!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>-->
 			<div class="nav-item dropdown login-dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
-					class="fa fa-user-o"></i> Nguyễn Văn A</a>
+					class="fa fa-user-o"></i>&nbsp;{{user.username}}</a>
 				<div class="dropdown-menu">
 
 					<a href="#" class="dropdown-item" [routerLink]="['/admin/employee-list']">
@@ -36,7 +36,7 @@
 <!--					</a>-->
 					<a href="#" class="dropdown-item" [routerLink]="['/admin/statistic']">
 						<span><i class="fa fa-bar-chart"></i> Thống kê</span> </a>
-					<a href="#" class="dropdown-item" [routerLink]="['/authentication/sign-up']">
+					<a href="#" class="dropdown-item" (click)="logout()">
 						<span><i class="fa fa-sign-out"></i> Đăng xuất</span>
 					</a>
 				</div>
