@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MaiService} from '../../../service/mai.service';
+import {MaiService} from '../../service/mai_htq/mai.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
-import {ParkingSlotService} from '../../../service/parking-slot.service';
-import {DetailParkingSlotComponent} from '../detail-parking-slot/detail-parking-slot.component';
+import {ParkingSlotService} from '../../service/parking-slot.service';
+import {DetailParkingSlotComponent} from '../../app-admin/parking-slot/detail-parking-slot/detail-parking-slot.component';
 
 @Component({
   selector: 'app-list-parking-slot',
@@ -23,7 +23,6 @@ export class ListParkingSlotComponent implements OnInit {
     public parkingSlotService: MaiService,
     public parkingSlotService1: ParkingSlotService,
     public dialog: MatDialog,
-    private route: ActivatedRoute
   ) {
   }
 

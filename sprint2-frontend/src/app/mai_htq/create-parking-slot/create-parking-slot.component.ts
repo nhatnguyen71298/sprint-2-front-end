@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {MaiService} from '../../../service/mai.service';
+import {MaiService} from '../../service/mai_htq/mai.service';
 
 @Component({
   selector: 'app-create-parking-slot',

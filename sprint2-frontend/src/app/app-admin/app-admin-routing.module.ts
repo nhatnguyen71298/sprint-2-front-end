@@ -15,7 +15,7 @@ import {StatisticTicketComponent} from './statistic/statistic-ticket/statistic-t
 import {StatisticSalesComponent} from './statistic/statistic-sales/statistic-sales.component';
 import {StatisticCarComponent} from './statistic/statistic-car/statistic-car.component';
 import {StatisticCustomerComponent} from './statistic/statistic-customer/statistic-customer.component';
-import {ListParkingSlotComponent} from './parking-slot/list-parking-slot/list-parking-slot.component';
+import {ListParkingSlotComponent} from '../mai_htq/list-parking-slot/list-parking-slot.component';
 // @ts-ignore
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // @ts-ignore
@@ -24,7 +24,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {OrderModule} from 'ngx-order-pipe';
 // @ts-ignore
 import {CommonModule} from '@angular/common';
-import {CreateParkingSlotComponent} from './parking-slot/create-parking-slot/create-parking-slot.component';
+import {CreateParkingSlotComponent} from '../mai_htq/create-parking-slot/create-parking-slot.component';
 import {EditParkingSlotComponent} from './parking-slot/edit-parking-slot/edit-parking-slot.component';
 import {ListCarExpiredComponent} from './parking-slot/list-car-expired/list-car-expired.component';
 import {DetailCarExpiredComponent} from './parking-slot/detail-car-expired/detail-car-expired.component';
