@@ -54,11 +54,12 @@ export class EntryViewComponent implements OnInit {
         }
       };
       const isRegistered = this.ticketForm.value.startDate != null;
-      const currentDate = (new Date()).valueOf();
-      const endDate = new Date(this.ticketForm.value.endDate).valueOf();
-      const isValid = (currentDate - endDate) < 0;
+      // const currentDate = (new Date()).valueOf();
+      // const endDate = new Date(this.ticketForm.value.endDate).valueOf();
+      // const isValid = (currentDate - endDate) < 0;
+      const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not register or member card expired
-      if (!isRegistered && !isValid) {
+      if (!isRegistered || !isValid) {
         this.ticketService.saveTicket(ticket).subscribe(next => {
           this.message = next.message;
           this.snackBar.open(this.message, 'OK', {
@@ -175,6 +176,12 @@ export class EntryViewComponent implements OnInit {
     }
   }
 
+  checkMemberCardValid(endDate) {
+    const currentDate = (new Date()).valueOf();
+    const endDate2 = new Date(endDate).valueOf();
+    return currentDate - endDate2 < 0;
+  }
+
   checkout() {
     if (this.ticketForm.valid) {
       const ticket = {
@@ -189,8 +196,9 @@ export class EntryViewComponent implements OnInit {
         exitDate: this.ticketForm.value.exitDate,
       };
       const isRegistered = this.ticketForm.value.startDate != null;
+      const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not registered
-      if (!isRegistered) {
+      if (!isRegistered || !isValid) {
         this.ticketService.closeTicket(ticket).subscribe(next => {
           this.message = next.message;
           this.snackBar.open(this.message, 'OK', {
