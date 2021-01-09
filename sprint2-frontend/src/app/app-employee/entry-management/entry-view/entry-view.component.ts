@@ -199,6 +199,12 @@ export class EntryViewComponent implements OnInit {
       const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not registered
       if (!isRegistered || !isValid) {
+        if (this.ticketForm.value.price == null) {
+          this.snackBar.open('Vui lòng tính phí trước', 'OK', {
+            duration: 1000
+          });
+          return;
+        }
         this.ticketService.closeTicket(ticket).subscribe(next => {
           this.message = next.message;
           this.snackBar.open(this.message, 'OK', {
