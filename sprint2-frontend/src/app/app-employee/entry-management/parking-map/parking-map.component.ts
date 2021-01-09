@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TicketService} from '../../../service/ticket.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SlotInfoComponent} from '../slot-info/slot-info.component';
 
 @Component({
   selector: 'app-parking-map',
@@ -10,8 +12,10 @@ export class ParkingMapComponent implements OnInit {
   parkingSlotList;
   floorList;
   currentFloor;
+  availableSlots;
 
-  constructor(private ticketService: TicketService) {
+  constructor(private ticketService: TicketService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -23,8 +27,13 @@ export class ParkingMapComponent implements OnInit {
   }
 
   getSlotInfo(id) {
-    this.ticketService.findSlotById(id).subscribe(next => {
-      console.log(next);
+    const dialogRef = this.dialog.open(SlotInfoComponent, {
+      width: '500px',
+      data: {id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The slot-info was closed');
     });
   }
 
@@ -34,5 +43,8 @@ export class ParkingMapComponent implements OnInit {
         this.currentFloor = floor;
       }
     );
+    this.ticketService.findAllAvailableSlots(floor).subscribe(next => {
+      this.availableSlots = next.length;
+    });
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TicketService} from '../../../service/ticket.service';
 import {DatePipe} from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class EntryViewComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private ticketService: TicketService,
               private datePipe: DatePipe,
+              private snackBar: MatSnackBar
   ) {
   }
 
@@ -24,7 +26,7 @@ export class EntryViewComponent implements OnInit {
     this.ticketForm = this.formBuilder.group({
       enterDate: [],
       exitDate: [],
-      plateNumber: ['', Validators.required],
+      plateNumber: ['', [Validators.required, Validators.maxLength(10)]],
       price: [],
       fullName: [],
       email: [],
@@ -45,7 +47,7 @@ export class EntryViewComponent implements OnInit {
         enterDate: this.ticketForm.value.enterDate,
         exitDate: this.ticketForm.value.exitDate,
         car: {
-          plateNumber: this.ticketForm.value.plateNumber,
+          plateNumber: this.ticketForm.value.plateNumber.trim(),
           carType: {
             carTypeName: this.ticketForm.value.carType,
           }
@@ -59,6 +61,9 @@ export class EntryViewComponent implements OnInit {
       if (!isRegistered && !isValid) {
         this.ticketService.saveTicket(ticket).subscribe(next => {
           this.message = next.message;
+          this.snackBar.open(this.message, 'OK', {
+            duration: 1000
+          });
           if (this.message === 'Xếp chỗ thành công') {
             const car = {
               plateNumber: this.ticketForm.value.plateNumber,
@@ -75,6 +80,9 @@ export class EntryViewComponent implements OnInit {
         };
         this.ticketService.parkRegisteredCar(car).subscribe(next => {
           this.message = next.message;
+          this.snackBar.open(this.message, 'OK', {
+            duration: 1000
+          });
         });
       }
     }
@@ -88,6 +96,9 @@ export class EntryViewComponent implements OnInit {
       // car not found
       if (next.message != null) {
         this.message = next.message;
+        this.snackBar.open(this.message, 'OK', {
+          duration: 1000
+        });
         this.ticketForm.reset();
         this.ticketForm.patchValue({plateNumber: car.plateNumber});
       } else {
@@ -95,6 +106,9 @@ export class EntryViewComponent implements OnInit {
         this.message = '';
         this.patchForm(next);
         this.message = 'Tìm xe thành công';
+        this.snackBar.open(this.message, 'OK', {
+          duration: 1000
+        });
         const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
         // car not register parked
         if (next.parkingSlot != null && !next.parkingSlot.reserved) {
@@ -133,21 +147,6 @@ export class EntryViewComponent implements OnInit {
                 this.ticketForm.patchValue({exitDate: null});
               }
             });
-            // const parkingSlot = memberCard.car.parkingSlot;
-            // const memberCardList = memberCard.car.memberCardList;
-            // memberCard = memberCardList[memberCardList.length - 1];
-            // const entryLogList = memberCard.entryLogList;
-            // const entryLog = entryLogList[entryLogList.length - 1];
-            // const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddThh:mm');
-            // // car registered parked
-            // if (parkingSlot.status) {
-            //   this.ticketForm.patchValue({enterDate});
-            //   this.ticketForm.patchValue({exitDate: currentDate});
-            // } else {
-            //   // car registered not parked
-            //   this.ticketForm.patchValue({enterDate: currentDate});
-            //   this.ticketForm.patchValue({exitDate: null});
-            // }
           });
         } else {
           // car not parked
@@ -195,6 +194,9 @@ export class EntryViewComponent implements OnInit {
       if (!isRegistered) {
         this.ticketService.closeTicket(ticket).subscribe(next => {
           this.message = next.message;
+          this.snackBar.open(this.message, 'OK', {
+            duration: 1000
+          });
           const parkingSlot = {
             floor: '',
             slot: '',
@@ -207,6 +209,9 @@ export class EntryViewComponent implements OnInit {
         const car = ticket.car;
         this.ticketService.checkoutRegisteredCar(car).subscribe(next => {
           this.message = next.message;
+          this.snackBar.open(this.message, 'OK', {
+            duration: 1000
+          });
         });
       }
     } else {

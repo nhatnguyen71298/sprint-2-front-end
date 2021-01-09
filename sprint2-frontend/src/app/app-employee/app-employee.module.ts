@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {DatePipe} from '@angular/common';
 
-import { AppEmployeeRoutingModule } from './app-employee-routing.module';
+import {AppEmployeeRoutingModule} from './app-employee-routing.module';
 import {MaterialModule} from '../material.module';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -13,6 +14,6 @@ import {MaterialModule} from '../material.module';
     AppEmployeeRoutingModule,
     MaterialModule
   ],
-  providers: [DatePipe]
+  providers: [DatePipe, MatSnackBar]
 })
 export class AppEmployeeModule { }

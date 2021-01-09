@@ -23,6 +23,7 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from '../material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import { SlotInfoComponent } from './entry-management/slot-info/slot-info.component';
 
 
 export const routes: Routes = [
@@ -44,7 +45,7 @@ export const routes: Routes = [
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent
+    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent, SlotInfoComponent
   ]
 })
 export class AppEmployeeRoutingModule { }

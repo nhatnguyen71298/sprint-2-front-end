@@ -13,6 +13,7 @@ export class TicketService {
   API_SLOT_FIND_BY_FLOOR_SLOT = 'http://localhost:8080/parking-slot/find-by-floor-slot-number';
   API_SLOT_FIND_BY_CAR_ID = 'http://localhost:8080/parking-slot/find-slot-by-car-id';
   API_SLOT_FIND_BY_FLOOR = 'http://localhost:8080/parking-slot/find-by-floor';
+  API_SLOT_AVAILABLE_FIND_BY_FLOOR = 'http://localhost:8080/parking-slot/find-available-slot-by-floor';
   API_CAR_FIND_BY_PLATE = 'http://localhost:8080/car/get-info';
   API_CAR_TYPE_ALL = 'http://localhost:8080/car/find-all-type';
   API_MEMBER_CARD_LIST = 'http://localhost:8080/car/find-all-member-card';
@@ -73,5 +74,9 @@ export class TicketService {
 
   findAllFloor(): Observable<any> {
     return this.http.get(this.API_FLOOR_ALL);
+  }
+
+  findAllAvailableSlots(floor): Observable<any> {
+    return this.http.get(this.API_SLOT_AVAILABLE_FIND_BY_FLOOR + '/' + floor);
   }
 }
