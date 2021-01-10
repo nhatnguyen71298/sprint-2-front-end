@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Chart} from 'chart.js';
 import {MAT_DATE_FORMATS} from "@angular/material/core";
 import {StatisticsService} from "../../../service/statistics.service";
+import * as Highcharts from "highcharts";
+
+declare var require: any;
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/export-data.src')(Highcharts);
+
 
 export const FORMATS_MONTH_YEAR = {
   parse: {
@@ -23,30 +28,25 @@ export const FORMATS_MONTH_YEAR = {
   providers: [{provide: MAT_DATE_FORMATS, useValue: FORMATS_MONTH_YEAR}]
 })
 export class StatisticTicketComponent implements OnInit {
-
   formStatisticMemberCard: FormGroup;
   totalMemberCardWeek: any[];
   totalMemberCardMonth: any[];
   totalMemberCardYear: any[];
-  chartWeek: Chart;
-  chartMonth: Chart;
-  chartYear: Chart;
   typeReport;
   monthYear;
+  message;
 
   typeReports = [
     {value: 'week', valueView: 'Thống kê vé tuần'},
     {value: 'month', valueView: 'Thống kê vé tháng'},
     {value: 'year', valueView: 'Thống kê vé năm'},
   ];
-
   weekParams = [
     {value: '1', valueView: 'Tuần 1'},
     {value: '2', valueView: 'Tuần 2'},
     {value: '3', valueView: 'Tuần 3'},
     {value: '4', valueView: 'Tuần 4'},
   ];
-
   monthParams = [
     {value: '1', valueView: 'Tháng 1'},
     {value: '2', valueView: 'Tháng 2'},
@@ -103,183 +103,252 @@ export class StatisticTicketComponent implements OnInit {
     if (this.typeReport === 'week' && this.monthYear.weekParam === '1') {
       this.statisticsService.getTotalMemberCardWeek1(this.monthYear).subscribe(dataTotalMemberCardWeek1 => {
         this.totalMemberCardWeek = dataTotalMemberCardWeek1;
-        this.createChartWeek();
+        if (dataTotalMemberCardWeek1 != null) {
+          this.createChartWeek();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '2') {
       this.statisticsService.getTotalMemberCardWeek2(this.monthYear).subscribe(dataTotalMemberCardWeek2 => {
         this.totalMemberCardWeek = dataTotalMemberCardWeek2;
-        this.createChartWeek();
+        if (dataTotalMemberCardWeek2 != null) {
+          this.createChartWeek();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '3') {
       this.statisticsService.getTotalMemberCardWeek3(this.monthYear).subscribe(dataTotalMemberCardWeek3 => {
         this.totalMemberCardWeek = dataTotalMemberCardWeek3;
-        this.createChartWeek();
+        if (dataTotalMemberCardWeek3 != null) {
+          this.createChartWeek();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '4') {
       this.statisticsService.getTotalMemberCardWeek4(this.monthYear).subscribe(dataTotalMemberCardWeek4 => {
         this.totalMemberCardWeek = dataTotalMemberCardWeek4;
-        this.createChartWeek();
+        if (dataTotalMemberCardWeek4 != null) {
+          this.createChartWeek();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     }
     // get data member card by month
     else if (this.typeReport === 'month') {
       this.statisticsService.getTotalMemberCardMonth(this.monthYear).subscribe(dataTotalMemberCardMonth => {
         this.totalMemberCardMonth = dataTotalMemberCardMonth;
-        this.createChartMonth();
+        if (dataTotalMemberCardMonth != null) {
+          this.createChartMonth();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     }
     // get data member card by year
     else {
       this.statisticsService.getTotalMemberCardYear(this.monthYear).subscribe(dataTotalMemberCardYear => {
         this.totalMemberCardYear = dataTotalMemberCardYear;
-        this.createChartYear();
+        if (dataTotalMemberCardYear != null) {
+          this.createChartYear();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     }
   }
 
   // create chart data by week
   createChartWeek() {
-    this.chartWeek = new Chart('statistic-member-card-week', {
-      type: 'line',
-      data: {
-        labels: this.totalMemberCardWeek.map(x => x.date),
-        datasets: [
-          {
-            label: 'Doanh thu vé thành viên',
-            data: this.totalMemberCardWeek.map(x => x.total_member_card),
-            backgroundColor: [
-              'rgb(19,39,180)',
-              'rgb(29,255,15)',
-              'rgb(75, 0, 130)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(180,60,166)',
-            ],
-            fill: false,
-            borderColor: 'red',
-          },
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-member-card-week', {
+      title: {
+        text: 'Biểu đồ số lượng vé theo tuần',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
+        }
       },
-      options: {
+
+      yAxis: {
         title: {
-          text: 'Biểu đồ thống kê vé theo tuần',
-          display: true
+          text: 'Số lượng (Đơn vị: Vé)'
         },
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Thời gian'
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      xAxis: {
+        categories: this.totalMemberCardWeek.map(x => x.date),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      series: [{
+        name: 'Số lượng vé theo tuần',
+        data: this.totalMemberCardWeek.map(x => x.total_member_card),
+        color: 'red',
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
             }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Đơn vị: VND'
-            },
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        },
+          }
+        }]
       }
     });
   }
 
   // create chart data by month
   createChartMonth() {
-    this.chartMonth = new Chart('statistic-member-card-month', {
-      type: 'line',
-      data: {
-        labels: this.totalMemberCardMonth.map(x => x.date),
-        datasets: [
-          {
-            label: 'Doanh thu vé thành viên',
-            data: this.totalMemberCardMonth.map(x => x.total_member_card),
-            backgroundColor: [
-              'rgb(19,39,180)',
-              'rgb(29,255,15)',
-              'rgb(75, 0, 130)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(180,60,166)',
-            ],
-            fill: false,
-            borderColor: 'red',
-          },
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-member-card-month', {
+      title: {
+        text: 'Biểu đồ số lượng vé theo tháng',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
+        }
       },
-      options: {
+
+      yAxis: {
         title: {
-          text: 'Biểu đồ thống kê vé theo tháng',
-          display: true
+          text: 'Số lượng (Đơn vị: Vé)'
         },
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Thời gian'
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      xAxis: {
+        categories: this.totalMemberCardMonth.map(x => x.date),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      series: [{
+        name: 'Số lượng vé theo tháng',
+        data: this.totalMemberCardMonth.map(x => x.total_member_card),
+        color: 'blue',
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
             }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Đơn vị: VND'
-            },
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        },
+          }
+        }]
       }
     });
   }
 
   // create chart data by year
   createChartYear() {
-    this.chartYear = new Chart('statistic-member-card-year', {
-      type: 'line',
-      data: {
-        labels: this.totalMemberCardYear.map(x => x.date),
-        datasets: [
-          {
-            label: 'Doanh thu vé thành viên',
-            data: this.totalMemberCardYear.map(x => x.total_member_card),
-            backgroundColor: [
-              'rgb(19,39,180)',
-              'rgb(29,255,15)',
-              'rgb(75, 0, 130)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(180,60,166)',
-            ],
-            fill: false,
-            borderColor: 'red',
-          },
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-member-card-year', {
+      title: {
+        text: 'Biểu đồ số lượng vé theo năm',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
+        }
       },
-      options: {
+
+      yAxis: {
         title: {
-          text: 'Biểu đồ thống kê vé theo năm',
-          display: true
+          text: 'Số lượng (Đơn vị: Vé)'
         },
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Thời gian'
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      xAxis: {
+        categories: this.totalMemberCardYear.map(x => x.date),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      series: [{
+        name: 'Số lượng vé theo năm',
+        data: this.totalMemberCardYear.map(x => x.total_member_card),
+        color: 'orange',
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
             }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Đơn vị: VND'
-            },
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        },
+          }
+        }]
       }
     });
   }

@@ -13,3 +13,7 @@
   border: none;
   background: none;
 }
+
+.ng-star-inserted {
+  margin-top: 5px !important;
+}

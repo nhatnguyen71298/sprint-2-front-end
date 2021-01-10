@@ -92,6 +92,8 @@ export class StatisticOverviewComponent implements OnInit {
             bottom: 0
           }
         },
+        animationEnabled: true,
+        exportEnabled: true,
         title: {
           display: true,
           text: 'Biểu đồ số lượng hãng xe',

@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
-import {Chart} from 'chart.js';
 import {StatisticsService} from "../../../service/statistics.service";
+import *as Highcharts from "highcharts";
+
+declare var require: any;
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/export-data.src')(Highcharts);
 
 export const MY_FORMATS = {
   parse: {
@@ -23,10 +27,10 @@ export const MY_FORMATS = {
 })
 export class StatisticCustomerComponent implements OnInit {
   formStatisticCustomerRegisterPeriod: FormGroup;
-  chart: Chart;
   toTalCustomerRegisterPeriods: any[];
   day;
   days;
+  message;
 
   constructor(public formBuilder: FormBuilder,
               public statisticsService: StatisticsService) {
@@ -53,62 +57,106 @@ export class StatisticCustomerComponent implements OnInit {
     // statistic total customer in period time
     this.statisticsService.getToTalCustomerRegisterPeriod(this.days).subscribe(dataToTalCustomerRegisterPeriod => {
       this.toTalCustomerRegisterPeriods = dataToTalCustomerRegisterPeriod;
-      this.createChartTotalCustomer();
+      if (dataToTalCustomerRegisterPeriod != null) {
+        this.createChartTotalCustomer();
+      } else {
+        return this.message = 'Dữ liệu không tồn tại!'
+      }
     });
   }
 
   // create chart total customer
   createChartTotalCustomer() {
-    this.chart = new Chart('statistic-customer', {
-      type: 'bar',
-      data: {
-        labels: this.toTalCustomerRegisterPeriods.map(x => x.create_date),
-        datasets: [
-          {
-            data: this.toTalCustomerRegisterPeriods.map(x => x.total_customer),
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(84, 255, 159)',
-              'rgb(255, 77, 0)',
-              'rgb(255, 165, 0)',
-              'rgb(75, 0, 130)',
-              'rgb(0, 0, 255)',
-              'rgb(255,0,0)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(128,0,0)',
-              'rgb(128,128,128)',
-            ],
-          }
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-customer', {
+
+      chart: {
+        type: 'column',
+        backgroundColor: 'white',
       },
-      options: {
-        legend: {
-          position: 'bottom',
-          display: false
-        },
-        layout: {
-          padding: {
-            left: 70,
-            right: 0,
-            top: 20,
-            bottom: 30
-          }
-        },
-        title: {
-          display: true,
-          text: 'Biểu đồ thống kê số lượng xe của khách hàng',
-          position: 'bottom'
-        },
-        responsive: true,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
+      title: {
+        text: 'Biểu đồ số lượng khách hàng',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
         }
-      }
+      },
+
+      xAxis: {
+        categories: this.toTalCustomerRegisterPeriods.map(x => x.create_date),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: 'Số lượng khách hàng'
+        },
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        enabled: false
+      },
+
+      plotOptions: {
+        series: {
+          borderWidth: 1,
+          dataLabels: {
+            enabled: true,
+          }
+        }
+      },
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 600
+          },
+          chartOptions: {
+            legend: {
+              enabled: false
+            }
+          }
+        }]
+      },
+      colors: [
+        'rgb(255, 99, 132)',
+        'rgb(84, 255, 159)',
+        'rgb(255, 77, 0)',
+        'rgb(255, 165, 0)',
+        'rgb(75, 0, 130)',
+        'rgb(0, 0, 255)',
+        'rgb(255,0,0)',
+        'rgb(0,255,0)',
+        'rgb(255,255,0)',
+        'rgb(128,0,0)',
+        'rgb(128,128,128)',
+        'rgb(255, 99, 132)',
+        'rgb(84, 255, 159)',
+        'rgb(255, 77, 0)',
+        'rgb(255, 165, 0)',
+        'rgb(75, 0, 130)',
+        'rgb(0, 0, 255)',
+        'rgb(255,0,0)',
+      ],
+      series: [
+        {
+          name: "Số lượng khách hàng ",
+          colorByPoint: true,
+          data: this.toTalCustomerRegisterPeriods.map(x => x.total_customer),
+        }
+      ],
     });
   }
 }

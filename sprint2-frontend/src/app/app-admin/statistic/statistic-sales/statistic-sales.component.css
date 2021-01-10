@@ -3,7 +3,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-.statistics {
+div.statistics {
   background-image: url("https://msmobile.com.vn/upload_images/images/hinh-nen-powerpoint-mau-xanh-da-troi-9.jpg") !important;
   background-size: cover;
   background-repeat: no-repeat;
@@ -16,4 +16,7 @@
   outline: none;
   border: none;
   background: none;
+}
+.ng-star-inserted {
+  margin-top: 5px !important;
 }
