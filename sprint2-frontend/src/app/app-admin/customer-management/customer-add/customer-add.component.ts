@@ -43,7 +43,7 @@ export class CustomerAddComponent implements OnInit {
       address: ['', [Validators.required, Validators.pattern('^\\d{1,3}\\D{5,45}$')]],
       brandName: ['', [Validators.required, Validators.pattern('^[\\D]*$'), Validators.minLength(3),
         Validators.maxLength(45)]],
-      plateNumber: ['', [Validators.required, Validators.pattern('^\\d{2}[A-Z]-\\d{4,5}$')]],
+      plateNumber: ['', [Validators.required, Validators.pattern('^([A-Z]|\\d){6,10}$')]],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       carType: ['', [Validators.required]],
