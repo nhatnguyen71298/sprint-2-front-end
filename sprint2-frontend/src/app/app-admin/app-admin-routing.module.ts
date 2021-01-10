@@ -32,6 +32,8 @@ import {DetailParkingSlotComponent} from './parking-slot/detail-parking-slot/det
 import {MatButtonModule} from "@angular/material/button";
 import {MaterialModule} from "../material.module";
 import {MatSelectModule} from "@angular/material/select";
+import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
+import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +52,9 @@ export const routes: Routes = [
       {path: 'statistic-revenue', component: StatisticSalesComponent},
       {path: 'statistic-ticket', component: StatisticTicketComponent},
       {path: 'statistic-customer-register', component: StatisticCustomerComponent},
+      // Ngân
+      {path: 'customer-list', component: CustomerListComponent},
+      {path: 'customer-add', component: CustomerAddComponent}
     ]
   },
 ];
@@ -76,7 +81,9 @@ export const routes: Routes = [
     DetailParkingSlotComponent,
     EditParkingSlotComponent,
     ListCarExpiredComponent,
-    DetailCarExpiredComponent
+    DetailCarExpiredComponent,
+    CustomerAddComponent,
+    CustomerListComponent
   ],
   entryComponents: [DetailParkingSlotComponent]
 })
