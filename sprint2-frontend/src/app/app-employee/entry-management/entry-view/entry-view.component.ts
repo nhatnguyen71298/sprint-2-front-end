@@ -42,6 +42,13 @@ export class EntryViewComponent implements OnInit {
   }
 
   onSubmit() {
+    this.ticketForm.value.plateNumber.trim();
+    if (this.ticketForm.value.plateNumber.trim() === '') {
+      this.snackBar.open('Vui lòng nhập biển số', 'OK', {
+        duration: 1000
+      });
+      return;
+    }
     if (this.ticketForm.valid) {
       const ticket = {
         enterDate: this.ticketForm.value.enterDate,
@@ -54,9 +61,6 @@ export class EntryViewComponent implements OnInit {
         }
       };
       const isRegistered = this.ticketForm.value.startDate != null;
-      // const currentDate = (new Date()).valueOf();
-      // const endDate = new Date(this.ticketForm.value.endDate).valueOf();
-      // const isValid = (currentDate - endDate) < 0;
       const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not register or member card expired
       if (!isRegistered || !isValid) {
