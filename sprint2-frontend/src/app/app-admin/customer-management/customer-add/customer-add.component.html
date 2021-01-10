@@ -40,7 +40,6 @@
 <!--              <input type="date" class="form-control" id="birthday" formControlName="birthday">-->
                 <input [max]="startAge" matInput [matDatepicker]="picker" id="birthday" formControlName="birthday" required>
                 <mat-datepicker-toggle matSuffix [for]="picker">
-                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker startView="year" [startAt]="startAge"></mat-datepicker>
                 <mat-error *ngIf="formAddNew.get('birthday').invalid && formAddNew.get('birthday').touched"
