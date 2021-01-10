@@ -18,6 +18,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export const MY_FORMATS = {
   parse: {
@@ -49,6 +50,6 @@ export const MY_FORMATS = {
   ],
   entryComponents: [SuccessComponent],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'vi-VI'}, {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}]
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}, MatSnackBar]
 })
 export class AppCustomerModule { }

@@ -1,9 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {HttpClient} from "@angular/common/http";
-import {SuccessfullyPayComponent} from "../successfully-pay/successfully-pay.component";
-import {PayService} from "../../../service/pay.service";
-import {ActivatedRoute} from "@angular/router";
+import {MatDialog} from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http';
+import {SuccessfullyPayComponent} from '../successfully-pay/successfully-pay.component';
+import {PayService} from '../../../service/pay.service';
+import {ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pay',
@@ -25,6 +26,7 @@ export class PayComponent implements OnInit {
     private dialog: MatDialog,
     protected http: HttpClient,
     private activedRouter: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -73,21 +75,27 @@ export class PayComponent implements OnInit {
         },
 
         onCancel(data) {
-          alert('Yêu cầu hủy thanh toán thành công!');
+          this.snackBar.open('Yêu cầu hủy thanh toán thành công!', 'OK', {
+            duration: 1000
+          });
           console.log('Đã hủy.');
         },
 
         onApprove: (data, actions) => {
           return actions.order.capture().then(details => {
-            alert('Thông tin đang cập nhật. Vui lòng đợi trong giây lát!');
+            this.snackBar.open('Thông tin đang cập nhật. Vui lòng đợi trong giây lát!', 'OK', {
+              duration: 1000
+            });
             this.updateMemberCard();
           });
         },
 
         onError: (data, actions) => {
           this.refresh();
-          alert('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. ' +
-            'Mong quý khách thông cảm! Xin cảm ơn!');
+          this.snackBar.open('Lỗi hệ thống. Quý khách vui lòng liên hệ nhân viên để khắc phục. ' +
+            'Mong quý khách thông cảm! Xin cảm ơn!', 'OK', {
+            duration: 1000
+          });
           console.log('Lỗi hệ thống.');
         }
       }
@@ -95,7 +103,9 @@ export class PayComponent implements OnInit {
   }
 
   payNothing() {
-    alert('Vui lòng chọn vé trước khi thanh toán!');
+    this.snackBar.open('Vui lòng chọn vé trước khi thanh toán!', 'OK', {
+      duration: 1000
+    });
   }
 
   onCheckboxChange($event: Event, memberCard) {
