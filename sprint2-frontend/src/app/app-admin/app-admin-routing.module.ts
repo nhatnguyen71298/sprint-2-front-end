@@ -26,9 +26,9 @@ import {DetailParkingSlotComponent} from './parking-slot/detail-parking-slot/det
 import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
 import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {MaterialModule} from "../material.module";
-import {MatIconModule} from "@angular/material/icon";
-import {MatSelectModule} from "@angular/material/select";
+import {MaterialModule} from '../material.module';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 
 

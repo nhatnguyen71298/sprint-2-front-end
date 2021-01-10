@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl, AbstractControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {NganService} from '../../../service/ngan-service.service';
 import {MatDatepicker} from "@angular/material/datepicker";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-customer-add',
@@ -16,12 +17,12 @@ export class CustomerAddComponent implements OnInit {
   private customerList: any;
   private dateCreate = new Date();
   startAge = new Date(2003, 0, 1);
-  startDate = new Date('yyyy/MM/dd');
   // @ts-ignore
   // endDate = this.startDate.getDate() + 7;
 
   public startDateMin = new Date ();
   public startDateTS = new Date('yyyy/MM/dd');
+  private pipe: DatePipe;
 
   constructor(public formBuilder: FormBuilder,
               public nganService: NganService,
@@ -31,8 +32,10 @@ export class CustomerAddComponent implements OnInit {
       car_id: [''],
       customerCode: ['', [Validators.required, Validators.pattern('^KH-\\d{4}$')]],
       identityNumber: ['', [Validators.required, Validators.pattern('^\\d{9}|\\d{12}$')]],
-      fullName: ['', [Validators.required, Validators.pattern('^[\\D]*$'), Validators.minLength(3),
-        Validators.maxLength(45)]],
+      fullName: ['', [Validators.required, Validators.pattern('^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +\n' +
+        '            "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +\n' +
+        '            "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$'), Validators.minLength(3),
+        Validators.maxLength(45), this.nganService.validateWhitespace]],
       gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern('^[a-z][\\w]{3,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')]],
       birthday: ['', [Validators.required]],
@@ -65,6 +68,7 @@ export class CustomerAddComponent implements OnInit {
     //     appRole: 3,
     //   }
     // );
+    this.pipe = new DatePipe('en-US');
     this.nganService.addNewCustomer(this.formAddNew.value).subscribe(data => {
       this.router.navigateByUrl('admin/customer-list');
     });

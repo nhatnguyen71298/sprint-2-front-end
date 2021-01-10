@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AbstractControl} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,14 @@ export class NganService {
   search(input, key, currentPage): Observable<any> {
     console.log(input, key);
     return this.http.get(this.apiGetCustomer + '/' + input + '/' + key);
+  }
+  validateWhitespace(c: AbstractControl) {
+    if (c.value !== '') {
+      const isWhitespace = c.value.trim().length === 0;
+      if (isWhitespace) {
+        const isValid = !isWhitespace;
+        return isValid ? null : {whitespace: true};
+      }
+    }
   }
 }

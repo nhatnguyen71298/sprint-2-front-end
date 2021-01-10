@@ -9,7 +9,7 @@
               <mat-label>Họ Tên</mat-label>
               <input matInput type="text" id="fullName" formControlName="fullName" required>
               <mat-error *ngIf="formAddNew.get('fullName').invalid && formAddNew.get('fullName').touched"
-                 class="text-danger">Tên khách hàng không được để trống.</mat-error>
+                 class="text-danger">Vui lòng nhập tên khách hàng bằng chữ.</mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-6">
@@ -19,15 +19,8 @@
                 <mat-option value=true>Nam</mat-option>
                 <mat-option value=false>Nữ</mat-option>
               </mat-select>
-<!--              <mat-form-field appearance="fill">-->
-<!--                <mat-label >Giới tính:*</mat-label>-->
-<!--                <mat-select>-->
-<!--                  <mat-option  name= "gender" value=true>-->
-<!--                    {{food.viewValue}}-->
-<!--                  </mat-option>-->
-<!--                </mat-select>-->
-<!--              </mat-form-field>-->
-
+              <mat-error *ngIf="formAddNew.get('gender').invalid && formAddNew.get('gender').touched"
+                         class="text-danger">Vui lòng chọn giới tính khách hàng.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -51,7 +44,7 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker startView="year" [startAt]="startAge"></mat-datepicker>
                 <mat-error *ngIf="formAddNew.get('birthday').invalid && formAddNew.get('birthday').touched"
-                           class="text-danger">Ngày sinh không được để trống. Khách hàng phải lớn hơn 18 tuổi.</mat-error>
+                           class="text-danger">Khách hàng phải lớn hơn 18 tuổi.</mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -62,7 +55,7 @@
               <mat-label for="phone">Số điện thoại</mat-label>
               <input  matInput type="text" id="phone" formControlName="phone" required>
               <mat-error *ngIf="formAddNew.get('phone').invalid && formAddNew.get('phone').touched"
-                 class="text-danger">Số điện thoại không được để trống.</mat-error>
+                 class="text-danger">Vui lòng nhập số điện thoại theo đúng định dạng.</mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-6">
@@ -70,7 +63,7 @@
               <mat-label for="address">Địa chỉ</mat-label>
               <input matInput type="text" id="address" formControlName="address" required>
               <mat-error *ngIf="formAddNew.get('address').invalid && formAddNew.get('address').touched"
-                 class="text-danger">Địa chỉ không được để trống.</mat-error>
+                 class="text-danger">Vui lòng nhập địa chỉ theo đúng định dạng, ví dụ: 205 Hoàng Diệu</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -80,7 +73,7 @@
               <mat-label for="identityNumber">Số CMND</mat-label>
               <input matInput type="text" id="identityNumber" formControlName="identityNumber" required>
               <mat-error *ngIf="formAddNew.get('identityNumber').invalid && formAddNew.get('identityNumber').touched"
-                 class="text-danger">Số CMND không được để trống.</mat-error>
+                 class="text-danger">Số CMND gồm 9 hoặc 12 số.</mat-error>
             </mat-form-field>
           </div>
           <div class="col-lg-6">
@@ -88,7 +81,7 @@
               <mat-label>ID khách hàng</mat-label>
               <input matInput type="text" id="customerCode" formControlName="customerCode" required>
               <mat-error *ngIf="formAddNew.get('customerCode').invalid && formAddNew.get('customerCode').touched"
-                 class="text-danger">Mã khách hàng không được để trống.</mat-error>
+                 class="text-danger">Vui lòng nhập số điện thoại theo đúng định dạng.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -163,7 +156,7 @@
         <div class="row">
           <div class="col-6" style="margin-left: 150px">
             <button type="submit" class="btn btn-secondary mr-3" (click)="comeBack()">Quay lại</button>
-            <button type="submit" [disabled]="formAddNew.invalid" class="btn btn-success" (click)="addNewCustomer()">Thêm mới</button>
+            <button type="submit" class="btn btn-success" (click)="addNewCustomer()">Thêm mới</button>
 <!--            last change 6:20PM-->
           </div>
         </div>

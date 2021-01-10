@@ -49,7 +49,7 @@
     <tr style="text-align: center">
       <td>{{customer.customerCode}}</td>
       <td>{{customer.fullName}}</td>
-      <td>{{customer.birthday | date: 'dd/MM/yyyy'}}</td>
+      <td>{{customer.birthday|date: 'dd/MM/yyyy'}}</td>
       <td *ngIf="customer.gender">Nam</td>
       <td *ngIf="!customer.gender">Nữ</td>
       <td>{{customer.identityNumber}}</td>

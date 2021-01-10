@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AppAdminRoutingModule } from './app-admin-routing.module';
-import {BrowserModule} from "@angular/platform-browser";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MaterialModule} from "../material.module";
-import {ToastrModule} from "ngx-toastr";
+import {BrowserModule} from '@angular/platform-browser';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MaterialModule} from '../material.module';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -21,6 +20,5 @@ import {ToastrModule} from "ngx-toastr";
       preventDuplicates: true,
     } )
   ]
-
 })
 export class AppAdminModule { }
