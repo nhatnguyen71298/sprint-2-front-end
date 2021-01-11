@@ -33,6 +33,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {SlotInfoComponent} from './entry-management/slot-info/slot-info.component';
 
 
 export const routes: Routes = [
@@ -52,7 +53,8 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes), CommonModule, ReactiveFormsModule, MatInputModule, MatSelectModule,
     NgxPaginationModule, MatDatepickerModule, FormsModule],
   exports: [RouterModule],
-  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent,
+  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent,
+    CustomerViewComponent, CustomerDeleteComponent, SlotInfoComponent,
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
