@@ -20,7 +20,8 @@ import {MaterialModule} from './material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 // @ts-ignore
 import {CommonModule} from '@angular/common';
-import {AuthenticationRoutingModule} from "./authentication/authentication-routing.module";
+import {AuthenticationRoutingModule} from './authentication/authentication-routing.module';
+import {ToastrModule} from 'ngx-toastr';
 
 // @ts-ignore
 @NgModule({
@@ -40,7 +41,11 @@ import {AuthenticationRoutingModule} from "./authentication/authentication-routi
     AppEmployeeModule,
     AppAdminModule,
     MaterialModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    } )
   ],
     providers: [],
     bootstrap: [AppComponent]

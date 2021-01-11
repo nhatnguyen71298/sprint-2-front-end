@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/auth/authentication.service';
+import {ToastrService} from 'ngx-toastr';
 
 function comparePassword(c: AbstractControl): any {
   const v = c.value;
@@ -23,6 +24,7 @@ export class SignUpComponent implements OnInit {
   messageError = '';
 
   constructor(
+    private toastrService: ToastrService,
     public formBuilder: FormBuilder,
     // public loginService: LoginService,
     private authenticationService: AuthenticationService,
@@ -39,16 +41,24 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
     if (this.signUpForm.valid){
-      this.authenticationService.register(this.signUpForm.value.username, this.signUpForm.value.password ).subscribe( next => {
+      this.authenticationService.register(this.signUpForm.value.username, this.signUpForm.value.passwordNew ).subscribe( next => {
+        console.log(next);
         this.checkRegister = next;
         if (this.checkRegister === true){
-          this.router.navigateByUrl('/');
+          this.toastrService.success('Đăng ký tài khoản thành công!', 'Thông báo!');
+          this.router.navigateByUrl('/home-page/info');
         }else {
-          this.messageError = 'Tên tài khoản đã tồn tại. Vui lòng nhập tên khác.';
+          this.messageError = 'Tên tài khoản đã tồn tại hoặc chưa được đăng ký. Vui lòng nhập tên khác.';
+          setTimeout(() => {
+            this.messageError = '';
+          }, 2000);
         }
       });
     } else {
       this.messageError = 'Bạn đang để trống hoặc sai thông tin , vui lòng điền đầy đủ thông tin.';
+      setTimeout(() => {
+        this.messageError = '';
+      }, 2000);
     }
   }
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a href="#" class="navbar-brand"><b>QUẢN LÝ BÃI ĐỖ XE Ô TÔ</b></a>
+	<a [routerLink]="['/home-page']" class="navbar-brand"><b>QUẢN LÝ BÃI ĐỖ XE Ô TÔ</b></a>
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -9,8 +9,17 @@
 <!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> Đăng nhập</a>-->
 <!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>-->
 			<div class="nav-item dropdown login-dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
-					class="fa fa-user-o"></i>&nbsp;{{user.username}}</a>
+
+          <a *ngIf="check" href="#"  data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
+            class="fa fa-user-o"></i>&nbsp;{{user.username}}</a>
+
+			  <div *ngIf="!check">
+          <a [routerLink]="['/home-page/login']" class="nav-item nav-link dropdown-toggle mr-3">
+            <i class="fa fa-sign-in"></i> Đăng Nhập</a>
+          <a [routerLink]="['/home-page/sign-up']" class="nav-item nav-link dropdown-toggle">
+            <i class="fa fa-user-o"></i> Đăng Ký</a>
+        </div>
+
 				<div class="dropdown-menu">
 
 					<a href="#" class="dropdown-item" [routerLink]="['/admin/employee-list']">

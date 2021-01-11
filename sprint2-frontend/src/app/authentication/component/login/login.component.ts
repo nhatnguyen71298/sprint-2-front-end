@@ -9,6 +9,9 @@ import {User} from '../../model/User';
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 import {TokenDTO} from '../../model/TokenDTO';
 import {ResetPasswordComponent} from '../reset-password/reset-password.component';
+import {ToastrService} from 'ngx-toastr';
+import {HomePageComponent} from '../home-page/home-page.component';
+
 
 
 @Component({
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private tokenStorageService: TokenStorageService,
     private router: Router,
+    private toastrService: ToastrService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private  title: Title,
@@ -61,7 +65,12 @@ export class LoginComponent implements OnInit {
           }, 2000);
           this.isLoggedIn = false;
         }, () => {
+          this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
+          this.router.navigateByUrl('/home-page/info');
           this.router.navigateByUrl('/home-page');
+          setTimeout(() => {
+            this.reloadPage();
+          }, 1000);
         }
       );
     } else {
@@ -80,11 +89,15 @@ export class LoginComponent implements OnInit {
         this.authenticationService.google(token).subscribe(next => {
           this.tokenStorageService.saveToken(next.accessToken);
           this.tokenStorageService.saveUser(next);
+          this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
           this.isLoggedIn = true;
         }, err => {
           this.isLoggedIn = false;
         }, () => {
           this.router.navigateByUrl('/home-page');
+          setTimeout(() => {
+            this.reloadPage();
+          }, 1000);
         });
       }
     );
@@ -105,7 +118,11 @@ export class LoginComponent implements OnInit {
           console.log('error');
           this.isLoggedIn = false;
         }, () => {
-          this.router.navigateByUrl('/home-page');
+          this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
+          this.router.navigateByUrl('/home-page/info');
+          setTimeout(() => {
+            this.reloadPage();
+          }, 1000);
         });
       }
     );
@@ -123,5 +140,8 @@ export class LoginComponent implements OnInit {
 
   resetInput() {
     this.ngOnInit();
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 }

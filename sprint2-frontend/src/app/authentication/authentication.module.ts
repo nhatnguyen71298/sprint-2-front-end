@@ -7,13 +7,22 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import {ToastrModule} from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ToastrModule.forRoot({
+      timeOut : 2000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    } ),
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
