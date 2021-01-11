@@ -19,7 +19,7 @@ export class ChangePasswordUserComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, public changePasswordService: ChangePasswordService, public route: Router,
               public dialog: MatDialog) {
     this.confirmPassWordForm = this.formBuilder.group({
-      passwordOld: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$')]],
+      passwordOld: ['', Validators.required],
       passwordNew: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$')]],
       confirmPassword: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$')]]
     }, {validator: this.checkPasswordConfirm});
