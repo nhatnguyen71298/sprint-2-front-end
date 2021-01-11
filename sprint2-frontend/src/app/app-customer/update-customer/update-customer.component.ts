@@ -40,7 +40,7 @@ export class UpdateCustomerComponent implements OnInit {
       birthday: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern('^((\\(\\+84\\))|(0))9[0-9]{8}$')]],
       address: ['', [Validators.required]],
-      identityNumber: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      identityNumber: ['', [Validators.required, Validators.pattern('^\\d{9}|\\d{12}$')]],
       imageAvatar: ['']
     });
     this.customerService.getCustomerByAccount(1).subscribe(data => {
