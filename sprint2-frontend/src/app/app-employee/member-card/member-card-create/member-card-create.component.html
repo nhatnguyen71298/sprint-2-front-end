@@ -65,8 +65,8 @@
       <div class="form-group px-3 d-flex justify-content-end">
         <label class="col-3 ml-3">Ngày bất đầu<span class="text-danger"> *</span></label>
         <div class="col-9">
-          <mat-form-field appearance="fill" (change)="setEndDate()">
-            <input class="form-control" matInput [matDatepicker]="startPicker" (change)="setEndDate()"
+          <mat-form-field  (change)="setEndDate()">
+            <input matInput [matDatepicker]="startPicker" (change)="setEndDate()"
                    [(ngModel)]="startDateInput" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="startPicker" (change)="setEndDate()"></mat-datepicker-toggle>
             <mat-datepicker #startPicker (change)="setEndDate()"></mat-datepicker>

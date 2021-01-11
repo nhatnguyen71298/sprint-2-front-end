@@ -42,7 +42,8 @@
           <mat-label>Biển số xe</mat-label>
           <input matInput formControlName="plateNumber">
           <mat-error *ngIf="ticketForm.get('plateNumber').hasError('required')">Vui lòng nhập biển số</mat-error>
-          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('maxlength')">Biển số xe không quá 10 kí tự</mat-error>
+          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('maxlength')">Biển số xe không quá 10 kí tự
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="col-6">

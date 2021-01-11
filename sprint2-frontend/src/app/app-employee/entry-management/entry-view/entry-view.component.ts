@@ -50,8 +50,9 @@ export class EntryViewComponent implements OnInit {
       return;
     }
     if (this.ticketForm.valid) {
+      const enterDate = new Date();
       const ticket = {
-        enterDate: this.ticketForm.value.enterDate,
+        enterDate,
         exitDate: this.ticketForm.value.exitDate,
         car: {
           plateNumber: this.ticketForm.value.plateNumber.trim(),
@@ -61,8 +62,11 @@ export class EntryViewComponent implements OnInit {
         }
       };
       const isRegistered = this.ticketForm.value.startDate != null;
+      console.log(this.ticketForm.value.startDate);
       const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not register or member card expired
+      console.log(!isRegistered);
+      console.log( !isValid);
       if (!isRegistered || !isValid) {
         this.ticketService.saveTicket(ticket).subscribe(next => {
           this.message = next.message;
@@ -114,11 +118,11 @@ export class EntryViewComponent implements OnInit {
         this.snackBar.open(this.message, 'OK', {
           duration: 1000
         });
-        const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
+        const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm');
         // car not register parked
         if (next.parkingSlot != null && !next.parkingSlot.reserved) {
           const ticketList = next.parkingSlot.car.ticketList;
-          const enterDateNew = this.datePipe.transform(ticketList[ticketList.length - 1].enterDate, 'yyyy-MM-ddThh:mm');
+          const enterDateNew = this.datePipe.transform(ticketList[ticketList.length - 1].enterDate, 'yyyy-MM-ddTHH:mm');
           this.ticketForm.patchValue({enterDate: enterDateNew});
           this.ticketForm.patchValue({exitDate: currentDate});
           // calculate price
@@ -140,7 +144,7 @@ export class EntryViewComponent implements OnInit {
               memberCard = memberCardList[memberCardList.length - 1];
               const entryLogList = memberCard.entryLogList;
               const entryLog = entryLogList[entryLogList.length - 1];
-              const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddThh:mm');
+              const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddTHH:mm');
               // car registered parked
               if (parkingSlot.status) {
                 this.ticketForm.patchValue({enterDate});
@@ -274,7 +278,7 @@ export class EntryViewComponent implements OnInit {
           const memberCard = memberCardList[memberCardList.length - 1];
           ticket.startDate = this.datePipe.transform(new Date(memberCard.startDate), 'dd-MM-yyyy');
           ticket.endDate = this.datePipe.transform(new Date(memberCard.endDate), 'dd-MM-yyyy');
-          ticket.enterDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddThh:mm');
+          ticket.enterDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm');
           this.ticketForm.patchValue(ticket);
         });
     }

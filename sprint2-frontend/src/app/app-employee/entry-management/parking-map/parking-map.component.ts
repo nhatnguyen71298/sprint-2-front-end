@@ -10,8 +10,8 @@ import {SlotInfoComponent} from '../slot-info/slot-info.component';
 })
 export class ParkingMapComponent implements OnInit {
   parkingSlotList;
-  floorList;
-  currentFloor;
+  floorList = [];
+  currentFloor
   availableSlots;
 
   constructor(private ticketService: TicketService,

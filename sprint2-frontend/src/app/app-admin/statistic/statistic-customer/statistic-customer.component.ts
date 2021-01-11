@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
-import {StatisticsService} from "../../../service/statistics.service";
-import *as Highcharts from "highcharts";
+import {StatisticsService} from '../../../service/statistics.service';
+import * as Highcharts from 'highcharts';
 
 declare var require: any;
 require('highcharts/modules/exporting')(Highcharts);
@@ -60,7 +60,7 @@ export class StatisticCustomerComponent implements OnInit {
       if (dataToTalCustomerRegisterPeriod != null) {
         this.createChartTotalCustomer();
       } else {
-        return this.message = 'Dữ liệu không tồn tại!'
+        return this.message = 'Dữ liệu không tồn tại!';
       }
     });
   }
@@ -152,7 +152,7 @@ export class StatisticCustomerComponent implements OnInit {
       ],
       series: [
         {
-          name: "Số lượng khách hàng ",
+          name: 'Số lượng khách hàng ',
           colorByPoint: true,
           data: this.toTalCustomerRegisterPeriods.map(x => x.total_customer),
         }
