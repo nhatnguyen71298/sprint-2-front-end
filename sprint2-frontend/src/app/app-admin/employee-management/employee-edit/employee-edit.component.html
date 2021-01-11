@@ -1,32 +1,61 @@
 <div class="container-fluid ">
   <!--  <div class=" border rounded-lg p-3 my-5 ">-->
-  <form [formGroup]="formEditUser">
-    <h3 class="row d-flex justify-content-center">Thêm thành viên </h3>
+  <form [formGroup]="formEditUser" (ngSubmit)="editEmployee()">
+    <h3 class="row d-flex justify-content-center">Chỉnh sửa thành viên </h3>
     <hr>
 
     <div class="form-group row ">
-      <label class="col-sm-3 col-form-label">Họ và tên <sup class="text-danger">*</sup> </label>
+      <label class="col-sm-3 col-form-label">Họ và tên:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
-        <input type="text" min="1" class="form-control form-control-sm" formControlName="fullName" required>
+        <input type="text" class="form-control form-control-sm" formControlName="fullName" required>
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formEditUser.get('fullName').hasError('required') && formEditUser.get('fullName').touched">Họ và tên không được để trống.</span>
+        <span
+          *ngIf="formEditUser.get('fullName').hasError('specialCharacter') && formEditUser.get('fullName').touched">Họ và tên không có kí tự đặt biệt.</span>
+        <span
+          *ngIf="formEditUser.get('fullName').hasError('minlength') && formEditUser.get('fullName').touched">Họ và tên không phải nhiều hơn 10 ký tự.</span>
+        <span
+          *ngIf="formEditUser.get('fullName').hasError('maxlength') && formEditUser.get('fullName').touched">Họ và tên phải có ít hơn 45 ký tự.</span>
+        <span
+          *ngIf="formEditUser.get('fullName').hasError('whiteSpace') && formEditUser.get('fullName').touched">Họ tên không được chứa khoảng trắng</span>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-sm-3 col-form-label">Địa chỉ:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
-        <textarea rows="1" type="text" min="1" class="form-control form-control-sm" formControlName="address" required></textarea>
+        <textarea rows="1" type="text" min="1" class="form-control form-control-sm" formControlName="address"
+                  required></textarea>
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formEditUser.get('address').hasError('required') && formEditUser.get('address').touched">Địa chỉ không được để trống.</span>
+        <span
+          *ngIf="formEditUser.get('address').hasError('maxlength') && formEditUser.get('address').touched">Địa chỉ phải ít hơn 255 ký tự.</span>
+        <span
+          *ngIf="formEditUser.get('address').hasError('whiteSpace') && formEditUser.get('address').touched">Địa chỉ không được chứa khoảng trắng.</span>
       </div>
     </div>
 
     <div class="form-group row ">
       <label class="col-sm-3 col-form-label">Số điện thoại:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
-        <input type="text"  class="form-control form-control-sm" formControlName="phoneNumber" required>
+        <input type="text" class="form-control form-control-sm" formControlName="phoneNumber" required>
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formEditUser.get('phoneNumber').hasError('required') && formEditUser.get('phoneNumber').touched">Số điện thoại không được để trống.</span>
+        <span
+          *ngIf="formEditUser.get('phoneNumber').hasError('format') && formEditUser.get('phoneNumber').touched">Số điện thoại không đúng định dạng.</span>
+        <span
+          *ngIf="formEditUser.get('phoneNumber').hasError('phoneAlpha') && formEditUser.get('phoneNumber').touched">Số điện thoại phải là số.</span>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-sm-3 col-form-label">Giới tính:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
-        <select class="form-control d-flex justify-content-start" formControlName="gender" required="">
+        <select class="form-control d-flex justify-content-start" formControlName="gender" required>
           <option [value]=true>Nam</option>
           <option [value]=false>Nữ</option>
         </select>
@@ -36,47 +65,69 @@
       <label class="col-sm-3 col-form-label">Cấp bậc:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
         <select class="form-control d-flex justify-content-start" formControlName="position">
-          <option value="Nhân Viên Giữ Xe">Nhân Viên Giữ Xe</option>
-          <option value="Nhân Viên">Bảo Vệ</option>
-          <option value="Nhân Viên">Nhân Viên Bảo Trì</option>
+          <option value="Nhân viên giữ xe">Nhân viên giữ xe</option>
+          <option value="Nhân viên bảo vệ">Nhân viên bảo vệ</option>
+          <option value="Nhân Viên bảo trì">Nhân viên bảo trì</option>
         </select>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Email <sup class="text-danger">*</sup> </label>
+      <label class="col-sm-3 col-form-label">Email:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
-        <input type="text" min="1" class="form-control form-control-sm" formControlName="email">
+        <input type="text"  class="form-control form-control-sm" formControlName="email">
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+        <span  *ngIf="formEditUser.get('email').hasError('email') && formEditUser.get('email').touched">Email không đúng định dạng.</span>
+        <span *ngIf="formEditUser.get('email').hasError('required') && formEditUser.get('email').touched"
+        >Email không được để trống.</span>
+        <span
+          *ngIf="formEditUser.get('email').hasError('minlength') && formEditUser.get('email').touched">Email phải nhiều hơn 10 ký tự.</span>
+        <span
+          *ngIf="formEditUser.get('email').hasError('maxlength') && formEditUser.get('email').touched">Email phải có ít hơn 50 ký tự.</span>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Ngày sinh <sup class="text-danger">*</sup> </label>
+      <label class="col-sm-3 col-form-label">Ngày sinh:<sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
         <!--        <mat-form-field>-->
-        <input type="date" class="form-control form-control-sm" formControlName="birthday" >
+<!--        <input type="date" class="form-control form-control-sm" formControlName="birthday">-->
         <!--          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>-->
         <!--          <mat-datepicker #myDatepicker></mat-datepicker>-->
         <!--        </mat-form-field>-->
+        <mat-form-field style="width: 100%">
+          <input matInput [matDatepicker]="birthday" placeholder="Chọn ngày sinh" class="inputForm"
+                 formControlName="birthday" [max]="maxDate" [min]="minDate">
+          <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+          <mat-datepicker #birthday></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formEditUser.get('birthday').hasError('required') && formEditUser.get('birthday').touched">Ngày sinh không được để trống.</span>
+        <span
+          *ngIf="formEditUser.get('birthday').hasError('checkAge') && formEditUser.get('birthday').touched">Để đăng kí tài khoản thì bạn phải hơn 18 tuổi.</span>
       </div>
     </div>
-    <div class="form-group row ">
-      <label class="col-sm-3 col-form-label">Tên đăng nhập <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-8">
-        <input type="text" class="form-control form-control-sm" formControlName="userName" required>
-      </div>
+    <!--    <div class="form-group row ">-->
+    <!--      <label class="col-sm-3 col-form-label">Tên đăng nhập <sup class="text-danger">*</sup> </label>-->
+    <!--      <div class="col-sm-8">-->
+    <!--        <input type="text" class="form-control form-control-sm" formControlName="userName" required>-->
+    <!--      </div>-->
 
-    </div>
-    <div class="form-group row ">
-      <label class="col-sm-3 col-form-label">Mật khẩu <sup class="text-danger">*</sup> </label>
-      <div class="col-sm-8">
-        <input type="password" class="form-control form-control-sm" formControlName="password" required>
-      </div>
-    </div>
+    <!--    </div>-->
+    <!--    <div class="form-group row ">-->
+    <!--      <label class="col-sm-3 col-form-label">Mật khẩu <sup class="text-danger">*</sup> </label>-->
+    <!--      <div class="col-sm-8">-->
+    <!--        <input type="password" class="form-control form-control-sm" formControlName="password" required>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
 
     <div class="row d-flex justify-content-center ml-4">
       <div>
         <button class="btn btn-secondary btn btn-sm" style="width: 80px" [mat-dialog-close]="">Hủy</button>
-        <button type="submit" class="btn btn-success btn btn-sm mx-4" style="width: 90px">Thêm mới</button>
+        <button type="submit" class="btn btn-success btn btn-sm mx-4" style="width: 90px" [disabled]="formEditUser.invalid" (click)="editEmployee()">Sửa
+        </button>
       </div>
     </div>
   </form>

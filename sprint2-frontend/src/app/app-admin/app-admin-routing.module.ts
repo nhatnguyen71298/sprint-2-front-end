@@ -14,8 +14,17 @@ import { StatisticSalesComponent } from './statistic/statistic-sales/statistic-s
 import { StatisticCarComponent } from './statistic/statistic-car/statistic-car.component';
 import { StatisticCustomerComponent } from './statistic/statistic-customer/statistic-customer.component';
 import {CommonModule} from '@angular/common';
-import {MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatOptionModule, MatSelectModule} from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
+import {
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule
+} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { EmployeeMessageComponent } from './employee-management/employee-message/employee-message.component';
 
 
 export const routes: Routes = [
@@ -33,9 +42,9 @@ export const routes: Routes = [
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  imports: [RouterModule.forChild(routes), CommonModule, MatDialogModule, MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule, MatOptionModule, MatSelectModule],
+    imports: [RouterModule.forChild(routes), CommonModule, MatDialogModule, MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule, MatOptionModule, MatSelectModule, NgxPaginationModule, MatInputModule, FormsModule],
   exports: [RouterModule],
   // tslint:disable-next-line:max-line-length
-  declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent, StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent]
+  declarations: [EmployeeListComponent, EmployeeAddComponent, EmployeeEditComponent, EmployeeViewComponent, EmployeeDeleteComponent, StatisticOverviewComponent, StatisticTicketComponent, StatisticSalesComponent, StatisticCarComponent, StatisticCustomerComponent, EmployeeMessageComponent]
 })
 export class AppAdminRoutingModule { }

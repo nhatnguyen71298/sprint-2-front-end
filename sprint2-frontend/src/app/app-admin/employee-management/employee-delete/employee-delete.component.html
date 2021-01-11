@@ -1,1 +1,12 @@
-<p>employee-delete works!</p>
+<div >
+<h4 class="d-flex justify-content-center " >XÁC NHẬN XÓA</h4>
+<hr>
+<h5 class="my-3 font-weight-bold">Bạn có chắc chắn muốn xóa nhân viên
+  <span style="color: red">{{employee.fullName}}</span>, với ID là :"<span style="color: red">{{employee.id}}</span>"</h5>
+<p style="color: deeppink">Hành động này không thể hoàn tác !</p>
+<hr>
+<div class="row d-flex justify-content-center">
+  <button mat-dialog-close class="btn btn-secondary mr-3" style="width: 100px">Hủy</button>
+  <button class="btn btn-success mr-3" style="width: 100px" (click)="deleteEmployee()">Xác Nhận</button>
+</div>
+</div>

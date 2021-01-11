@@ -7,17 +7,7 @@ import {MatDialog} from '@angular/material';
 import {EmployeeDeleteComponent} from '../employee-delete/employee-delete.component';
 import {EmployeeAddComponent} from '../employee-add/employee-add.component';
 import {EmployeeEditComponent} from '../employee-edit/employee-edit.component';
-class Employee {
-  id: number;
-  employeeCode: string;
-  fullName: string;
-  birthday: string;
-  email: string;
-  gender: string;
-  phoneNumber: string;
-  password: string;
-  role: string;
-}
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -29,6 +19,7 @@ export class EmployeeListComponent implements OnInit {
   public checkList = 'true';
   key: string;
   p: number;
+  public valueSearch: string;
   constructor(
     public employeeService: EmployeeService,
     public dialog: MatDialog
@@ -69,18 +60,38 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   openDialogEdit(id): void {
-    this.employeeService.findEmployeeByIdService(id).subscribe(dataUser => {
+    this.employeeService.findEmployeeByIdService(id).subscribe(dataEmployee => {
       const dialogRef = this.dialog.open(EmployeeEditComponent, {
         width: '600px',
         maxHeight: '90vh',
-        data: {dataC: dataUser.idUser, dataD: dataUser.gender},
+        data: {dataC: dataEmployee.id},
         disableClose: true
       });
-      console.log('data:' + dataUser.idUser);
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         this.ngOnInit();
       });
+    });
+  }
+  openDialogView(id): void {
+    this.employeeService.findEmployeeByIdService(id).subscribe(dataEmployee => {
+      const dialogRef = this.dialog.open(EmployeeViewComponent, {
+        width: '600px',
+        maxHeight: '90vh',
+        data: {dataC: dataEmployee},
+        disableClose: true
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
+  }
+
+  search(): void {
+    this.p = 0;
+    this.employeeService.searchEmployee(this.valueSearch.trim()).subscribe(dataSearch => {
+      this.list = dataSearch;
     });
   }
 

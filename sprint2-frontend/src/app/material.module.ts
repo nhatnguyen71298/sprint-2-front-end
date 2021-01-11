@@ -15,6 +15,8 @@ import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {EmployeeViewComponent} from './app-admin/employee-management/employee-view/employee-view.component';
+// @ts-ignore
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import {EmployeeViewComponent} from './app-admin/employee-management/employee-vi
     MatDialogModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMomentDateModule
   ],
   exports: [
     MatDatepickerModule,
@@ -35,7 +38,8 @@ import {EmployeeViewComponent} from './app-admin/employee-management/employee-vi
     MatDialogModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMomentDateModule
   ],
   providers: [ MatDatepickerModule ],
 })
