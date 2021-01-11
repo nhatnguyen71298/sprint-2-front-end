@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TicketService} from '../../../service/ticket.service';
 import {DatePipe} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -18,7 +18,8 @@ export class EntryViewComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private ticketService: TicketService,
               private datePipe: DatePipe,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private el: ElementRef
   ) {
   }
 
@@ -26,7 +27,7 @@ export class EntryViewComponent implements OnInit {
     this.ticketForm = this.formBuilder.group({
       enterDate: [],
       exitDate: [],
-      plateNumber: ['', [Validators.required, Validators.maxLength(10)]],
+      plateNumber: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(10)]],
       price: [],
       fullName: [],
       email: [],
@@ -42,56 +43,72 @@ export class EntryViewComponent implements OnInit {
   }
 
   onSubmit() {
-    this.ticketForm.value.plateNumber.trim();
-    if (this.ticketForm.value.plateNumber.trim() === '') {
-      this.snackBar.open('Vui lòng nhập biển số', 'OK', {
-        duration: 1000
-      });
-      return;
-    }
-    if (this.ticketForm.valid) {
-      const enterDate = new Date();
-      const ticket = {
-        enterDate,
-        exitDate: this.ticketForm.value.exitDate,
-        car: {
-          plateNumber: this.ticketForm.value.plateNumber.trim(),
-          carType: {
-            carTypeName: this.ticketForm.value.carType,
+    const car2 = {
+      plateNumber: this.ticketForm.value.plateNumber,
+    };
+    const endDate = this.ticketForm.value.endDate;
+    this.ticketService.findCar(car2).subscribe(next3 => {
+      if (next3.message !== 'Không tìm thấy xe') {
+        this.ticketForm.reset();
+        this.ticketForm.patchValue(car2);
+        this.patchForm(next3);
+      }
+      if (this.ticketForm.valid) {
+        const enterDate = new Date();
+        const ticket = {
+          enterDate,
+          exitDate: this.ticketForm.value.exitDate,
+          car: {
+            plateNumber: this.ticketForm.value.plateNumber.trim(),
+            carType: {
+              carTypeName: this.ticketForm.value.carType,
+            }
           }
-        }
-      };
-      const isRegistered = this.ticketForm.value.startDate !== '';
-      const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
-      // if car not register or member card expired
-      console.log(!isRegistered);
-      console.log( !isValid);
-      if (!isRegistered || !isValid) {
-        this.ticketService.saveTicket(ticket).subscribe(next => {
-          this.message = next.message;
-          this.snackBar.open(this.message, 'OK', {
-            duration: 1000
-          });
-          if (this.message === 'Xếp chỗ thành công') {
-            const car = {
-              plateNumber: this.ticketForm.value.plateNumber,
-            };
-            this.ticketService.findCar(car).subscribe(next2 => {
-              this.patchForm(next2);
-            });
-          }
-        });
-      } else {
-        // member card is valid
-        const car = {
-          plateNumber: this.ticketForm.value.plateNumber
         };
-        this.ticketService.parkRegisteredCar(car).subscribe(next => {
-          this.message = next.message;
-          this.snackBar.open(this.message, 'OK', {
-            duration: 1000
+        const isRegistered = this.ticketForm.value.startDate !== '';
+        const isValid = this.checkMemberCardValid(endDate);
+        console.log(endDate);
+        // if car not register or member card expired
+        if (!isRegistered || !isValid) {
+          this.ticketService.saveTicket(ticket).subscribe(next => {
+            this.message = next.message;
+            this.snackBar.open(this.message, 'OK', {
+              duration: 1000
+            });
+            if (this.message === 'Xếp chỗ thành công') {
+              const car = {
+                plateNumber: this.ticketForm.value.plateNumber,
+              };
+              this.ticketService.findCar(car).subscribe(next2 => {
+                this.patchForm(next2);
+              });
+            }
           });
-        });
+        } else {
+          // member card is valid
+          const car = {
+            plateNumber: this.ticketForm.value.plateNumber
+          };
+          this.ticketService.parkRegisteredCar(car).subscribe(next => {
+            this.message = next.message;
+            this.snackBar.open(this.message, 'OK', {
+              duration: 1000
+            });
+          });
+        }
+      } else {
+        this.focusFirstInvalid();
+      }
+    });
+
+  }
+
+  focusFirstInvalid() {
+    for (const key of Object.keys(this.ticketForm.controls)) {
+      if (this.ticketForm.controls[key].invalid) {
+        const invalidControl = this.el.nativeElement.querySelector('[formControlName="' + key + '"]');
+        invalidControl.focus();
+        break;
       }
     }
   }
@@ -172,6 +189,82 @@ export class EntryViewComponent implements OnInit {
     });
   }
 
+  checkout() {
+    const car2 = {
+      plateNumber: this.ticketForm.value.plateNumber,
+    };
+    const endDate = this.ticketForm.value.endDate;
+    const startDate = this.ticketForm.value.startDate;
+    // find car before checkout
+    this.ticketService.findCar(car2).subscribe(next2 => {
+      if (next2.message === 'Không tìm thấy xe') {
+        this.snackBar.open(next2.message, 'OK', {
+          duration: 1000
+        });
+        return;
+      } else {
+        this.patchForm(next2);
+        if (this.ticketForm.valid) {
+          const ticket = {
+            car: {
+              carType: {
+                carTypeName: this.ticketForm.value.carType
+              },
+              plateNumber: this.ticketForm.value.plateNumber,
+            },
+            price: this.ticketForm.value.price,
+            enterDate: this.ticketForm.value.enterDate,
+            exitDate: this.ticketForm.value.exitDate,
+          };
+          const isRegistered = startDate !== null;
+          const isValid = this.checkMemberCardValid(endDate);
+          // if car not registered or member card invalid
+          if (!isRegistered || !isValid) {
+            if (next2.parkingSlot == null) {
+              this.snackBar.open('Xe ko nằm trong bãi', 'OK', {
+                duration: 1000
+              });
+              return;
+            }
+            if (this.ticketForm.value.price == null || this.ticketForm.value.price === '') {
+              this.snackBar.open('Xe chưa tính phí', 'OK', {
+                duration: 1000
+              });
+              this.ticketForm.reset();
+              this.ticketForm.patchValue(car2);
+              this.patchForm(next2);
+              return;
+            }
+            this.ticketService.closeTicket(ticket).subscribe(next => {
+              this.message = next.message;
+              this.snackBar.open(this.message, 'OK', {
+                duration: 1000
+              });
+              const parkingSlot = {
+                floor: '',
+                slot: '',
+                price: '',
+              };
+              this.ticketForm.patchValue(parkingSlot);
+            });
+          } else {
+            // if car registered
+            const car = ticket.car;
+            this.ticketService.checkoutRegisteredCar(car).subscribe(next => {
+              this.message = next.message;
+              this.snackBar.open(this.message, 'OK', {
+                duration: 1000
+              });
+            });
+          }
+        } else {
+          this.ticketForm.markAllAsTouched();
+          this.focusFirstInvalid();
+        }
+      }
+    });
+  }
+
   compareType(c1, c2) {
     return c1 === c2;
   }
@@ -191,62 +284,6 @@ export class EntryViewComponent implements OnInit {
     const currentDate = (new Date()).valueOf();
     const endDate2 = (new Date(endDate)).valueOf();
     return currentDate - endDate2 < 0;
-  }
-
-  checkout() {
-    if (this.ticketForm.valid) {
-      const ticket = {
-        car: {
-          carType: {
-            carTypeName: this.ticketForm.value.carType
-          },
-          plateNumber: this.ticketForm.value.plateNumber,
-        },
-        price: this.ticketForm.value.price,
-        enterDate: this.ticketForm.value.enterDate,
-        exitDate: this.ticketForm.value.exitDate,
-      };
-      const isRegistered = this.ticketForm.value.startDate !== '';
-      const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
-      // if car not registered
-      if (!isRegistered || !isValid) {
-        if (this.ticketForm.value.price == null) {
-          this.snackBar.open('Vui lòng tính phí trước', 'OK', {
-            duration: 1000
-          });
-          return;
-        }
-        if (!new RegExp('\\d+').test(this.ticketForm.value.price)) {
-          this.snackBar.open('Tổng tiền phải là số', 'OK', {
-            duration: 1000
-          });
-          return;
-        }
-        this.ticketService.closeTicket(ticket).subscribe(next => {
-          this.message = next.message;
-          this.snackBar.open(this.message, 'OK', {
-            duration: 1000
-          });
-          const parkingSlot = {
-            floor: '',
-            slot: '',
-            price: '',
-          };
-          this.ticketForm.patchValue(parkingSlot);
-        });
-      } else {
-        // if car registered
-        const car = ticket.car;
-        this.ticketService.checkoutRegisteredCar(car).subscribe(next => {
-          this.message = next.message;
-          this.snackBar.open(this.message, 'OK', {
-            duration: 1000
-          });
-        });
-      }
-    } else {
-      this.ticketForm.markAllAsTouched();
-    }
   }
 
   patchForm(next) {
@@ -286,5 +323,11 @@ export class EntryViewComponent implements OnInit {
         });
     }
     this.ticketForm.patchValue(ticket);
+  }
+
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : {whitespace: true};
   }
 }
