@@ -1,0 +1,62 @@
+form {
+  margin-left: 15%;
+  width: 95%;
+}
+
+p {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+span {
+  color: blue;
+}
+
+.back {
+  margin-top: 3%;
+  background-color: grey;
+  color: white;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 7%;
+}
+
+.back:hover {
+  background-color: blue;
+}
+
+.accept {
+  margin-left: 5%;
+  margin-top: 3%;
+  background-color: orange;
+  color: white;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 7%;
+}
+
+.accept:hover {
+  background-color: black;
+}
+
+.bookingCode {
+  margin-left: 8.3%;
+}
+
+.passengerName {
+  margin-left: 2%;
+}
+
+.flight {
+  margin-left: 7.9%;
+}
+
+.departureDate {
+  margin-left: 12.8%;
+}
+
+.warning {
+  color: red;
+}

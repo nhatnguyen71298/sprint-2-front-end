@@ -84,4 +84,17 @@ export class MemberCardService {
   searchPlateNumber(idSearch: any): Observable<any> {
     return this.http.get(this.API + '/search-plate-number/' + idSearch);
   }
+
+  findMemberCardByIdService(idMemberCard): Observable<any> {
+    return this.http.get(this.API + '/' + 'findByMemberCardById/' + idMemberCard);
+  }
+
+  deleteMemberCardService(idMemberCard): Observable<any> {
+    return this.http.delete(this.API + '/deleteMemberCard/' + idMemberCard);
+  }
+
+  editTicketService(editForm): Observable<any> {
+    console.log(editForm);
+    return this.http.put(this.API + '/edit', editForm);
+  }
 }

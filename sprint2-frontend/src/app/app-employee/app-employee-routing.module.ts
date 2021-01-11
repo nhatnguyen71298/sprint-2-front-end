@@ -31,6 +31,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DeleteMemberCardDialogComponent } from './member-card/delete-member-card-dialog/delete-member-card-dialog.component';
+import { UpdateMemberCardDialogComponent } from './member-card/update-member-card-dialog/update-member-card-dialog.component';
 
 
 export const routes: Routes = [
@@ -55,6 +57,8 @@ export const routes: Routes = [
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent, MemberCardListComponent, MemberCardCreateComponent]
+    SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent,
+    MemberCardListComponent, MemberCardCreateComponent, DeleteMemberCardDialogComponent, UpdateMemberCardDialogComponent],
+  entryComponents: [DeleteMemberCardDialogComponent]
 })
 export class AppEmployeeRoutingModule { }

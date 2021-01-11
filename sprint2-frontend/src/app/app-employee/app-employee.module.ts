@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AppEmployeeRoutingModule } from './app-employee-routing.module';
 import {MaterialModule} from '../material.module';
 
