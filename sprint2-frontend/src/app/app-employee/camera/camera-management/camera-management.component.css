@@ -12,7 +12,7 @@
   position: absolute;
   bottom: 161px;
   height: 192px;
-  right: 64px;
+  right: 29px;
   width: 398px;
 }
 #formFileLg {
@@ -22,7 +22,7 @@
   width: 273px;
   bottom: 86px;
   position: relative;
-  right: 86px;
+  right: 89px;
   /*-webkit-animation: my 700ms infinite;*/
   /*-moz-animation: my 700ms infinite;*/
   /*-o-animation: my 700ms infinite;*/
@@ -42,9 +42,9 @@
 
 #label {
   position: absolute;
-  right: 125px;
+  right: 133px;
   bottom: 112px;
-  width: 181px; 
+  width: 181px;
   font-size:14px;
   font-weight:bold;
   -webkit-animation: glowing 1500ms infinite;
