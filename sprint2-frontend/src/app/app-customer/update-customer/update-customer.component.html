@@ -72,7 +72,7 @@
                 CMND không được để trống
               </mat-error>
               <mat-error *ngIf="customer.get('identityNumber').hasError('pattern')">
-                CMND dạng số và có 9 số
+                CMND là chữ số và có 9 hoặc 12 số
               </mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6">
@@ -106,7 +106,7 @@
             </mat-form-field>
           </div>
           <div class="row justify-content-end mt-4 pr-3">
-            <button class="btn btn-warning">Lưu</button>
+            <button class="btn btn-warning" *ngIf="customer.invalid">Lưu</button>
           </div>
         </form>
       </div>
