@@ -52,7 +52,8 @@ export const MY_FORMATS = {
     AngularFireDatabaseModule,
   ],
   entryComponents: [SuccessComponent],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'vi-VI'}, {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'vi-VI'},
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}, MatSnackBar]
 })
 export class AppCustomerModule {
