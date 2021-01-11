@@ -83,7 +83,7 @@ export class StatisticCustomerComponent implements OnInit {
       },
 
       xAxis: {
-        categories: this.toTalCustomerRegisterPeriods.map(x => x.create_date),
+        categories: this.toTalCustomerRegisterPeriods.map(x => x.date_register),
         lineColor: 'black',
         labels: {
           style: {

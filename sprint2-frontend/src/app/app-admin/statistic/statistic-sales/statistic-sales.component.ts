@@ -56,6 +56,7 @@ export class StatisticSalesComponent implements OnInit {
     if (this.typeReport === 'reMemberCard') {
       this.statisticsService.getTotalRevenueMemberCardPeriod(this.days).subscribe(dataTotalRevenueMemberCardPeriod => {
         this.totalRevenueMemberCardPeriod = dataTotalRevenueMemberCardPeriod;
+        console.log(dataTotalRevenueMemberCardPeriod);
         if (dataTotalRevenueMemberCardPeriod != null) {
           this.createChartRevenueMemberCard();
         } else {
@@ -67,6 +68,7 @@ export class StatisticSalesComponent implements OnInit {
     else {
       this.statisticsService.getTotalRevenueTicketPeriod(this.days).subscribe(dataTotalRevenueTicketPeriod => {
         this.totalRevenueTicketPeriod = dataTotalRevenueTicketPeriod;
+        console.log(dataTotalRevenueTicketPeriod);
         if (dataTotalRevenueTicketPeriod != null) {
           this.createChartRevenueTicket();
         } else {
@@ -168,7 +170,7 @@ export class StatisticSalesComponent implements OnInit {
       },
 
       xAxis: {
-        categories: this.totalRevenueTicketPeriod.map(x => x.enter_date),
+        categories: this.totalRevenueTicketPeriod.map(x => x.exit_date),
         lineColor: 'black',
         labels: {
           style: {
