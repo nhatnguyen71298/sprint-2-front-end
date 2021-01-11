@@ -44,7 +44,7 @@
   position: absolute;
   right: 125px;
   bottom: 112px;
-  width: 181px;
+  width: 181px; 
   font-size:14px;
   font-weight:bold;
   -webkit-animation: glowing 1500ms infinite;
