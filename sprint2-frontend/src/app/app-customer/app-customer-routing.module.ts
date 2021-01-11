@@ -17,6 +17,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {UpdateCustomerComponent} from "./update-customer/update-customer.component";
 import {ListEntryLogComponent} from "./list-entry-log/list-entry-log.component";
 import {InfoOfCustomerComponent} from "./info-of-customer/info-of-customer.component";
+import { PayMomoComponent } from './customer-pay/pay-momo/pay-momo.component';
 
 
 export const routes: Routes = [
@@ -40,8 +41,10 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes), CommonModule, MatDialogModule, ReactiveFormsModule, NgxPaginationModule],
   exports: [RouterModule],
-  declarations: [PayComponent, SuccessfullyPayComponent, ChangePasswordUserComponent, ChangePasswordSuccessfullyComponent, ConfirmEmailComponent, CarListComponent, HistoryPaymentComponent],
-  entryComponents: [SuccessfullyPayComponent]
+  declarations: [PayComponent, SuccessfullyPayComponent, ChangePasswordUserComponent,
+    ChangePasswordSuccessfullyComponent, ConfirmEmailComponent, CarListComponent,
+    HistoryPaymentComponent, PayMomoComponent],
+  entryComponents: [SuccessfullyPayComponent, PayMomoComponent]
 })
 export class AppCustomerRoutingModule {
 }
