@@ -26,25 +26,15 @@
         </div>
       </div>
       <div class="form-group px-3 d-flex justify-content-end">
-        <label for="floor" class="col-3 ml-3">Tầng<sup class="text-danger">*</sup></label>
-        <div class="col-9">
-          <input class="form-control" type="text" id="floor" formControlName="floor">
-          <label class="text-danger" style=" margin-left: 0%;"
-                 *ngIf="formEdit.get('floor').hasError('required')">
-            Vui lòng nhập số tầng
-          </label>
-        </div>
-
-      </div>
-      <div class="form-group px-3 d-flex justify-content-end">
-        <label for="numberSlot" class="col-3 ml-3">Vị trí<sup class="text-danger">*</sup></label>
-        <div class="col-9">
-          <input class="form-control" type="text" id="numberSlot" formControlName="numberSlot">
-          <label class="text-danger" style=" margin-left: 0%;"
-                 *ngIf="formEdit.get('numberSlot').hasError('required')">
-            Vui lòng nhập vị trí
-          </label>
-        </div>
+        <label class="col-3 ml-3">Vị trí<span class="text-danger"> *</span></label>
+        <mat-form-field class="col-9">
+          <mat-select formControlName="floor">
+            <mat-label>Chọn vị trí</mat-label>
+            <mat-option *ngFor="let par of parkingSlotList" [value]="par.id">
+              {{par.floor}} - {{par.slotNumber}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class="form-group px-3 d-flex justify-content-end">
         <label class="col-3 ml-3">Loại vé<sup class="text-danger">*</sup></label>
@@ -72,6 +62,8 @@
       </div>
       <div class="form-group px-3 d-flex justify-content-end">
         <label for="price" class="col-3 ml-3">Giá</label>
+        <input formControlName="floor" [value]="floor" hidden>
+        <input formControlName="numberSlot" [value]="numberSlot" hidden>
         <div class="col-9">
           <input class="form-control" type="text" id="price" [(ngModel)]="priceInput" formControlName="price" readonly>
         </div>

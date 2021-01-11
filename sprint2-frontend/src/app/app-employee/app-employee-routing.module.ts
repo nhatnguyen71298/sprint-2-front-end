@@ -1,8 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {LoginComponent} from '../authentication/login/login.component';
-import {SignUpComponent} from '../authentication/sign-up/sign-up.component';
-import {PageNotFoundComponent} from '../authentication/page-not-found/page-not-found.component';
 import {CustomerListComponent} from './customer-management/customer-list/customer-list.component';
 import {CustomerAddComponent} from './customer-management/customer-add/customer-add.component';
 import {CustomerEditComponent} from './customer-management/customer-edit/customer-edit.component';

@@ -87,13 +87,13 @@ export class MemberCardListComponent implements OnInit {
 
   // Hoat start
 
-  openDialogEdit(id: any) {
+  openDialogEdit(id, slotTypeEdit) {
     this.memberCardService.findMemberCardByIdService(id).subscribe(memberCard => {
         if (memberCard != null) {
           const DIALOG_REF = this.dialog.open(UpdateMemberCardDialogComponent, {
             width: '800px',
             height: '700px',
-            data: {dataMemberCard: memberCard},
+            data: {dataMemberCard: memberCard, slotType: slotTypeEdit},
             disableClose: true
           });
           DIALOG_REF.afterClosed().subscribe(

@@ -109,7 +109,7 @@
           <mat-label>Chọn vị trí</mat-label>
           <mat-select formControlName="slotNumber">
             <mat-option *ngFor="let par of parkingSlotList" [value]="par.id">
-              {{par.slotNumber}}
+                {{par.floor}} - {{par.slotNumber}}
             </mat-option>
           </mat-select>
         </mat-form-field>

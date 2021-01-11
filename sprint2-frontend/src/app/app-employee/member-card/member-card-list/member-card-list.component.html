@@ -23,15 +23,17 @@
                    [(ngModel)]="keywordSearch" style="width: 150px">
           </div>
           <div class="col-3">
-            <button class="fa fa-search btn btn-success m-0 ml-2 mb-2" style="height: 32px" (click)="searchPlateNumber()"></button>
-            <button class="fas fa-undo-alt btn btn-success m-0 ml-1 mb-2" style="height: 32px" (click)="resetSearch()"></button>
+            <button class="fa fa-search btn btn-success m-0 ml-2 mb-2" style="height: 32px"
+                    (click)="searchPlateNumber()"></button>
+            <button class="fas fa-undo-alt btn btn-success m-0 ml-1 mb-2" style="height: 32px"
+                    (click)="resetSearch()"></button>
           </div>
         </div>
       </div>
       <table class="table table-striped table-hover">
         <thead>
         <tr>
-<!--          <th>Stt</th>-->
+          <!--          <th>Stt</th>-->
           <th>Biển số xe</th>
           <th style="padding: 10px">Tên khách hàng</th>
           <th>Loại thẻ</th>
@@ -45,7 +47,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let memberCard of memberCardList |paginate: { itemsPerPage: 5, currentPage: p}; index as i">
-<!--          <td>{{i + 1}}</td>-->
+          <!--          <td>{{i + 1}}</td>-->
           <td>{{memberCard.plateNumber}}</td>
           <td>{{memberCard.nameCustomer}}</td>
           <td>{{memberCard.nameType}}</td>
@@ -56,12 +58,14 @@
           <td>{{memberCard.price | currency: ' '}}</td>
           <td>
             <div class="d-flex justify-content-center">
-              <a (click)="openDialogEdit(memberCard.id)" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                               data-toggle="tooltip"
-                                                                               title="Edit">&#xE254;</i></a>
-              <a (click)="openDialogDelete(memberCard.id)" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                   data-toggle="tooltip"
-                                                                                   title="Delete">&#xE872;</i></a>
+              <a (click)="openDialogEdit(memberCard.id, memberCard.slotType)"
+                 class="edit" data-toggle="modal"><i class="material-icons"
+                                                     data-toggle="tooltip"
+                                                     title="Edit">&#xE254;</i></a>
+              <a (click)="openDialogDelete(memberCard.id)" class="delete" data-toggle="modal">
+                <i class="material-icons"
+                   data-toggle="tooltip"
+                   title="Delete">&#xE872;</i></a>
             </div>
           </td>
         </tr>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, timer} from 'rxjs';
 import {MemberCardAddDTO} from '../model/MemberCardAddDTO';
@@ -21,7 +21,8 @@ export class MemberCardService {
   };
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // Lanh start
   getMemberCardList(): Observable<any[]> {
@@ -33,11 +34,11 @@ export class MemberCardService {
   }
 
   getMemberCardType(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API}/memberCardType`);
+    return this.http.get<any[]>(`${this.API}/member-card-type`);
   }
 
   getParkingSlot(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API}/parkingSlot`);
+    return this.http.get<any[]>(`${this.API}/parking-slot`);
   }
 
 
@@ -53,8 +54,8 @@ export class MemberCardService {
         );
     };
   }
+
   search(text) {
-    console.log(text);
     return timer(100)
       .pipe(
         switchMap(() => {
@@ -99,6 +100,10 @@ export class MemberCardService {
 
   editTicketService(editForm): Observable<any> {
     return this.http.put(this.API + '/edit', editForm);
+  }
+
+  getParkingSlotEdit(slotType): Observable<any> {
+    return this.http.get(this.API + '/slot-type-edit/' + slotType);
   }
 
   // Hoat end

@@ -18,8 +18,11 @@ export class UpdateMemberCardDialogComponent implements OnInit {
   radio: string;
   public startDateInput;
   public endDateAuto;
+  public floor: number;
+  public numberSlot: string;
   public type: string;
   public priceInput: number;
+  parkingSlotList = [];
 
   constructor(protected dialogRef: MatDialogRef<UpdateMemberCardDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,8 +32,13 @@ export class UpdateMemberCardDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.memberCardService.getParkingSlotEdit(this.data.slotType).subscribe(value => {
+      this.parkingSlotList = value;
+    });
     this.memberCard = this.data.dataMemberCard;
     this.endDateAuto = this.data.dataMemberCard.endDate;
+    this.floor = this.data.dataMemberCard.car.parkingSlot.floor;
+    this.numberSlot = this.data.dataMemberCard.car.parkingSlot.slotNumber;
     this.type = this.data.dataMemberCard.memberCardType.id;
     this.priceInput = this.data.dataMemberCard.price;
     this.formEdit = this.formBuilder.group({
@@ -40,11 +48,13 @@ export class UpdateMemberCardDialogComponent implements OnInit {
       startDate: [this.data.dataMemberCard.startDate],
       endDate: [this.endDateAuto],
       price: [this.priceInput],
-      numberSlot: [this.data.dataMemberCard.car.parkingSlot.id, [Validators.required]],
-      floor: [this.data.dataMemberCard.car.parkingSlot.floor, [Validators.required]],
+      numberSlot: [this.numberSlot, [Validators.required]],
+      floor: [this.floor, [Validators.required]],
       memberCardType: [this.type]
     });
     this.startDateInput = this.data.dataMemberCard.startDate;
+    this.startDateInput = new Date(this.startDateInput);
+    this.endDateAuto = new Date(this.startDateInput);
   }
 
   keyDownFunction(event) {
