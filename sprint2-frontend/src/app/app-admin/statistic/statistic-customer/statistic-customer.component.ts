@@ -62,7 +62,7 @@ export class StatisticCustomerComponent implements OnInit {
     this.chart = new Chart('statistic-customer', {
       type: 'bar',
       data: {
-        labels: this.toTalCustomerRegisterPeriods.map(x => x.create_date),
+        labels: this.toTalCustomerRegisterPeriods.map(x => x.date_register),
         datasets: [
           {
             data: this.toTalCustomerRegisterPeriods.map(x => x.total_customer),

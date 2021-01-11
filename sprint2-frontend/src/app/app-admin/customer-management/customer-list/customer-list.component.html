@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bg-white p-2">
   <div class="table-wrapper">
     <div class="table-title" style="background-color: #435d7d; color: white; padding-bottom: 15px">
       <div class="row">
@@ -12,20 +12,24 @@
             class="material-icons" style="height: 25px">&#xE147;</i> <span>Thêm mới khách hàng</span></a>
         </div>
         <div class="col-lg-3" style="margin-left: 200px; height: 25px">
-          <select  [(ngModel)]="input" class="custom-select">
-            <option  value="customerCode">Tìm theo mã khách hàng</option>
+          <select [(ngModel)]="input" class="custom-select">
+            <option value="customerCode">Tìm theo mã khách hàng</option>
             <option value="fullName">Tìm theo họ tên</option>
-            <option  value="identityNumber">Tìm theo số CMND</option>
-            <option  value="email">Tìm theo email</option>
+            <option value="identityNumber">Tìm theo số CMND</option>
+            <option value="email">Tìm theo email</option>
           </select></div>
         <div class="col-lg-3" style="height: 25px; margin-left: -10px">
-          <input [(ngModel)]="key" class="form-control ml-0" type="search" placeholder="Nhập từ khóa" aria-label="Search">
-          <a href="#" class="btn-btn" (click)=getCustomer() data-toggle="modal" style="color: white"><svg
-            xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-left: 270px; margin-top: -60px" fill="currentColor"
-            class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1
+          <input [(ngModel)]="key" class="form-control ml-0" type="search" placeholder="Nhập từ khóa"
+                 aria-label="Search">
+          <a href="#" class="btn-btn" (click)=getCustomer() data-toggle="modal" style="color: white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-left: 270px; margin-top: -60px"
+              fill="currentColor"
+              class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1
                                             1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg></a>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -58,12 +62,15 @@
       <!--      <td>{{customer.address}}</td>-->
       <td>
         <div class="d-flex justify-content-center">
-          <a class = "nav-link" [routerLink]="['/customer-info']"><i class="material-icons" data-toggle="tooltip" style="color: deepskyblue"
-                                                                     title="Xem">remove_red_eye</i></a>
-          <a class = "nav-link" [routerLink]="['/customer-edit']"><i class="material-icons" data-toggle="tooltip" style="color: #FFC107"
-                                                                     title="Sửa">&#xE254;</i></a>
-          <a  class = "nav-link" [routerLink]="['/customer-delete']"><i class="material-icons" data-toggle="tooltip" style="color: #F44336"
-                                                                        title="Xóa">&#xE872;</i></a>
+          <a class="nav-link" [routerLink]="['/customer-info']"><i class="material-icons" data-toggle="tooltip"
+                                                                   style="color: deepskyblue"
+                                                                   title="Xem">remove_red_eye</i></a>
+          <a class="nav-link" [routerLink]="['/customer-edit']"><i class="material-icons" data-toggle="tooltip"
+                                                                   style="color: #FFC107"
+                                                                   title="Sửa">&#xE254;</i></a>
+          <a class="nav-link" [routerLink]="['/customer-delete']"><i class="material-icons" data-toggle="tooltip"
+                                                                     style="color: #F44336"
+                                                                     title="Xóa">&#xE872;</i></a>
         </div>
       </td>
     </tr>

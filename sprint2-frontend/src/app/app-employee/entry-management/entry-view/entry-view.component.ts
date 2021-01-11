@@ -209,6 +209,12 @@ export class EntryViewComponent implements OnInit {
           });
           return;
         }
+        if (!new RegExp('\\d+').test(this.ticketForm.value.price)) {
+          this.snackBar.open('Tổng tiền phải là số', 'OK', {
+            duration: 1000
+          });
+          return;
+        }
         this.ticketService.closeTicket(ticket).subscribe(next => {
           this.message = next.message;
           this.snackBar.open(this.message, 'OK', {
