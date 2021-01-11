@@ -22,7 +22,7 @@
   width: 273px;
   bottom: 86px;
   position: relative;
-  right: 127px;
+  right: 86px;
   /*-webkit-animation: my 700ms infinite;*/
   /*-moz-animation: my 700ms infinite;*/
   /*-o-animation: my 700ms infinite;*/
@@ -42,7 +42,7 @@
 
 #label {
   position: absolute;
-  right: 165px;
+  right: 125px;
   bottom: 112px;
   width: 181px;
   font-size:14px;
@@ -58,7 +58,7 @@
   margin: 0;
   position: absolute;
   bottom: 231px;
-  left: -155px;
+  left: -119px;
   background: black;
   font-size: 37px;
   font-weight:bold;
