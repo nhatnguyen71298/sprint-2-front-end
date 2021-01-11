@@ -44,8 +44,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, OrderModule, ReactiveFormsModule,
-        MatButtonModule, MaterialModule, MatSelectModule],
+  imports: [RouterModule.forChild(routes), FormsModule, NgxPaginationModule, CommonModule, OrderModule, ReactiveFormsModule,
+    MatButtonModule, MaterialModule, MatSelectModule],
   exports: [RouterModule],
   declarations: [
     EmployeeListComponent,

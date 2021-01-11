@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {StatisticsService} from "../../../service/statistics.service";
 import *as Highcharts from "highcharts";
+import {MatDialog} from "@angular/material/dialog";
+import {StatisticNotifyComponent} from "../statistic-notify/statistic-notify.component";
 
 declare var require: any;
 require('highcharts/modules/exporting')(Highcharts);
@@ -33,7 +35,9 @@ export class StatisticCustomerComponent implements OnInit {
   message;
 
   constructor(public formBuilder: FormBuilder,
-              public statisticsService: StatisticsService) {
+              public statisticsService: StatisticsService,
+              public dialog: MatDialog,
+              public el: ElementRef) {
     this.formStatisticCustomerRegisterPeriod = this.formBuilder.group({
       fromDay: ['', Validators.required],
       toDay: ['', Validators.required]
@@ -54,15 +58,28 @@ export class StatisticCustomerComponent implements OnInit {
       fromDay: moment(this.day.fromDay).format('YYYY-MM-DD'),
       toDay: moment(this.day.toDay).format('YYYY-MM-DD'),
     };
-    // statistic total customer in period time
-    this.statisticsService.getToTalCustomerRegisterPeriod(this.days).subscribe(dataToTalCustomerRegisterPeriod => {
-      this.toTalCustomerRegisterPeriods = dataToTalCustomerRegisterPeriod;
-      if (dataToTalCustomerRegisterPeriod != null) {
-        this.createChartTotalCustomer();
-      } else {
-        return this.message = 'Dữ liệu không tồn tại!'
+    if (this.formStatisticCustomerRegisterPeriod.valid) {
+      // statistic total customer in period time
+      this.statisticsService.getToTalCustomerRegisterPeriod(this.days).subscribe(dataToTalCustomerRegisterPeriod => {
+        this.toTalCustomerRegisterPeriods = dataToTalCustomerRegisterPeriod;
+        if (dataToTalCustomerRegisterPeriod != null) {
+          this.createChartTotalCustomer();
+        } else {
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
+        }
+      });
+    } else {
+      for (const KEY of Object.keys(this.formStatisticCustomerRegisterPeriod.controls)) {
+        if (this.formStatisticCustomerRegisterPeriod.controls[KEY].invalid) {
+          const INVALID_CONTROL = this.el.nativeElement.querySelector('[formControlName="' + KEY + '"]');
+          INVALID_CONTROL.focus();
+          break;
+        }
       }
-    });
+    }
   }
 
   // create chart total customer
@@ -72,8 +89,21 @@ export class StatisticCustomerComponent implements OnInit {
 
       chart: {
         type: 'column',
-        backgroundColor: 'white',
+        backgroundColor: 'none',
       },
+
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
+
       title: {
         text: 'Biểu đồ số lượng khách hàng',
         style: {
@@ -83,6 +113,13 @@ export class StatisticCustomerComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.toTalCustomerRegisterPeriods.map(x => x.date_register),
         lineColor: 'black',
         labels: {
@@ -121,11 +158,20 @@ export class StatisticCustomerComponent implements OnInit {
       responsive: {
         rules: [{
           condition: {
-            maxWidth: 600
+            maxWidth: 500,
           },
           chartOptions: {
             legend: {
-              enabled: false
+              align: "center",
+              verticalAlign: "bottom",
+              layout: "horizontal",
+            },
+            yAxis: {
+              labels: {
+                align: "left",
+                x: 0,
+                y: -5,
+              }
             }
           }
         }]

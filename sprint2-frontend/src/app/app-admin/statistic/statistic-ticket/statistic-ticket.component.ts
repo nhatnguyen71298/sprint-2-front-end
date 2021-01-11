@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DATE_FORMATS} from "@angular/material/core";
 import {StatisticsService} from "../../../service/statistics.service";
 import * as Highcharts from "highcharts";
+import {MatDialog} from "@angular/material/dialog";
+import {StatisticNotifyComponent} from "../statistic-notify/statistic-notify.component";
 
 declare var require: any;
 require('highcharts/modules/exporting')(Highcharts);
@@ -36,10 +38,11 @@ export class StatisticTicketComponent implements OnInit {
   monthYear;
   message;
 
+
   typeReports = [
-    {value: 'week', valueView: 'Thống kê vé tuần'},
-    {value: 'month', valueView: 'Thống kê vé tháng'},
-    {value: 'year', valueView: 'Thống kê vé năm'},
+    {value: 'week', valueView: 'Vé tuần'},
+    {value: 'month', valueView: 'Vé tháng'},
+    {value: 'year', valueView: 'Vé năm'},
   ];
   weekParams = [
     {value: '1', valueView: 'Tuần 1'},
@@ -76,7 +79,9 @@ export class StatisticTicketComponent implements OnInit {
   ];
 
   constructor(public statisticsService: StatisticsService,
-              public formBuilder: FormBuilder) {
+              public formBuilder: FormBuilder,
+              public dialog: MatDialog,
+  ) {
     this.formStatisticMemberCard = this.formBuilder.group({
       typeReport: ['', Validators.required],
       fromDay: ['', Validators.required],
@@ -106,7 +111,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardWeek1 != null) {
           this.createChartWeek();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '2') {
@@ -115,7 +123,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardWeek2 != null) {
           this.createChartWeek();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '3') {
@@ -124,7 +135,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardWeek3 != null) {
           this.createChartWeek();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     } else if (this.typeReport === 'week' && this.monthYear.weekParam === '4') {
@@ -133,7 +147,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardWeek4 != null) {
           this.createChartWeek();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     }
@@ -144,7 +161,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardMonth != null) {
           this.createChartMonth();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     }
@@ -155,7 +175,10 @@ export class StatisticTicketComponent implements OnInit {
         if (dataTotalMemberCardYear != null) {
           this.createChartYear();
         } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+          this.dialog.open(StatisticNotifyComponent, {
+            width: '500px',
+            disableClose: true,
+          });
         }
       });
     }
@@ -172,7 +195,17 @@ export class StatisticTicketComponent implements OnInit {
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
       },
-
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
       yAxis: {
         title: {
           text: 'Số lượng (Đơn vị: Vé)'
@@ -186,6 +219,13 @@ export class StatisticTicketComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalMemberCardWeek.map(x => x.date),
         lineColor: 'black',
         labels: {
@@ -195,7 +235,9 @@ export class StatisticTicketComponent implements OnInit {
           }
         }
       },
-
+      chart: {
+        backgroundColor: 'none',
+      },
       legend: {
         layout: 'vertical',
         align: 'right',
@@ -236,7 +278,20 @@ export class StatisticTicketComponent implements OnInit {
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
       },
-
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
+      chart: {
+        backgroundColor: 'none',
+      },
       yAxis: {
         title: {
           text: 'Số lượng (Đơn vị: Vé)'
@@ -250,6 +305,13 @@ export class StatisticTicketComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalMemberCardMonth.map(x => x.date),
         lineColor: 'black',
         labels: {
@@ -300,7 +362,20 @@ export class StatisticTicketComponent implements OnInit {
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
       },
-
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
+      chart: {
+        backgroundColor: 'none',
+      },
       yAxis: {
         title: {
           text: 'Số lượng (Đơn vị: Vé)'
@@ -314,6 +389,13 @@ export class StatisticTicketComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalMemberCardYear.map(x => x.date),
         lineColor: 'black',
         labels: {
@@ -331,9 +413,9 @@ export class StatisticTicketComponent implements OnInit {
       },
 
       series: [{
-        name: 'Số lượng vé theo năm',
+        name: 'Số lượng vé',
         data: this.totalMemberCardYear.map(x => x.total_member_card),
-        color: 'orange',
+        color: 'black',
       }],
 
       responsive: {

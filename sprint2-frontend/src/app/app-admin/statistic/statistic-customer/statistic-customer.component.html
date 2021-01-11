@@ -1,5 +1,5 @@
 <div class="statistics-overview">
-  <div class="statistics p-2 mx-auto bg-light">
+  <div class="statistics p-2 mx-auto">
     <button class="pcx" routerLink="/admin/statistic-overview">Tổng hợp</button>
     <button class="pcx" routerLink="/admin/statistic-ticket">Thống kê vé</button>
     <button class="pcx" routerLink="/admin/statistic-revenue">Thống kê doanh thu</button>
@@ -8,9 +8,9 @@
   <div class="statistics bg-light">
     <form [formGroup]="formStatisticCustomerRegisterPeriod" (ngSubmit)="openStatisticCustomerRegisterPeriod()">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 mt-2 ml-3 mb-3">
 
-          <mat-form-field color="accent" appearance="fill" class="mr-2">
+          <mat-form-field color="accent" class="mr-2">
             <mat-label>Ngày bắt đầu (*)</mat-label>
             <input matInput [matDatepicker]="picker1" formControlName="fromDay">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -20,7 +20,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field color="accent" appearance="fill">
+          <mat-form-field color="accent">
             <mat-label>Ngày kết thúc (*)</mat-label>
             <input matInput [matDatepicker]="picker2" formControlName="toDay">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -30,17 +30,12 @@
             </mat-error>
           </mat-form-field>
 
-          <button type="submit" class="btn btn-primary mb-2" style="margin-left: 330px">
-            Xem thống kê
-          </button>
-          <p style="color: red; font-weight: bolder; margin-left: 20px">{{message}}</p>
+          <button type="submit" class="btn btn-secondary">Xem thống kê</button>
         </div>
-
       </div>
     </form>
   </div>
 
-  
   <div class="mr-0">
     <div class="integrated-statistics row container-fluid p-0 m-0">
       <div class="row">
