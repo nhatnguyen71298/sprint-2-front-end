@@ -5,13 +5,13 @@ import {MemberCardAddDTO} from '../model/MemberCardAddDTO';
 import {AbstractControl, AsyncValidatorFn} from '@angular/forms';
 import {map, switchMap} from 'rxjs/operators';
 
-const URL = 'http://localhost:8080/lanh/member-card';
+const URL = 'http://localhost:8080/member-card';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberCardService {
-  private readonly API = 'http://localhost:8080/lanh/member-card';
+  private readonly API = 'http://localhost:8080/member-card';
 
   private options = {
     headers: new HttpHeaders({
@@ -23,6 +23,7 @@ export class MemberCardService {
 
   constructor(private http: HttpClient) { }
 
+  // Lanh start
   getMemberCardList(): Observable<any[]> {
     return this.http.get<any[]>(`${this.API}/list`, this.options);
   }
@@ -85,16 +86,20 @@ export class MemberCardService {
     return this.http.get(this.API + '/search-plate-number/' + idSearch);
   }
 
+  // Lanh end
+
+  // Hoat start
   findMemberCardByIdService(idMemberCard): Observable<any> {
-    return this.http.get(this.API + '/' + 'findByMemberCardById/' + idMemberCard);
+    return this.http.get(this.API + '/' + 'find-by-id/' + idMemberCard);
   }
 
   deleteMemberCardService(idMemberCard): Observable<any> {
-    return this.http.delete(this.API + '/deleteMemberCard/' + idMemberCard);
+    return this.http.delete(this.API + '/delete/' + idMemberCard);
   }
 
   editTicketService(editForm): Observable<any> {
-    console.log(editForm);
     return this.http.put(this.API + '/edit', editForm);
   }
+
+  // Hoat end
 }

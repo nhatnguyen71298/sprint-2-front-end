@@ -32,17 +32,17 @@ export class DeleteMemberCardDialogComponent implements OnInit {
         if (data.message === 'Succeed') {
           this.dialogRef.close();
         } else {
-          this.dialogRef.close();
-          const NOTICE = 'Xóa vé không thành công';
-          const URL = 'http://localhost:4200/list-ticket';
-          this.route.navigate(['notice-page', {message: NOTICE, path: URL}]).then(r => {
-          });
+          // this.dialogRef.close();
+          // const NOTICE = 'Xóa vé không thành công';
+          // const URL = 'http://localhost:4200/list-ticket';
+          // this.route.navigate(['notice-page', {message: NOTICE, path: URL}]).then(r => {
+          // });
         }
       },
       () => {
-        const NOTICE = 'Lỗi hệ thống';
-        this.route.navigate(['notice-page', {message: NOTICE}]).then(r => {
-        });
+        // const NOTICE = 'Lỗi hệ thống';
+        // this.route.navigate(['notice-page', {message: NOTICE}]).then(r => {
+        // });
       }
     );
   }

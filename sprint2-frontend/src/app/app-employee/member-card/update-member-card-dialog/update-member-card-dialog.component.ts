@@ -55,6 +55,8 @@ export class UpdateMemberCardDialogComponent implements OnInit {
 
   edit() {
     if (this.formEdit.valid) {
+      this.endDateAuto.setDate(this.endDateAuto.getDate() + 1);
+      this.startDateInput.setDate(this.startDateInput.getDate() + 1);
       this.memberCardService.editTicketService(this.formEdit.value)
         .subscribe(
           data => {
