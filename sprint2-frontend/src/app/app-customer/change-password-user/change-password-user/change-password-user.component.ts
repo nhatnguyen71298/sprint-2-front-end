@@ -1,10 +1,15 @@
+// @ts-ignore
 import {Component, OnInit} from '@angular/core';
+// @ts-ignore
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+// @ts-ignore
 import {Router} from '@angular/router';
+// @ts-ignore
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmEmailComponent} from '../confirm-email/confirm-email.component';
 import {ChangePasswordService} from "../../../service/nqkhanh/change-password.service";
 
+// @ts-ignore
 @Component({
   selector: 'app-change-password-user',
   templateUrl: './change-password-user.component.html',

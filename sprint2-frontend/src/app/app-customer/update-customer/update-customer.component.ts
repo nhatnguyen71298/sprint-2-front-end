@@ -19,6 +19,9 @@ export class UpdateCustomerComponent implements OnInit {
   selectedImage: any = null;
   imageUrl;
   checkAvatar = true;
+  REGEX_STRING = '[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ' +
+    'ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ' +
+    'ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]';
 
   constructor(private formBuilder: FormBuilder,
               private customerService: CustomerService,
@@ -31,7 +34,7 @@ export class UpdateCustomerComponent implements OnInit {
     this.customer = this.formBuilder.group({
       id: [],
       fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
-        Validators.pattern('^[^\\W]*$')]],
+        Validators.pattern('^(\\s*' + this.REGEX_STRING + '+\\s*)+$')]],
       gender: ['', [Validators.required]],
       email: ['', [Validators.pattern('^[a-z][a-z0-9_\\.]{4,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')]],
       birthday: ['', [Validators.required]],
@@ -51,7 +54,22 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   update() {
-    if (this.customer.invalid === false) {
+    console.log(this.customer)
+    if (this.customer.valid) {
+      // tslint:disable-next-line:variable-name
+      const string = this.customer.get('fullName').value.toLocaleLowerCase().trim();
+      let stringtempt = string[0].toLocaleUpperCase();
+      for (let i = 1; i < string.length; i++) {
+        if (string[i] === ' ' && string[i - 1] === ' ') {
+          continue;
+        }
+        if (string[i] !== ' ' && string[i - 1] === ' ') {
+          stringtempt += string[i].toLocaleUpperCase();
+          continue;
+        }
+        stringtempt += string[i];
+      }
+      this.customer.controls.fullName.setValue(stringtempt);
       this.customerService.updateCustomer(this.customer.value).subscribe(data => {
         const dialogRef = this.dialog.open(SuccessComponent, {
           width: 'auto',
@@ -94,7 +112,7 @@ export class UpdateCustomerComponent implements OnInit {
           this.customer.value.imageAvatar = this.imageUrl;
           this.customerService.updateCustomer(this.customer.value).subscribe(() => dialogRef.close(
             this.dialog.open(SuccessComponent, {
-              width: 'auto',
+              width: '32%',
               data: {check: false}
             })
           ));

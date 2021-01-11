@@ -16,7 +16,7 @@ import {CommonModule} from '@angular/common';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         CommonModule,
@@ -33,6 +33,8 @@ import {CommonModule} from '@angular/common';
         MaterialModule,
     ],
     providers: [],
+    exports: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
