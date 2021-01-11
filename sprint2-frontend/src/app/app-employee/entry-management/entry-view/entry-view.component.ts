@@ -61,8 +61,7 @@ export class EntryViewComponent implements OnInit {
           }
         }
       };
-      const isRegistered = this.ticketForm.value.startDate != null;
-      console.log(this.ticketForm.value.startDate);
+      const isRegistered = this.ticketForm.value.startDate !== '';
       const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not register or member card expired
       console.log(!isRegistered);
@@ -143,8 +142,12 @@ export class EntryViewComponent implements OnInit {
               const memberCardList = parkingSlot.car.memberCardList;
               memberCard = memberCardList[memberCardList.length - 1];
               const entryLogList = memberCard.entryLogList;
-              const entryLog = entryLogList[entryLogList.length - 1];
-              const enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddTHH:mm');
+              let enterDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm');
+              // check if car is registered recently
+              if (entryLogList.length > 0) {
+                const entryLog = entryLogList[entryLogList.length - 1];
+                enterDate = this.datePipe.transform(entryLog.enterDate, 'yyyy-MM-ddTHH:mm');
+              }
               // car registered parked
               if (parkingSlot.status) {
                 this.ticketForm.patchValue({enterDate});
@@ -186,7 +189,7 @@ export class EntryViewComponent implements OnInit {
 
   checkMemberCardValid(endDate) {
     const currentDate = (new Date()).valueOf();
-    const endDate2 = new Date(endDate).valueOf();
+    const endDate2 = (new Date(endDate)).valueOf();
     return currentDate - endDate2 < 0;
   }
 
@@ -203,7 +206,7 @@ export class EntryViewComponent implements OnInit {
         enterDate: this.ticketForm.value.enterDate,
         exitDate: this.ticketForm.value.exitDate,
       };
-      const isRegistered = this.ticketForm.value.startDate != null;
+      const isRegistered = this.ticketForm.value.startDate !== '';
       const isValid = this.checkMemberCardValid(this.ticketForm.value.endDate);
       // if car not registered
       if (!isRegistered || !isValid) {
@@ -276,8 +279,8 @@ export class EntryViewComponent implements OnInit {
         .subscribe(next2 => {
           const memberCardList = next2;
           const memberCard = memberCardList[memberCardList.length - 1];
-          ticket.startDate = this.datePipe.transform(new Date(memberCard.startDate), 'dd-MM-yyyy');
-          ticket.endDate = this.datePipe.transform(new Date(memberCard.endDate), 'dd-MM-yyyy');
+          ticket.startDate = this.datePipe.transform(new Date(memberCard.startDate), 'yyyy-MM-ddTHH:mm');
+          ticket.endDate = this.datePipe.transform(new Date(memberCard.endDate), 'yyyy-MM-ddTHH:mm');
           ticket.enterDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm');
           this.ticketForm.patchValue(ticket);
         });
