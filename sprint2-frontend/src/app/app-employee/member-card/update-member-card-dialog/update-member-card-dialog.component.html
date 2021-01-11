@@ -18,10 +18,10 @@
         <label for="idCar" class="col-3 ml-3">Ngày bắt đầu<sup class="text-danger">*</sup></label>
         <div class="col-9">
           <mat-form-field appearance="fill" (change)="setEndDate()">
-            <input class="form-control" matInput [matDatepicker]="startPicker" (change)="setEndDate()"
+            <input class="form-control" matInput [matDatepicker]="startPicker"
                    [(ngModel)]="startDateInput" formControlName="startDate">
-            <mat-datepicker-toggle matSuffix [for]="startPicker" (change)="setEndDate()"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker (change)="setEndDate()"></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <div class="col-9">
           <input class="form-control" type="text" id="floor" formControlName="floor">
           <label class="text-danger" style=" margin-left: 0%;"
-             *ngIf="formEdit.get('floor').hasError('required')">
+                 *ngIf="formEdit.get('floor').hasError('required')">
             Vui lòng nhập số tầng
           </label>
         </div>

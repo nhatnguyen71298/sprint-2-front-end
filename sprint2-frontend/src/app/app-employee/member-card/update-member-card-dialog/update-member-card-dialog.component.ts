@@ -55,24 +55,16 @@ export class UpdateMemberCardDialogComponent implements OnInit {
 
   edit() {
     if (this.formEdit.valid) {
-
-      this.memberCardService.editTicketService( this.formEdit.value)
+      this.memberCardService.editTicketService(this.formEdit.value)
         .subscribe(
           data => {
-            if (data.message === 'Succeed') {
-              this.dialogRef.close();
-            } else {
-              this.dialogRef.close();
-              const NOTICE = 'Sửa vé không thành công';
-              const URL = 'http://localhost:4200/member-card-list';
-              this.router.navigate(['notice-page', {message: NOTICE, path: URL}]).then(r => {
-              });
-            }
           },
           () => {
-            const NOTICE = 'Lỗi hệ thống';
-            this.router.navigate(['notice-page', {message: NOTICE}]).then(r => {
-            });
+            // const NOTICE = 'Lỗi hệ thống';
+            // this.router.navigate(['notice-page', {message: NOTICE}]).then(r => {
+            // });
+          }, () => {
+            this.dialogRef.close();
           }
         );
     } else {
@@ -91,7 +83,6 @@ export class UpdateMemberCardDialogComponent implements OnInit {
   }
 
   setEndDate() {
-    console.log('vô');
     this.startDateInput = new Date(this.startDateInput);
     this.endDateAuto = new Date(this.startDateInput);
     if (this.radio === 'Tuần') {

@@ -5,5 +5,4 @@ export class MemberCard {
   price: BigInteger;
   memberCardType: number;
   car: number;
-  entryLogList: number;
 }
