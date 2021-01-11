@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Chart} from 'chart.js';
 import * as moment from 'moment';
 import {StatisticsService} from "../../../service/statistics.service";
+import *as Highcharts from "highcharts";
+
+declare var require: any;
+require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/export-data.src')(Highcharts);
 
 @Component({
   selector: 'app-statistic-sales',
@@ -13,10 +17,9 @@ export class StatisticSalesComponent implements OnInit {
   formStatisticRevenuePeriod: FormGroup;
   totalRevenueMemberCardPeriod: any[];
   totalRevenueTicketPeriod: any[];
-  chartMemberCard: Chart;
-  chartTicket: Chart;
   day;
   days;
+  message;
   typeReport;
   typeReports = [
     {value: 'reMemberCard', valueView: 'Doanh thu vé thành viên'},
@@ -53,112 +56,155 @@ export class StatisticSalesComponent implements OnInit {
     if (this.typeReport === 'reMemberCard') {
       this.statisticsService.getTotalRevenueMemberCardPeriod(this.days).subscribe(dataTotalRevenueMemberCardPeriod => {
         this.totalRevenueMemberCardPeriod = dataTotalRevenueMemberCardPeriod;
-        this.createChartRevenueMemberCard();
+        console.log(dataTotalRevenueMemberCardPeriod);
+        if (dataTotalRevenueMemberCardPeriod != null) {
+          this.createChartRevenueMemberCard();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     }
     // statistic total revenue ticket in period time
     else {
       this.statisticsService.getTotalRevenueTicketPeriod(this.days).subscribe(dataTotalRevenueTicketPeriod => {
         this.totalRevenueTicketPeriod = dataTotalRevenueTicketPeriod;
-        this.createChartRevenueTicket();
+        console.log(dataTotalRevenueTicketPeriod);
+        if (dataTotalRevenueTicketPeriod != null) {
+          this.createChartRevenueTicket();
+        } else {
+          return this.message = 'Dữ liệu không tồn tại!'
+        }
       });
     }
   }
 
   // create chart statistic revenue member card
   createChartRevenueMemberCard() {
-    this.chartMemberCard = new Chart('statistic-revenue-member-card', {
-      type: 'line',
-      data: {
-        labels: this.totalRevenueMemberCardPeriod.map(x => x.date_payment),
-        datasets: [
-          {
-            label: 'Doanh thu vé thành viên',
-            data: this.totalRevenueMemberCardPeriod.map(x => x.total_price),
-            backgroundColor: [
-              'rgb(19,39,180)',
-              'rgb(29,255,15)',
-              'rgb(75, 0, 130)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(180,60,166)',
-            ],
-            fill: false,
-            borderColor: 'red',
-          },
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-revenue-member-card', {
+
+      title: {
+        text: 'Biểu đồ doanh thu vé thành viên',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
+        }
       },
-      options: {
+
+      yAxis: {
         title: {
-          text: 'Biểu đồ doanh thu',
-          display: true
+          text: 'Doanh thu (Đơn vị: VND)'
         },
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Thời gian'
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      xAxis: {
+        categories: this.totalRevenueMemberCardPeriod.map(x => x.date_payment),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      series: [{
+        name: 'Doanh thu vé thành viên',
+        data: this.totalRevenueMemberCardPeriod.map(x => x.total_price),
+        color: 'red',
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
             }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Đơn vị: VND'
-            },
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        },
+          }
+        }]
       }
     });
+
   }
 
   // create chart statistic revenue ticket
   createChartRevenueTicket() {
-    this.chartTicket = new Chart('statistic-revenue-ticket', {
-      type: 'line',
-      data: {
-        labels: this.totalRevenueTicketPeriod.map(x => x.enter_date),
-        datasets: [
-          {
-            label: 'Doanh thu vé ngày',
-            data: this.totalRevenueTicketPeriod.map(x => x.total_price),
-            backgroundColor: [
-              'rgb(19,39,180)',
-              'rgb(29,255,15)',
-              'rgb(75, 0, 130)',
-              'rgb(0,255,0)',
-              'rgb(255,255,0)',
-              'rgb(180,60,166)',
-            ],
-            fill: false,
-            borderColor: 'rgb(0,255,0)',
-          },
-        ]
+    // @ts-ignore
+    Highcharts.chart('statistic-revenue-ticket', {
+
+      title: {
+        text: 'Biểu đồ doanh thu vé ngày',
+        style: {
+          color: '#435d7d',
+          font: 'bold 20px "Arial", Verdana, sans-serif'
+        }
       },
-      options: {
+
+      yAxis: {
         title: {
-          text: 'Biểu đồ doanh thu',
-          display: true
+          text: 'Doanh thu (Đơn vị: VND)'
         },
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Thời gian'
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      xAxis: {
+        categories: this.totalRevenueTicketPeriod.map(x => x.exit_date),
+        lineColor: 'black',
+        labels: {
+          style: {
+            fontSize: '15px',
+            color: 'black'
+          }
+        }
+      },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      series: [{
+        name: 'Doanh thu vé ngày',
+        data: this.totalRevenueTicketPeriod.map(x => x.total_price),
+        color: 'blue',
+      }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
             }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Đơn vị: VND'
-            },
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        },
+          }
+        }]
       }
     });
   }

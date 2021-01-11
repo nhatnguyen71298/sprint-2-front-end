@@ -15,25 +15,25 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        RouterModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        AuthenticationModule,
-        AppCustomerModule,
-        AppEmployeeModule,
-        AppAdminModule,
-        MaterialModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AuthenticationModule,
+    AppCustomerModule,
+    AppEmployeeModule,
+    AppAdminModule,
+    MaterialModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
