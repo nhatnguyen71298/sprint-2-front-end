@@ -106,7 +106,7 @@
             </mat-form-field>
           </div>
           <div class="row justify-content-end mt-4 pr-3">
-            <button class="btn btn-warning" *ngIf="customer.invalid">Lưu</button>
+            <button class="btn btn-warning" [disabled]="customer.invalid">Lưu</button>
           </div>
         </form>
       </div>
