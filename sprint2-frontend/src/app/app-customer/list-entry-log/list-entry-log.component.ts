@@ -9,6 +9,7 @@ import {CustomerService} from '../../service/lvq-din/customer.service';
 export class ListEntryLogComponent implements OnInit {
   listEntryLog;
   STT = 0;
+  searchPlate = '';
 
   constructor(private customerService: CustomerService) {
   }
@@ -21,15 +22,22 @@ export class ListEntryLogComponent implements OnInit {
     );
   }
 
-  searchOneWayPage(page: number) {
+  searchOneWayPage(page: number, search) {
     if (page === undefined) {
       page = 0;
     }
-    // Lấy list Flight đi
-    this.customerService.getListEntryLog('1', page).subscribe(data => {
+    this.searchPlate = search.trim();
+    if (this.searchPlate === '') {
+      this.customerService.getListEntryLog('1', page).subscribe(data => {
+          this.listEntryLog = data;
+        }
+      );
+    } else {
+      this.customerService.getListEntryLogPlate('1', page, this.searchPlate).subscribe(data => {
         this.listEntryLog = data;
-      }
-    );
+      })
+    }
+    // Tạo vòng for in
   }
 
   createFor(lenght: any) {

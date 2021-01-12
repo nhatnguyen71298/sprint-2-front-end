@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChildren} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {SuccessComponent} from '../alert/success/success.component';
@@ -12,7 +12,8 @@ import {CustomerService} from '../../service/lvq-din/customer.service';
   templateUrl: './update-customer.component.html',
   styleUrls: ['./update-customer.component.css']
 })
-export class UpdateCustomerComponent implements OnInit {
+export class UpdateCustomerComponent implements OnInit,AfterViewInit {
+  @ViewChildren('input') inputFocus;
   customer: FormGroup;
   maxBirthdayOfHuman: Date;
   imgSrc: string;
@@ -26,9 +27,14 @@ export class UpdateCustomerComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private customerService: CustomerService,
               private dialog: MatDialog,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage
+  ) {
     this.maxBirthdayOfHuman = new Date(Date.parse(new Date().toString()) - 18 * 1000 * 3600 * 24 * 365);
   }
+
+  ngAfterViewInit(): void {
+        this.inputFocus.first.nativeElement.focus();
+    }
 
   ngOnInit(): void {
     this.customer = this.formBuilder.group({
@@ -38,9 +44,9 @@ export class UpdateCustomerComponent implements OnInit {
       gender: ['', [Validators.required]],
       email: ['', [Validators.pattern('^[a-z][a-z0-9_\\.]{4,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')]],
       birthday: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('^((\\(\\+84\\))|(0))9[0-9]{8}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^((\\(\\+84\\))|(0))[0-9]{9}$')]],
       address: ['', [Validators.required]],
-      identityNumber: ['', [Validators.required, Validators.pattern('^\\d{9}|\\d{12}$')]],
+      identityNumber: ['', [Validators.required, Validators.pattern('^([0-9]{9}|[0-9]{12})$')]],
       imageAvatar: ['']
     });
     this.customerService.getCustomerByAccount(1).subscribe(data => {

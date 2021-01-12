@@ -7,6 +7,13 @@
             <div class="row justify-content-center">
               <h2>Lịch sử xe ra vào</h2>
             </div>
+            <div class="row justify-content-end">
+              <form class="form-inline">
+                <input #search class="form-control mr-sm-2" type="search" placeholder="Nhập biển kiểm soát" aria-label="Search">
+                <button class="btn btn-outline-success btn-success my-2 my-sm-0"
+                        (click)="searchOneWayPage(undefined,search.value)">Search</button>
+              </form>
+            </div>
           </div>
           <table class="table table-striped table-hover" id="historyTable">
             <thead>
@@ -28,16 +35,16 @@
             </tr>
             </tbody>
           </table>
-          <nav aria-label="Page navigation example" *ngIf="listEntryLog.totalPages !== 0">
+          <nav aria-label="Page navigation example" *ngIf="listEntryLog.totalPages > 1">
             <ul class="pagination">
               <li class="page-item" *ngIf="listEntryLog.pageable?.pageNumber !== 0"
-                  (click)="searchOneWayPage(listEntryLog.pageable?.pageNumber - 1)"><a class="page-link"
+                  (click)="searchOneWayPage(listEntryLog.pageable?.pageNumber - 1,searchPlate)"><a class="page-link"
                                                                                        href="#">Trước</a></li>
               <li class="page-item" [ngClass]="page === listEntryLog.pageable?.pageNumber ? 'active' : ''"
                   *ngFor="let page of createFor(listEntryLog.totalPages)"
-                  (click)="searchOneWayPage(page)"><a class="page-link" href="#">{{page + 1}}</a></li>
+                  (click)="searchOneWayPage(page,searchPlate)"><a class="page-link" href="#">{{page + 1}}</a></li>
               <li class="page-item" *ngIf="listEntryLog.pageable?.pageNumber !== listEntryLog.totalPages -1"
-                  (click)="searchOneWayPage(listEntryLog.pageable?.pageNumber + 1)"><a class="page-link"
+                  (click)="searchOneWayPage(listEntryLog.pageable?.pageNumber + 1 , searchPlate)"><a class="page-link"
                                                                                        href="#">Sau</a></li>
             </ul>
           </nav>

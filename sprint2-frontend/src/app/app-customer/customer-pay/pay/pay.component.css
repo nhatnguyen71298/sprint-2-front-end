@@ -330,11 +330,12 @@ table.table td i {
 
 .choose {
   color: blue;
+  margin: -10% 0 0 0;
 }
 
 .momo {
   width: 75%;
-  margin: 2% 0 5% 7.9%;
+  margin: 1% 0 5% 7.9%;
 }
 
 .paypalIcon {
@@ -349,12 +350,12 @@ table.table td i {
 
 .warning {
   color: red;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .notification {
   color: blue;
-  margin: 5% 0 0 23.5%;
+  margin: 7% 0 0 23.5%;
 }
 
 .tick {
