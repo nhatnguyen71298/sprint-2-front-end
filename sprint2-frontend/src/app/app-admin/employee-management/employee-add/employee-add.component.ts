@@ -18,7 +18,7 @@ export class EmployeeAddComponent implements OnInit {
   public employee: Employee;
   public listRole: [];
   public maxDate = new Date(2003, 0, 12);
-  public minDate = new Date (1900, 0, 1);
+  public minDate = new Date (1960, 0, 1);
   public idMessage = 1;
 
   constructor(

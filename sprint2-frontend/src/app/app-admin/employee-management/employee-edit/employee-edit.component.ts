@@ -28,7 +28,7 @@ export class EmployeeEditComponent implements OnInit {
     this.formEditUser = this.formBuilder.group({
       fullName: ['',
         [Validators.required, this.employeeService.validateWhiteSpace,
-          this.employeeService.validateSpecialCharacter, Validators.maxLength(45), Validators.minLength(10)
+          this.employeeService.validateSpecialCharacter, Validators.maxLength(45), Validators.minLength(5)
         ]],
       birthday: ['', [Validators.required, this.employeeService.checkAge]],
       gender: [true, [Validators.required]],

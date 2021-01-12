@@ -15,7 +15,7 @@
           </div>
           <div class="col-sm-6 col-xl-6 col-lg-6 col-md-6 d-flex justify-content-end form-inline">
             <input type="text" class="form-control form-control-sm rounded "
-                   placeholder="Nhập từ khóa tìm kiếm" [(ngModel)]="valueSearch" #value>
+                   placeholder="Nhập từ khóa tìm kiếm"  (keydown.enter)="search()" [(ngModel)]="valueSearch" #value>
             <button type="button" class="search btn btn-info" (click)="search()">
               <i class="fa fa-search"></i></button>
           </div>

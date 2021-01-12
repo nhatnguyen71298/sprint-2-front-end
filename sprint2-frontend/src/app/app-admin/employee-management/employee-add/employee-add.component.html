@@ -1,7 +1,7 @@
 <div class="container-fluid ">
 
   <form [formGroup]="formCreateNew" (ngSubmit)="createEmployee()">
-    <h3 class="row d-flex justify-content-center">Thêm thành viên </h3>
+    <h3 class="row d-flex justify-content-center">Thêm thành viên</h3>
     <hr>
 
     <div class="form-group row ">
@@ -18,9 +18,9 @@
         <span
               *ngIf="formCreateNew.get('fullName').hasError('specialCharacter') && formCreateNew.get('fullName').touched">Họ và tên không có kí tự đặt biệt.</span>
         <span
-              *ngIf="formCreateNew.get('fullName').hasError('minlength') && formCreateNew.get('fullName').touched">Họ và tên không phải nhiều hơn 10 ký tự.</span>
+              *ngIf="formCreateNew.get('fullName').hasError('minlength') && formCreateNew.get('fullName').touched">Họ và tên phải nhiều hơn 5 ký tự.</span>
         <span
-              *ngIf="formCreateNew.get('fullName').hasError('maxlength') && formCreateNew.get('fullName').touched">Họ và tên phải có ít hơn 45 ký tự.</span>
+              *ngIf="formCreateNew.get('fullName').hasError('maxlength') && formCreateNew.get('fullName').touched">Họ và tên phải ít hơn 45 ký tự.</span>
         <span
               *ngIf="formCreateNew.get('fullName').hasError('whiteSpace') && formCreateNew.get('fullName').touched">Họ tên không được chứa khoảng trắng</span>
       </div>
@@ -55,7 +55,7 @@
       <span
         *ngIf="formCreateNew.get('phoneNumber').hasError('required') && formCreateNew.get('phoneNumber').touched">Số điện thoại không được để trống.</span>
         <span
-              *ngIf="formCreateNew.get('phoneNumber').hasError('format') && formCreateNew.get('phoneNumber').touched">Số điện thoại không đúng định dạng.</span>
+              *ngIf="formCreateNew.get('phoneNumber').hasError('format') && formCreateNew.get('phoneNumber').touched">Số điện thoại không đúng định dạng( vd: 09xxxxxxxx, 08xxxxxxxxx, 03xxxxxxxx).</span>
         <span
               *ngIf="formCreateNew.get('phoneNumber').hasError('phoneAlpha') && formCreateNew.get('phoneNumber').touched">Số điện thoại phải là số.</span>
       </div>
@@ -112,7 +112,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Tài khoản: <sup class="text-danger">*</sup> </label>
+      <label class="col-sm-3 col-form-label">Tài khoản email: <sup class="text-danger">*</sup> </label>
       <div class="col-sm-8">
         <input type="text" min="1" class="form-control form-control-sm" formControlName="email">
       </div>

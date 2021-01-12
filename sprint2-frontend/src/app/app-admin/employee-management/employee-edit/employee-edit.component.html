@@ -1,7 +1,7 @@
 <div class="container-fluid ">
   <!--  <div class=" border rounded-lg p-3 my-5 ">-->
   <form [formGroup]="formEditUser" (ngSubmit)="editEmployee()">
-    <h3 class="row d-flex justify-content-center">Chỉnh sửa thành viên </h3>
+    <h3 class="row d-flex justify-content-center">Chỉnh sửa nhân viên</h3>
     <hr>
 
     <div class="form-group row ">
@@ -15,7 +15,7 @@
         <span
           *ngIf="formEditUser.get('fullName').hasError('specialCharacter') && formEditUser.get('fullName').touched">Họ và tên không có kí tự đặt biệt.</span>
         <span
-          *ngIf="formEditUser.get('fullName').hasError('minlength') && formEditUser.get('fullName').touched">Họ và tên không phải nhiều hơn 10 ký tự.</span>
+          *ngIf="formEditUser.get('fullName').hasError('minlength') && formEditUser.get('fullName').touched">Họ và tên không phải nhiều hơn 5 ký tự.</span>
         <span
           *ngIf="formEditUser.get('fullName').hasError('maxlength') && formEditUser.get('fullName').touched">Họ và tên phải có ít hơn 45 ký tự.</span>
         <span
