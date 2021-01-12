@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../service/auth/authentication.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {ToastrService} from 'ngx-toastr';
 
 function comparePassword(c: AbstractControl): any {
   const v = c.value;
@@ -31,6 +32,7 @@ export class ResetPasswordComponent implements OnInit {
   reset: FormGroup;
   constructor(private authenticationService:
                 AuthenticationService,
+              private toastrService: ToastrService,
               private fb: FormBuilder,
               private router: Router,
               private dialog: MatDialog) {
@@ -60,9 +62,10 @@ export class ResetPasswordComponent implements OnInit {
         this.codeBackend = next;
         setTimeout (() => {
           this.codeBackend = null;
-        }, 60000);
+        }, 120000);
         this.checkEmail = true;
         this.checkResultEmail = true;
+        this.toastrService.success('Gửi mail thành công, bạn có 2 phút để nhập mã xác nhận!', 'Thông báo!');
       }
     });
   }
@@ -82,6 +85,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPassword(): void {
     this.authenticationService.resetPassWord(this.reset.value.passwordNew).subscribe(data => {
       this.checkReset = data;
+      this.toastrService.success('Đổi mật khẩu thành công!', 'Thông báo!');
       if (this.checkReset === true) {
         this.dialog.closeAll();
       //  thoong baos

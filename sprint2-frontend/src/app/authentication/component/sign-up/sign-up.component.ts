@@ -20,7 +20,7 @@ function comparePassword(c: AbstractControl): any {
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
-  checkRegister: boolean;
+  checkRegister: any;
   messageError = '';
 
   constructor(
@@ -44,18 +44,21 @@ export class SignUpComponent implements OnInit {
       this.authenticationService.register(this.signUpForm.value.username, this.signUpForm.value.passwordNew ).subscribe( next => {
         console.log(next);
         this.checkRegister = next;
-        if (this.checkRegister === true){
+        if (this.checkRegister === 3){
           this.toastrService.success('Đăng ký tài khoản thành công!', 'Thông báo!');
           this.router.navigateByUrl('/home-page/info');
-        }else {
-          this.messageError = 'Tên tài khoản đã tồn tại hoặc chưa được đăng ký. Vui lòng nhập tên khác.';
+        }else if (this.checkRegister === 2) {
+          this.toastrService.success('Tên tài khoản chưa được kích hoạt. Vui lòng nhập tên khác.', 'Thông báo!');
           setTimeout(() => {
             this.messageError = '';
           }, 2000);
+        } else if (this.checkRegister === 1) {
+          this.toastrService.success('Tên tài khoản đã được đăng ký. Vui lòng nhập tên khác.', 'Thông báo!');
         }
       });
     } else {
-      this.messageError = 'Bạn đang để trống hoặc sai thông tin , vui lòng điền đầy đủ thông tin.';
+      // this.messageError = 'Bạn đang để trống hoặc sai thông tin , vui lòng điền đầy đủ thông tin!';
+      this.toastrService.success('Bạn đang để trống hoặc sai thông tin , vui lòng điền đầy đủ thông tin!', 'Thông báo!');
       setTimeout(() => {
         this.messageError = '';
       }, 2000);

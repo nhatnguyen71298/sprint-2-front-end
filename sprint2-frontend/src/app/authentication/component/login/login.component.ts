@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{3,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')]],
       password: ['', [Validators.required, Validators.pattern(/^[a-z0-9A-Z]{6,30}$/)]]
     });
   }
@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
           this.tokenStorageService.saveUser(data);
           console.log(data);
           this.isLoggedIn = true;
+          console.log(this.isLoggedIn);
         },
         err => {
           this.errorMessage = 'Tên tài khoản và mật khẩu không hợp lệ !';
@@ -64,17 +65,19 @@ export class LoginComponent implements OnInit {
             this.errorMessage = '';
           }, 2000);
           this.isLoggedIn = false;
+          console.log(this.isLoggedIn);
+          this.toastrService.success('Đăng nhập không thành công! Tên tài khoản và mật khẩu không hợp lệ !', 'Thông báo!');
         }, () => {
           this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
           this.router.navigateByUrl('/home-page/info');
-          this.router.navigateByUrl('/home-page');
           setTimeout(() => {
             this.reloadPage();
           }, 1000);
         }
       );
     } else {
-      this.messageError = 'Đăng nhập không thành công , Vui lòng nhập đúng thông tin.';
+      // this.messageError = 'Đăng nhập không thành công , Vui lòng nhập đúng thông tin.';
+      this.toastrService.success('Đăng nhập không  thành công!', 'Thông báo!');
       setTimeout (() => {
         this.messageError = null;
       }, 3000);
