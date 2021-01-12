@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {EmployeeService} from '../../../service/employee.service';
 import {Router} from '@angular/router';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Employee} from '../model/employee';
 import {EmployeeMessageComponent} from '../employee-message/employee-message.component';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-add',

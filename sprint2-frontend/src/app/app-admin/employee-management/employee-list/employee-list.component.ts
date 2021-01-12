@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {EmployeeService} from '../../../service/employee.service';
 import {EmployeeViewComponent} from '../employee-view/employee-view.component';
-import {MatDialog} from '@angular/material';
 import {EmployeeDeleteComponent} from '../employee-delete/employee-delete.component';
 import {EmployeeAddComponent} from '../employee-add/employee-add.component';
 import {EmployeeEditComponent} from '../employee-edit/employee-edit.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-list',

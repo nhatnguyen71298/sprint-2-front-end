@@ -1,22 +1,24 @@
-import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// @ts-ignore
+import {NgModule} from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-// @ts-ignore
 import {MatFormFieldModule} from '@angular/material/form-field';
-// @ts-ignore
-import {MatNativeDateModule} from '@angular/material/core';
-// @ts-ignore
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
-// @ts-ignore
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatDialogModule} from '@angular/material/dialog';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {MatButtonModule} from '@angular/material/button';
+import {CommonModule} from '@angular/common';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MatSelectModule} from '@angular/material/select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MY_FORMATS} from './app-admin/statistic/statistic-customer/statistic-customer.component';
+import {StatisticCarComponent} from './app-admin/statistic/statistic-car/statistic-car.component';
+import {StatisticNotifyComponent} from './app-admin/statistic/statistic-notify/statistic-notify.component';
+
 
 @NgModule({
   imports: [
+    BrowserAnimationsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
@@ -27,8 +29,11 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     MatButtonModule,
     CommonModule,
     MatMomentDateModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   exports: [
+    BrowserAnimationsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
@@ -37,8 +42,10 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     NgxPaginationModule,
     Ng2SearchPipeModule,
     MatButtonModule,
-    BrowserAnimationsModule,
-    MatMomentDateModule
+    CommonModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

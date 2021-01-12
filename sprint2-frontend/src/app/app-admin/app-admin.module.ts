@@ -7,8 +7,8 @@ import {MaterialModule} from "../material.module";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from '@angular/common/http';
 import {StatisticNotifyComponent} from './statistic/statistic-notify/statistic-notify.component';
-import {MAT_DATE_LOCALE} from '@angular/material';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 
 @NgModule({

@@ -29,9 +29,12 @@ import {UpdateMemberCardDialogComponent} from './member-card/update-member-card-
 import {MemberCardListComponent} from './member-card/member-card-list/member-card-list.component';
 import {MemberCardCreateComponent} from './member-card/member-card-create/member-card-create.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+// @ts-ignore
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+// @ts-ignore
 import {MatInputModule} from '@angular/material/input';
+// @ts-ignore
 import {MatSelectModule} from '@angular/material/select';
 import {SlotInfoComponent} from './entry-management/slot-info/slot-info.component';
 
@@ -44,7 +47,7 @@ export const routes: Routes = [
       {path: 'entry-view', component: EntryViewComponent},
       {path: 'parking-map', component: ParkingMapComponent},
       {path: 'camera', component: CameraManagementComponent},
-      {path: 'member-card-list', component: MemberCardListComponent},
+      {path: 'member-card-list', component: MemberCardListComponent}
     ]
   }
 ];
@@ -60,7 +63,7 @@ export const routes: Routes = [
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
     SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent,
     MemberCardListComponent, MemberCardCreateComponent, DeleteMemberCardDialogComponent,
-    UpdateMemberCardDialogComponent
+    UpdateMemberCardDialogComponent,
   ],
   entryComponents: [DeleteMemberCardDialogComponent]
 })
