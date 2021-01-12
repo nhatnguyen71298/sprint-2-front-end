@@ -21,7 +21,7 @@ export class EditParkingSlotComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router,
               private el: ElementRef, private route: ActivatedRoute,
-              private toat: ToastrService
+              private toast: ToastrService
   ) {
   }
 
@@ -30,12 +30,12 @@ export class EditParkingSlotComponent implements OnInit {
       this.slotTypeList = dataType;
     });
     this.formUpdate = this.formBuilder.group({
-      floor: ['', [Validators.required, Validators.pattern('^\\d+$'), Validators.max(6)]],
-      slotNumber: ['', [Validators.required, Validators.pattern('^\\d+$'),
+      floor: ['', [Validators.required, Validators.pattern('^\\d{1,2}$'), Validators.max(6)]],
+      slotNumber: ['', [Validators.required, Validators.pattern('^\\d{1,2}$'),
         Validators.max(50)]],
       slotName: ['', [Validators.required]],
-      width: [0,[Validators.required,Validators.pattern('^\\d+$')]],
-      height: [0, [Validators.required, Validators.pattern('^\\d+$')]]
+      width: [300,[Validators.required,Validators.pattern('^\\d+$') , Validators.min(300) , Validators.max(10000)]],
+      height: [300, [Validators.required, Validators.pattern('^\\d+$'), Validators.min(300), Validators.max(10000)]]
     });
     // only for Edit
     this.route.params.subscribe(data => {
@@ -54,15 +54,15 @@ export class EditParkingSlotComponent implements OnInit {
       this.parkingSlotService.updateParkingSlot(this.eleId, this.formUpdate.value).subscribe(value => {
         if (value === 1) {
           this.router.navigate(['admin/list-parking-slot'], {
-            queryParams: {
-              create_msg: 'Create successfully!',
-              si: true
-            }
+            // queryParams: {
+            //   create_msg: 'Create successfully!',
+            //   si: true
+            // }
           });
           console.log(this.formUpdate.controls);
-        this.toat.success('Thao Tác Thành Công','Thông Báo');
+        this.toast.success('Thao Tác Thành Công','Thông Báo');
         } else{
-          this.toat.error('Thao Tác Thất Bại', 'Thông Báo');
+          this.toast.error('Thao Tác Thất Bại Vị Trí Đã Tồn Tại Trong Tầng', 'Thông Báo');
         }
       });
     } else{

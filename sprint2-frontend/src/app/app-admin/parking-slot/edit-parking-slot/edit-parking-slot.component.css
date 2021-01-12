@@ -89,3 +89,19 @@ body {
 .signup-form form a:hover{
   text-decoration: underline;
 }
+#input-floor{
+  width: 80px;
+  text-align: right;
+}
+#input-height{
+  width: 80px;
+  text-align: right;
+}
+#input-width{
+  width: 80px;
+  text-align: right;
+}
+#slot-number{
+  width: 80px;
+  text-align: right;
+}

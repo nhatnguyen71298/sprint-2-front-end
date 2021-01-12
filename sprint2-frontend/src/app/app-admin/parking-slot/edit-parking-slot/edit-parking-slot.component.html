@@ -16,14 +16,14 @@
   <div class="row">
     <div class="signup-form col-sm-10">
       <form [formGroup]="formUpdate" (keydown)="keyDownFunction($event)">
-        <h2>Sửa vị trí</h2>
+        <h2>Sửa Vị Trí Đỗ</h2>
         <div class="form-row">
           <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
-            <label>Tầng <span style="color: red"> (*)</span></label>
+            <label for="input-floor">Tầng <span style="color: red"> (*)</span></label>
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
-            <input class="form-control" type="text"
+            <input id="input-floor" class="form-control" type="text"
                    formControlName="floor"/>
 
             <p class="text-danger" style=" margin-left: -29%;"
@@ -37,7 +37,7 @@
                *ngIf="formUpdate.get('floor').hasError('pattern')
                                       && (formUpdate.controls.floor?.dirty
                                       || formUpdate.controls.floor?.touched)">
-              Số tầng phải là số.
+              Số tầng là số không đúng định dạng.
             </p>
 
             <p class="text-danger" style=" margin-left: -11%;"
@@ -49,10 +49,10 @@
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
-            <label>Chiều dài (mm)</label>
+            <label for="input-height">Chiều dài <span style="color: red"> (*)</span></label>
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
-            <input class="form-control" type="text" formControlName="height">
+            <input id="input-height" class="form-control" type="text" formControlName="height">
             <p class="text-danger" style="margin-left: -11%;"
                *ngIf="formUpdate.get('height').hasError('required')
                                       && (formUpdate.controls.height?.dirty
@@ -66,6 +66,20 @@
                                       || formUpdate.controls.height?.touched)">
               chiều dài  phải là số.
             </p>
+
+            <p class="text-danger" style=" margin-left: 10%;"
+               *ngIf="formUpdate.get('height').hasError('min')
+                                      && (formUpdate.controls.width?.dirty
+                                      || formUpdate.controls.width?.touched)">
+              chiều dài nhỏ nhất là 300
+            </p>
+
+            <p class="text-danger" style=" margin-left: 10%;"
+               *ngIf="formUpdate.get('height').hasError('max')
+                                      && (formUpdate.controls.width?.dirty
+                                      || formUpdate.controls.width?.touched)">
+              chiều dài lớn nhất 3000
+            </p>
           </div>
           <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
         </div>
@@ -73,10 +87,10 @@
         <div class="form-row mt-4">
           <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
-            <label>Vị trí <span style="color: red"> (*)</span></label>
+            <label for="slot-number">Vị trí <span style="color: red"> (*)</span></label>
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
-            <input class="form-control" type="text" formControlName="slotNumber"/>
+            <input id="slot-number" class="form-control" type="text" formControlName="slotNumber"/>
             <p class="text-danger" style="margin-left: -11%;"
                *ngIf="formUpdate.get('slotNumber').hasError('required')
                                       && (formUpdate.controls.slotNumber?.dirty
@@ -88,7 +102,7 @@
                *ngIf="formUpdate.get('slotNumber').hasError('pattern')
                                       && (formUpdate.controls.slotNumber?.dirty
                                       || formUpdate.controls.slotNumber?.touched)">
-              Vị trí phải là số.
+              Vị trí không đúng định dạng là số
             </p>
 
             <p class="text-danger" style=" margin-left: -11%;"
@@ -101,22 +115,44 @@
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0"></div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
-            <label>Chiều rộng (mm)</label>
+            <label for="input-width">Chiều Rộng <span style="color: red"> (*)</span></label>
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
-            <input class="form-control" type="text" formControlName="width">
+            <input id="input-width" class="form-control" type="text" formControlName="width">
             <p class="text-danger" style="margin-left: -11%;"
                *ngIf="formUpdate.get('width').hasError('required')
                                       && (formUpdate.controls.width?.dirty
                                       || formUpdate.controls.width?.touched)">
-              Vui lòng nhập chiều rộng
+              Vui lòng nhập chiều rộng.
+            </p>
+
+
+            <p class="text-danger" style=" margin-left: 10%;"
+               *ngIf="formUpdate.get('width').hasError('pattern')
+                                      && (formUpdate.controls.width?.dirty
+                                      || formUpdate.controls.width?.touched)">
+              chiều rộng phải là số.
             </p>
 
             <p class="text-danger" style=" margin-left: 10%;"
                *ngIf="formUpdate.get('width').hasError('pattern')
                                       && (formUpdate.controls.width?.dirty
                                       || formUpdate.controls.width?.touched)">
-              chiều rộng phải là số
+              chiều rộng phải là số.
+            </p>
+
+            <p class="text-danger" style=" margin-left: 10%;"
+               *ngIf="formUpdate.get('width').hasError('min')
+                                      && (formUpdate.controls.width?.dirty
+                                      || formUpdate.controls.width?.touched)">
+              chiều rộng nhỏ nhất là 300
+            </p>
+
+            <p class="text-danger" style=" margin-left: 10%;"
+               *ngIf="formUpdate.get('width').hasError('max')
+                                      && (formUpdate.controls.width?.dirty
+                                      || formUpdate.controls.width?.touched)">
+              chiều rộng lớn nhất 3000
             </p>
           </div>
           <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
@@ -125,18 +161,18 @@
         <div class="form-row mt-4">
           <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1 p-0 m-0"></div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0 mt-2">
-            <label>Loại xe<span style="color: red"> (*)</span></label>
+            <label for="rd-slotNameS">Loại xe<span style="color: red"> (*)</span></label>
           </div>
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 -0 mt-2">
-            <input type="radio" formControlName="slotName" value="S"  (click)="displayHeightWidth('S')"> 4 - 7 chỗ
+            <input id="rd-slotNameS" type="radio" formControlName="slotName" value="S"  (click)="displayHeightWidth('S')"> 4 - 7 chỗ
           </div>
 
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
-            <input type="radio" formControlName="slotName" value="M"  (click)="displayHeightWidth('M')"> 9 chỗ - bán tải
+            <input id="rd-slotNameM" type="radio" formControlName="slotName" value="M"  (click)="displayHeightWidth('M')"> 9 chỗ - bán tải
           </div>
 
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
-            <input type="radio" formControlName="slotName" value="L"   (click)="displayHeightWidth('L')"> > Tải 500 kg
+            <input id="rd-slotNameL" type="radio" formControlName="slotName" value="L"   (click)="displayHeightWidth('L')"> > Tải 500 kg
           </div>
         </div>
 
