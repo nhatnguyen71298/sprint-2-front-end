@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AppEmployeeRoutingModule} from './app-employee-routing.module';
+import {MatDialogModule} from '@angular/material';
 
-import { AppEmployeeRoutingModule } from './app-employee-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    AppEmployeeRoutingModule
-  ]
+    AppEmployeeRoutingModule,
+    MatDialogModule
+  ],
 })
-export class AppEmployeeModule { }
+export class AppEmployeeModule {
+}

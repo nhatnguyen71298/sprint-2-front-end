@@ -1,0 +1,168 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="offset-1 text-warning">CHỈNH SỬA THÔNG TIN KHÁCH HÀNG</h2>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formEditCustomer" (ngSubmit)="editCustomer()">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>Họ tên <span class="text-danger">(*)</span></label>
+          <input type="text" class="form-control" formControlName="fullName">
+          <mat-error
+            *ngIf="formEditCustomer.get('fullName').hasError('required')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Họ và tên không được để trống
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('fullName').hasError('cannotContainSpace')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            lỗi khoảng trắng
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('fullName').hasError('specialCharacter')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Họ và tên không đúng định dạng
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('fullName').hasError('minlength')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Tối thiểu 3 ký tự
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('fullName').hasError('maxlength')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Tối đa 50 ký tự
+          </mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <mat-form-field>
+            <input [min]="minDay" [max]="maxDay" class="form-control" formControlName="birthday" matInput
+                   [matDatepicker]="myDatepicker" placeholder="chọn ngày sinh">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
+          </mat-form-field>
+          <mat-error
+            *ngIf="formEditCustomer.get('birthday').hasError('required')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Ngày sinh không được để trống
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('birthday').hasError('checkAge')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Rất tiếc, bạn phải trên 18 tuổi
+          </mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Giới tính <span class="text-danger">(*)</span></label>
+          <select class="form-control" formControlName="gender" required>
+            <option [value]=true>Nam</option>
+            <option [value]=false>Nữ</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>CMND <span class="text-danger">(*)</span></label>
+          <input type="text" class="form-control" formControlName="identityNumber">
+          <mat-error
+            *ngIf="formEditCustomer.get('identityNumber').hasError('required')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Chứng minh nhân dân không được để trống
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('identityNumber').hasError('pattern')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Chứng minh nhân dân không đúng định dạng
+          </mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Số điện thoại <span class="text-danger">(*)</span></label>
+          <input type="text" class="form-control" formControlName="phone">
+          <mat-error
+            *ngIf="formEditCustomer.get('phone').hasError('required')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Số điện thoại không được để trống
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('phone').hasError('pattern')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Số điện thoại không đúng định dạng
+          </mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Email <span class="text-danger">(*)</span></label>
+          <input type="text" class="form-control" formControlName="email">
+          <mat-error
+            *ngIf="formEditCustomer.get('email').hasError('required')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Email không được để trống
+          </mat-error>
+          <mat-error
+            *ngIf="formEditCustomer.get('email').hasError('pattern')">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            Email không đúng định dạng
+          </mat-error>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Địa chỉ <span class="text-danger">(*)</span></label>
+        <input type="text" class="form-control" formControlName="address">
+        <mat-error
+          *ngIf="formEditCustomer.get('address').hasError('required')">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          Địa chỉ không được để trống
+        </mat-error>
+        <mat-error
+          *ngIf="formEditCustomer.get('address').hasError('specialCharacter')">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          Địa chỉ không đúng định dạng
+        </mat-error>
+        <mat-error
+          *ngIf="formEditCustomer.get('address').hasError('cannotContainSpace')">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          lỗi khoảng trắng
+        </mat-error>
+      </div>
+    </form>
+        <br>
+        <h3>Danh sách xe</h3>
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-bordered">
+              <thead>
+              <tr class="title-customer bg-info">
+                <th class="text-center">ID XE <span class="text-danger">(*)</span></th>
+                <th class="text-center">LOẠI XE <span class="text-danger">(*)</span></th>
+                <th class="text-center">LOẠI VÉ <span class="text-danger">(*)</span></th>
+                <th class="text-center">THỜI HẠN VÉ <span class="text-danger">(*)</span></th>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="text-center" contenteditable='true'>A12</td>
+                <td class="text-center" contenteditable='true'>Mecedes</td>
+                <td class="text-center" contenteditable='true'>Tháng VIP</td>
+                <td class="text-center" contenteditable='true'>1/1/2021-2/2/2021</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="clearfix d-flex justify-content-end">
+              <ul class="pagination">
+                <li class="page-item"><a href="#" class="page-link">Trang trước</a></li>
+                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                <li class="page-item active"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">Trang sau</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <div class="modal-footer">
+    <button mat-dialog-close class="btn btn-secondary mr-3">Hủy</button>
+    <button [disabled]="formEditCustomer.invalid" class="btn btn-warning" (click)="editCustomer()">Sửa</button>
+<!--    <button class="btn btn-warning" (click)="editCustomer()">Sửa</button>-->
+  </div>
+</div>
+

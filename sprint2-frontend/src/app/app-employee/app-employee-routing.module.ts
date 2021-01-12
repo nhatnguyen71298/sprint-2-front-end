@@ -3,11 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from '../authentication/login/login.component';
 import {SignUpComponent} from '../authentication/sign-up/sign-up.component';
 import {PageNotFoundComponent} from '../authentication/page-not-found/page-not-found.component';
-import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
-import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
-import { CustomerEditComponent } from './customer-management/customer-edit/customer-edit.component';
-import { CustomerViewComponent } from './customer-management/customer-view/customer-view.component';
-import { CustomerDeleteComponent } from './customer-management/customer-delete/customer-delete.component';
 import { EntryViewComponent } from './entry-management/entry-view/entry-view.component';
 import { ParkingMapComponent } from './entry-management/parking-map/parking-map.component';
 import { RegisteredCarListComponent } from './registered-car-management/registered-car-list/registered-car-list.component';
@@ -20,20 +15,32 @@ import { SalesAddComponent } from './sales-management/sales-add/sales-add.compon
 import { SalesEditComponent } from './sales-management/sales-edit/sales-edit.component';
 import { SalesViewComponent } from './sales-management/sales-view/sales-view.component';
 import { SalesDeleteComponent } from './sales-management/sales-delete/sales-delete.component';
+import {CommonModule} from '@angular/common';
+import {MatDialogModule} from '@angular/material';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/typings/input';
+import {MatDatepickerModule} from '@angular/material/typings/datepicker';
+import {MaterialModule} from '../material.module';
 
 
 export const routes: Routes = [
-  {
-    path: 'employee',
-    children: [
-      // {path: 'registered-car', component: RegisteredCarComponent},
-    ]
-  }
+  // {
+  //   path: 'employee',
+  //   children: [
+  //     // {path: 'registered-car', component: RegisteredCarComponent},
+  //   ]
+  // }
+  // hoang test
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), CommonModule, MatDialogModule, ReactiveFormsModule, MaterialModule],
   exports: [RouterModule],
-  declarations: [CustomerListComponent, CustomerAddComponent, CustomerEditComponent, CustomerViewComponent, CustomerDeleteComponent, EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent, RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent, RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent, SalesViewComponent, SalesDeleteComponent]
+  declarations: [
+    EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
+    RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
+    RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
+    SalesViewComponent, SalesDeleteComponent
+  ]
 })
 export class AppEmployeeRoutingModule { }

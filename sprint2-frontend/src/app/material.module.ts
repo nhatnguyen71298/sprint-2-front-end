@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     MatDialogModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMomentDateModule
   ],
   exports: [
     MatDatepickerModule,
@@ -34,9 +36,10 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     MatDialogModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMomentDateModule
   ],
-  providers: [ MatDatepickerModule ],
+  providers: [ MatDatepickerModule ]
 })
 
 export class MaterialModule {}
