@@ -23,6 +23,9 @@ export class CustomerService {
   getCustomerByAccount(accountId): Observable<any> {
     return this.http.get(this.api + 'find-by-account/' + accountId);
   }
+  getListEntryLogPlate(id, page , search): Observable<any> {
+    return this.http.get(this.api + 'list-entry-log/' + id + '/' + page + '/' + search);
+  }
 
   // -- End
 }
