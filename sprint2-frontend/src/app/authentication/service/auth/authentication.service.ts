@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {TokenDTO} from '../../model/TokenDTO';
 
-const API_URL = 'http://localhost:8080/';
+const API_URL = 'http://localhost:8080/account/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

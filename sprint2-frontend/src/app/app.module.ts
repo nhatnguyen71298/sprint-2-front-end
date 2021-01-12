@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {AuthenticationRoutingModule} from './authentication/authentication-routing.module';
 import {ToastrModule} from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent
