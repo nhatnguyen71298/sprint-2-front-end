@@ -1,1 +1,156 @@
-<p>employee-add works!</p>
+<div class="container-fluid ">
+
+  <form [formGroup]="formCreateNew" (ngSubmit)="createEmployee()">
+    <h3 class="row d-flex justify-content-center">Thêm thành viên</h3>
+    <hr>
+
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Họ và tên <sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <input type="text" min="1" class="form-control form-control-sm" formControlName="fullName">
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('fullName').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+            *ngIf="formCreateNew.get('fullName').hasError('required') && formCreateNew.get('fullName').touched">Họ và tên không được để trống.</span>
+        <span
+              *ngIf="formCreateNew.get('fullName').hasError('specialCharacter') && formCreateNew.get('fullName').touched">Họ và tên không có kí tự đặt biệt.</span>
+        <span
+              *ngIf="formCreateNew.get('fullName').hasError('minlength') && formCreateNew.get('fullName').touched">Họ và tên phải nhiều hơn 5 ký tự.</span>
+        <span
+              *ngIf="formCreateNew.get('fullName').hasError('maxlength') && formCreateNew.get('fullName').touched">Họ và tên phải ít hơn 45 ký tự.</span>
+        <span
+              *ngIf="formCreateNew.get('fullName').hasError('whiteSpace') && formCreateNew.get('fullName').touched">Họ tên không được chứa khoảng trắng</span>
+      </div>
+    </div>
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Địa chỉ:<sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <textarea rows="1" type="text" min="1" class="form-control form-control-sm" formControlName="address" required></textarea>
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('address').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+            *ngIf="formCreateNew.get('address').hasError('required') && formCreateNew.get('address').touched">Địa chỉ không được để trống.</span>
+      <span
+            *ngIf="formCreateNew.get('address').hasError('maxlength') && formCreateNew.get('address').touched">Địa chỉ phải ít hơn 255 ký tự.</span>
+        <span
+              *ngIf="formCreateNew.get('address').hasError('whiteSpace') && formCreateNew.get('address').touched">Địa chỉ không được chứa khoảng trắng.</span>
+      </div>
+    </div>
+
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Số điện thoại:<sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <input type="text"  class="form-control form-control-sm" formControlName="phoneNumber" required>
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('phoneNumber').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formCreateNew.get('phoneNumber').hasError('required') && formCreateNew.get('phoneNumber').touched">Số điện thoại không được để trống.</span>
+        <span
+              *ngIf="formCreateNew.get('phoneNumber').hasError('format') && formCreateNew.get('phoneNumber').touched">Số điện thoại không đúng định dạng( vd: 09xxxxxxxx, 08xxxxxxxxx, 03xxxxxxxx).</span>
+        <span
+              *ngIf="formCreateNew.get('phoneNumber').hasError('phoneAlpha') && formCreateNew.get('phoneNumber').touched">Số điện thoại phải là số.</span>
+      </div>
+    </div>
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Giới tính:<sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+          <select class="form-control d-flex justify-content-start" formControlName="gender" required>
+            <option [value]=true>Nam</option>
+            <option [value]=false>Nữ</option>
+          </select>
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('gender').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+    </div>
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Cấp bậc:<sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <select class="form-control d-flex justify-content-start" formControlName="position" >
+          <option value="Nhân viên giữ xe">Nhân viên giữ xe</option>
+          <option value="Nhân viên bảo vệ">Nhân viên bảo vệ</option>
+          <option value="Nhân viên bảo trì">Nhân viên bảo trì</option>
+        </select>
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('position').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+        *ngIf="formCreateNew.get('position').hasError('required') && formCreateNew.get('position').touched">Cấp bậc không được để trống.</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Ngày sinh <sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+
+        <mat-form-field style="width: 50%">
+          <input matInput [matDatepicker]="birthday" placeholder="Chọn ngày sinh" class="inputForm"
+                 formControlName="birthday" [max]="maxDate" [min]="minDate">
+          <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+          <mat-datepicker #birthday></mat-datepicker>
+        </mat-form-field>
+        <label class="ml-2 text-success"
+               *ngIf="formCreateNew.get('birthday').valid">
+          <i style="font-size: 15px" class="fa fa-check"></i></label>
+      </div>
+      <div class="text-danger offset-md-3 px-3">
+      <span
+            *ngIf="formCreateNew.get('birthday').hasError('required') && formCreateNew.get('birthday').touched">Ngày sinh không được để trống.</span>
+        <span
+              *ngIf="formCreateNew.get('birthday').hasError('checkAge') && formCreateNew.get('birthday').touched">Để đăng kí tài khoản thì bạn phải hơn 18 tuổi.</span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Tài khoản email: <sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <input type="text" min="1" class="form-control form-control-sm" formControlName="email">
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('email').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+        <span  *ngIf="formCreateNew.get('email').hasError('email') && formCreateNew.get('email').touched">Tài khoản không đúng định dạng.</span>
+        <span *ngIf="formCreateNew.get('email').hasError('required') && formCreateNew.get('email').touched"
+        >Tài khoản không được để trống.</span>
+        <span
+          *ngIf="formCreateNew.get('email').hasError('minlength') && formCreateNew.get('email').touched">Tài khoản phải nhiều hơn 10 ký tự.</span>
+        <span
+          *ngIf="formCreateNew.get('email').hasError('maxlength') && formCreateNew.get('email').touched">Tài khoản phải có ít hơn 50 ký tự.</span>
+      </div>
+    </div>
+
+    <div class="form-group row ">
+      <label class="col-sm-3 col-form-label">Mật khẩu <sup class="text-danger">*</sup> </label>
+      <div class="col-sm-8">
+        <input type="password" class="form-control form-control-sm" formControlName="password" required>
+      </div>
+      <label class="ml-2 text-success"
+             *ngIf="formCreateNew.get('password').valid">
+        <i style="font-size: 15px" class="fa fa-check"></i></label>
+      <div class="text-danger offset-md-3 px-3">
+        <span  *ngIf="formCreateNew.get('password').hasError('required') && formCreateNew.get('password').touched">Mật khẩu không được để trống.</span>
+        <span  *ngIf="formCreateNew.get('password').hasError('pattern') && formCreateNew.get('password').touched">Mật khẩu phải từ 8-20 ký tự, phải có ít nhất 1 ký tự viết hoa, 1 ký tự số, 1 kí tự thường.</span>
+      </div>
+    </div>
+
+
+    <div class="row d-flex justify-content-center ml-4">
+      <div>
+        <button class="btn btn-secondary btn btn-sm" style="width: 80px" [mat-dialog-close]="">Hủy</button>
+        <button type="submit" class="btn btn-success btn btn-sm mx-4" style="width: 90px">Thêm mới</button>
+      </div>
+    </div>
+  </form>
+  <!--  </div>-->
+</div>

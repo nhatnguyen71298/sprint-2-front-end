@@ -25,6 +25,9 @@ import {MaterialModule} from "../material.module";
 import {MatSelectModule} from "@angular/material/select";
 import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
 import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { EmployeeMessageComponent } from './employee-management/employee-message/employee-message.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +47,8 @@ export const routes: Routes = [
       // Ngân
       {path: 'customer-list', component: CustomerListComponent},
       {path: 'customer-add', component: CustomerAddComponent}
+      {path: 'employee-list', component: EmployeeListComponent},
+      {path: 'employee-list/employee-add', component: EmployeeAddComponent},
     ]
   },
 ];
@@ -58,6 +63,7 @@ export const routes: Routes = [
     EmployeeEditComponent,
     EmployeeViewComponent,
     EmployeeDeleteComponent,
+    EmployeeMessageComponent,
     StatisticOverviewComponent,
     StatisticTicketComponent,
     StatisticSalesComponent,

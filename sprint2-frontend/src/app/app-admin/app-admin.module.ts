@@ -7,6 +7,8 @@ import {MaterialModule} from "../material.module";
 import {ToastrModule} from "ngx-toastr";
 import {HttpClientModule} from '@angular/common/http';
 import {StatisticNotifyComponent} from './statistic/statistic-notify/statistic-notify.component';
+import {MAT_DATE_LOCALE} from '@angular/material';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -23,8 +25,10 @@ import {StatisticNotifyComponent} from './statistic/statistic-notify/statistic-n
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
-  ]
-
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+  ],
 })
-export class AppAdminModule {
-}
+export class AppAdminModule { }

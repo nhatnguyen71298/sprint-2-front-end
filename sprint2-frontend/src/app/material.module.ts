@@ -1,18 +1,19 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// @ts-ignore
 import {MatDatepickerModule} from '@angular/material/datepicker';
+// @ts-ignore
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+// @ts-ignore
+import {MatNativeDateModule} from '@angular/material/core';
+// @ts-ignore
 import {MatInputModule} from '@angular/material/input';
+// @ts-ignore
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
-import {MatButtonModule} from '@angular/material/button';
-import {StatisticCarComponent} from './app-admin/statistic/statistic-car/statistic-car.component';
-import {MY_FORMATS} from './app-admin/statistic/statistic-customer/statistic-customer.component';
-import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
-import {StatisticNotifyComponent} from "./app-admin/statistic/statistic-notify/statistic-notify.component";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {StatisticNotifyComponent} from "./app-admin/statistic/statistic-notify/s
     Ng2SearchPipeModule,
     MatButtonModule,
     CommonModule,
+    MatMomentDateModule,
   ],
   exports: [
     MatDatepickerModule,
@@ -36,6 +38,7 @@ import {StatisticNotifyComponent} from "./app-admin/statistic/statistic-notify/s
     Ng2SearchPipeModule,
     MatButtonModule,
     BrowserAnimationsModule,
+    MatMomentDateModule
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
