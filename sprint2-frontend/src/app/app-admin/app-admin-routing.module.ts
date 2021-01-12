@@ -25,7 +25,9 @@ import {MaterialModule} from "../material.module";
 import {MatSelectModule} from "@angular/material/select";
 import { CustomerAddComponent } from './customer-management/customer-add/customer-add.component';
 import { CustomerListComponent } from './customer-management/customer-list/customer-list.component';
-
+import {LoginComponent} from '../authentication/component/login/login.component';
+import {SignUpComponent} from '../authentication/component/sign-up/sign-up.component';
+import {PageNotFoundComponent} from '../authentication/component/page-not-found/page-not-found.component';
 export const routes: Routes = [
   {
     path: 'admin',
