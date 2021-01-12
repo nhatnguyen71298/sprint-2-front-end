@@ -12,7 +12,7 @@ import {MY_FORMATS} from './app-admin/statistic/statistic-customer/statistic-cus
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-
+import {StatisticNotifyComponent} from "./app-admin/statistic/statistic-notify/statistic-notify.component";
 
 @NgModule({
   imports: [
@@ -42,7 +42,7 @@ import {CommonModule} from '@angular/common';
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ],
-  entryComponents: [StatisticCarComponent]
+  entryComponents: [StatisticCarComponent, StatisticNotifyComponent]
 })
 
 export class MaterialModule {
