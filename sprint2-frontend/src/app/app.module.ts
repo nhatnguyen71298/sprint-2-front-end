@@ -13,6 +13,8 @@ import {AppAdminModule} from './app-admin/app-admin.module';
 import {MaterialModule} from './material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {AuthenticationRoutingModule} from './authentication/authentication-routing.module';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,11 @@ import {CommonModule} from '@angular/common';
     AppEmployeeModule,
     AppAdminModule,
     MaterialModule,
+    AuthenticationRoutingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    } )
   ],
   providers: [],
   bootstrap: [AppComponent]

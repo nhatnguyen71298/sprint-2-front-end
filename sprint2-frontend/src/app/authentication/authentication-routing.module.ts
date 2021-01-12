@@ -1,25 +1,36 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './component/login/login.component';
+import {SignUpComponent} from './component/sign-up/sign-up.component';
+import {PageNotFoundComponent} from './component/page-not-found/page-not-found.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {HomePageComponent} from './component/home-page/home-page.component';
+import {MessageComponent} from './component/message/message.component';
+import {AppRoutingModule} from '../app-routing.module';
+import {ResetPasswordComponent} from './component/reset-password/reset-password.component';
+import {MaterialModule} from '../material.module';
+import { InfoComponent } from './component/info/info.component';
+
 
 
 export const routes: Routes = [
   {
-    path: 'authentication',
+    path: 'home-page' ,
     children: [
-      {path: 'login', component: LoginComponent},
+      {path: '', component: InfoComponent},
       {path: 'sign-up', component: SignUpComponent},
-      {path: 'page-not-found', component: PageNotFoundComponent},
-
+      {path: 'info', component: InfoComponent},
+      {path: 'login', component: LoginComponent}
     ]
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  declarations: [LoginComponent, SignUpComponent, PageNotFoundComponent]
+  imports: [RouterModule.forChild(routes), ReactiveFormsModule, CommonModule, AppRoutingModule, MaterialModule],
+  exports: [RouterModule, LoginComponent, SignUpComponent],
+  // tslint:disable-next-line:max-line-length
+  declarations: [LoginComponent, ResetPasswordComponent, SignUpComponent, PageNotFoundComponent, HomePageComponent, MessageComponent, InfoComponent]
 })
-export class AuthenticationRoutingModule { }
+export class AuthenticationRoutingModule {
+}
