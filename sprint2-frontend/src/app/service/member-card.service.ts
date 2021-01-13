@@ -63,13 +63,17 @@ export class MemberCardService {
   }
 
   validateWhiteSpace(control: AbstractControl) {
-    if (control.value !== '') {
-      const isWhiteSpace = control.value.trim().length === 0;
-      if (isWhiteSpace) {
-        const isValid = !isWhiteSpace;
-        return isValid ? null : {whiteSpace: true};
-      }
+    // if (control.value !== ' ') {
+    //   const isWhiteSpace = control.value.trim().length === 0;
+    //   if (isWhiteSpace) {
+    //     const isValid = !isWhiteSpace;
+    //     return isValid ? null : {whiteSpace: true};
+    //   }
+    // }
+    if ((control.value as string).indexOf('  ') >= 0){
+      return {whiteSpace: true};
     }
+    return null;
   }
 
   validateSpecialCharacter(control: AbstractControl) {

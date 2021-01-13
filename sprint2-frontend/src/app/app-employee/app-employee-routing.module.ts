@@ -29,7 +29,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MessageNoticeMemberCardComponent } from './message-notice-member-card/message-notice-member-card.component';
 
 
 export const routes: Routes = [
@@ -52,6 +51,6 @@ export const routes: Routes = [
     EntryViewComponent, ParkingMapComponent, RegisteredCarListComponent,
     RegisteredCarAddComponent, RegisteredCarEditComponent, RegisteredCarViewComponent,
     RegisteredCarDeleteComponent, SalesListComponent, SalesAddComponent, SalesEditComponent,
-    SalesViewComponent, SalesDeleteComponent, MemberCardListComponent, MemberCardCreateComponent, MessageNoticeMemberCardComponent]
+    SalesViewComponent, SalesDeleteComponent, MemberCardListComponent, MemberCardCreateComponent]
 })
 export class AppEmployeeRoutingModule { }

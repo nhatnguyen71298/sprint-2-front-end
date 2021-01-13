@@ -13,6 +13,8 @@ import {AppAdminModule} from './app-admin/app-admin.module';
 import {MaterialModule} from './material.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,10 @@ import {CommonModule} from '@angular/common';
         AppAdminModule,
         MaterialModule
     ],
-    providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+  ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

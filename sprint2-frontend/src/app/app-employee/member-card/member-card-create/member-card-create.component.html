@@ -5,9 +5,9 @@
 
 
       <div class="form-group px-3 d-flex justify-content-end">
-        <label class="col-3 ml-3">Biển số xe<span class="text-danger"> *</span></label>
+        <label for="id" class="col-3 ml-3">Biển số xe<span class="text-danger"> *</span></label>
         <div class="col-9">
-          <input class="form-control" type="text" formControlName="plateNumber">
+          <input class="form-control" type="text" id="id" formControlName="plateNumber">
           <p class="text-danger" *ngIf="memberCardForm.get('plateNumber').hasError('pattern')
           && (memberCardForm.controls.plateNumber?.dirty || memberCardForm.controls.plateNumber?.touched)">
             Sai định dạng. Biển số xe có định dạng vd: RK755AJ.
@@ -29,9 +29,9 @@
 
 
       <div class="form-group px-3 d-flex justify-content-end">
-          <label class="col-3 ml-3">Họ và tên<span class="text-danger"> *</span></label>
+          <label for="id1" class="col-3 ml-3">Họ và tên<span class="text-danger"> *</span></label>
           <div class="col-9">
-            <input class="form-control" type="text" formControlName="fullName">
+            <input class="form-control" type="text" id="id1" formControlName="fullName">
           <p class="text-danger"
              *ngIf="memberCardForm.get('fullName').hasError('required')
                                       && (memberCardForm.controls.fullName?.dirty
@@ -63,14 +63,21 @@
       </div>
 
       <div class="form-group px-3 d-flex justify-content-end">
-        <label class="col-3 ml-3">Ngày bất đầu<span class="text-danger"> *</span></label>
+        <label class="col-3 ml-3 mt-4">Ngày bất đầu<span class="text-danger"> *</span></label>
         <div class="col-9">
-          <mat-form-field appearance="fill" (change)="setEndDate()">
+          <mat-form-field (change)="setEndDate()">
             <input class="form-control" matInput [matDatepicker]="startPicker" (change)="setEndDate()"
-                   [(ngModel)]="startDateInput" formControlName="startDate">
+                   [(ngModel)]="startDateInput" formControlName="startDate"
+                   [max]="maxDate" [min]="minDate">
             <mat-datepicker-toggle matSuffix [for]="startPicker" (change)="setEndDate()"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker (change)="setEndDate()"></mat-datepicker>
+            <mat-datepicker #startPicker disabled="false" (change)="setEndDate()"></mat-datepicker>
           </mat-form-field>
+          <p class="text-danger"
+             *ngIf="memberCardForm.get('startDate').hasError('required')
+                                      && (memberCardForm.controls.startDate?.dirty
+                                      || memberCardForm.controls.startDate?.touched)">
+            Vui lòng chọn ngày bất đầu.
+          </p>
         </div>
       </div>
 
@@ -134,3 +141,6 @@
     </form>
   </div>
 </main>
+<script>
+  $("#my_txtbox").keypress(function(event) {event.preventDefault();});
+</script>
