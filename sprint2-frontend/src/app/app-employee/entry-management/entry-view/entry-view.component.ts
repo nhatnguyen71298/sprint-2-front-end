@@ -154,7 +154,7 @@ export class EntryViewComponent implements OnInit {
           // car registered
           this.ticketService.findMemberCardsByCar(car).subscribe(next2 => {
             let memberCard = next2[next2.length - 1];
-            this.ticketService.findSlotByCarId(memberCard.car.id).subscribe(next3 => {
+            this.ticketService.findSlotByCarId(memberCard.car).subscribe(next3 => {
               const parkingSlot = next3;
               const memberCardList = parkingSlot.car.memberCardList;
               memberCard = memberCardList[memberCardList.length - 1];
