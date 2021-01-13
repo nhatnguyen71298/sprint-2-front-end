@@ -91,7 +91,9 @@ export class StatisticCustomerComponent implements OnInit {
         type: 'column',
         backgroundColor: 'none',
       },
-
+      exporting: {
+        filename: 'Số lượng khách hàng',
+      },
       lang: {
         downloadCSV: 'Tải file CSV',
         downloadJPEG: 'Tải hình ảnh JPEG',
