@@ -14,7 +14,7 @@
           <div class="col-12">
             <mat-form-field class="example-full-width">
               <mat-label>Ngày giờ vào</mat-label>
-              <input matInput type="datetime-local" formControlName="enterDate">
+              <input matInput type="datetime-local" formControlName="enterDate" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <mat-form-field class="example-full-width">
               <mat-label>Ngày giờ ra</mat-label>
-              <input matInput type="datetime-local" formControlName="exitDate">
+              <input matInput type="datetime-local" formControlName="exitDate" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -41,7 +41,9 @@
         <mat-form-field class="example-full-width">
           <mat-label>Biển số xe</mat-label>
           <input matInput formControlName="plateNumber">
-          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('required')">Vui lòng nhập biển số</mat-error>
+          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('required') ||
+          ticketForm.get('plateNumber').hasError('whitespace')">Vui lòng nhập biển số
+          </mat-error>
           <mat-error *ngIf="ticketForm.get('plateNumber').hasError('maxlength')">Biển số xe không quá 10 kí tự
           </mat-error>
         </mat-form-field>
@@ -62,7 +64,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Họ tên</mat-label>
-              <input matInput formControlName="fullName">
+              <input matInput formControlName="fullName" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -70,7 +72,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Tầng</mat-label>
-              <input matInput formControlName="floor" readonly>
+              <input matInput formControlName="floor" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -80,7 +82,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input matInput formControlName="email">
+              <input matInput formControlName="email" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -88,7 +90,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Vị trí đỗ</mat-label>
-              <input matInput formControlName="slot" readonly>
+              <input matInput formControlName="slot" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -111,7 +113,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Ngày bắt đầu</mat-label>
-              <input matInput type="datetime-local" formControlName="startDate">
+              <input matInput type="datetime-local" formControlName="startDate" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -121,7 +123,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Tổng tiền</mat-label>
-              <input matInput formControlName="price" readonly>
+              <input matInput formControlName="price" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>
@@ -129,7 +131,7 @@
           <div class="col">
             <mat-form-field class="example-full-width">
               <mat-label>Ngày kết thúc</mat-label>
-              <input matInput type="datetime-local" formControlName="endDate">
+              <input matInput type="datetime-local" formControlName="endDate" readonly tabindex="-1">
             </mat-form-field>
           </div>
         </div>

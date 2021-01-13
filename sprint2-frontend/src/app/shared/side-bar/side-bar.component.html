@@ -2,7 +2,16 @@
 	<div class="card">
 		<div class="card-header">
 			<h2 class="mb-0">
-				<a href="#">
+				<a [routerLink]="['home-page/info']">
+					<span><i class="fa fa-home"></i> Trang chủ</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+  <div class="card">
+		<div class="card-header">
+			<h2 class="mb-0">
+        <a [routerLink]="['/admin/employee-list']">
 					<span><i class="fa fa-address-book-o"></i> Quản lý nhân viên</span>
 				</a>
 			</h2>

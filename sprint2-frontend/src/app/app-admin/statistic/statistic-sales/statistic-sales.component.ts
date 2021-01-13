@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {StatisticsService} from "../../../service/statistics.service";
 import *as Highcharts from "highcharts";
+import {MatDialog} from "@angular/material/dialog";
+import {StatisticNotifyComponent} from "../statistic-notify/statistic-notify.component";
 
 declare var require: any;
 require('highcharts/modules/exporting')(Highcharts);
@@ -19,7 +21,6 @@ export class StatisticSalesComponent implements OnInit {
   totalRevenueTicketPeriod: any[];
   day;
   days;
-  message;
   typeReport;
   typeReports = [
     {value: 'reMemberCard', valueView: 'Doanh thu vé thành viên'},
@@ -27,7 +28,9 @@ export class StatisticSalesComponent implements OnInit {
   ];
 
   constructor(public formBuilder: FormBuilder,
-              public statisticsService: StatisticsService) {
+              public statisticsService: StatisticsService,
+              public dialog: MatDialog,
+              public el: ElementRef) {
     this.formStatisticRevenuePeriod = this.formBuilder.group({
       fromDayPayment: ['', Validators.required],
       toDayPayment: ['', Validators.required],
@@ -52,29 +55,45 @@ export class StatisticSalesComponent implements OnInit {
       fromDayPayment: moment(this.day.fromDayPayment).format('YYYY-MM-DD'),
       toDayPayment: moment(this.day.toDayPayment).format('YYYY-MM-DD')
     };
-    // statistic total revenue member card in period time
-    if (this.typeReport === 'reMemberCard') {
-      this.statisticsService.getTotalRevenueMemberCardPeriod(this.days).subscribe(dataTotalRevenueMemberCardPeriod => {
-        this.totalRevenueMemberCardPeriod = dataTotalRevenueMemberCardPeriod;
-        console.log(dataTotalRevenueMemberCardPeriod);
-        if (dataTotalRevenueMemberCardPeriod != null) {
-          this.createChartRevenueMemberCard();
-        } else {
-          return this.message = 'Dữ liệu không tồn tại!'
+    if (this.formStatisticRevenuePeriod.valid) {
+      // statistic total revenue member card in period time
+      if (this.typeReport === 'reMemberCard') {
+        this.statisticsService.getTotalRevenueMemberCardPeriod(this.days).subscribe(dataTotalRevenueMemberCardPeriod => {
+          this.totalRevenueMemberCardPeriod = dataTotalRevenueMemberCardPeriod;
+          console.log(dataTotalRevenueMemberCardPeriod);
+          if (dataTotalRevenueMemberCardPeriod != null) {
+            this.createChartRevenueMemberCard();
+          } else {
+            this.dialog.open(StatisticNotifyComponent, {
+              width: '500px',
+              disableClose: true,
+            });
+          }
+        });
+      }
+      // statistic total revenue ticket in period time
+      else {
+        this.statisticsService.getTotalRevenueTicketPeriod(this.days).subscribe(dataTotalRevenueTicketPeriod => {
+          this.totalRevenueTicketPeriod = dataTotalRevenueTicketPeriod;
+          console.log(dataTotalRevenueTicketPeriod);
+          if (dataTotalRevenueTicketPeriod != null) {
+            this.createChartRevenueTicket();
+          } else {
+            this.dialog.open(StatisticNotifyComponent, {
+              width: '500px',
+              disableClose: true,
+            });
+          }
+        });
+      }
+    } else {
+      for (const KEY of Object.keys(this.formStatisticRevenuePeriod.controls)) {
+        if (this.formStatisticRevenuePeriod.controls[KEY].invalid) {
+          const INVALID_CONTROL = this.el.nativeElement.querySelector('[formControlName="' + KEY + '"]');
+          INVALID_CONTROL.focus();
+          break;
         }
-      });
-    }
-    // statistic total revenue ticket in period time
-    else {
-      this.statisticsService.getTotalRevenueTicketPeriod(this.days).subscribe(dataTotalRevenueTicketPeriod => {
-        this.totalRevenueTicketPeriod = dataTotalRevenueTicketPeriod;
-        console.log(dataTotalRevenueTicketPeriod);
-        if (dataTotalRevenueTicketPeriod != null) {
-          this.createChartRevenueTicket();
-        } else {
-          return this.message = 'Dữ liệu không tồn tại!'
-        }
-      });
+      }
     }
   }
 
@@ -91,6 +110,18 @@ export class StatisticSalesComponent implements OnInit {
         }
       },
 
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
+
       yAxis: {
         title: {
           text: 'Doanh thu (Đơn vị: VND)'
@@ -104,6 +135,13 @@ export class StatisticSalesComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalRevenueMemberCardPeriod.map(x => x.date_payment),
         lineColor: 'black',
         labels: {
@@ -112,6 +150,10 @@ export class StatisticSalesComponent implements OnInit {
             color: 'black'
           }
         }
+      },
+
+      chart: {
+        backgroundColor: 'none',
       },
 
       legend: {
@@ -156,7 +198,17 @@ export class StatisticSalesComponent implements OnInit {
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
       },
-
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
       yAxis: {
         title: {
           text: 'Doanh thu (Đơn vị: VND)'
@@ -170,6 +222,13 @@ export class StatisticSalesComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Thời gian',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalRevenueTicketPeriod.map(x => x.exit_date),
         lineColor: 'black',
         labels: {
@@ -178,6 +237,10 @@ export class StatisticSalesComponent implements OnInit {
             color: 'black'
           }
         }
+      },
+
+      chart: {
+        backgroundColor: 'none',
       },
 
       legend: {

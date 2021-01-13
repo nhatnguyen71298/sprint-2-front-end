@@ -75,6 +75,15 @@ export class StatisticOverviewComponent implements OnInit {
               'rgb(0,255,0)',
               'rgb(255,255,0)',
               'rgb(128,128,128)',
+              'rgb(250,44,136)',
+              'rgb(178,73,9)',
+              'rgb(78,216,202)',
+              'rgb(229,157,220)',
+              'rgb(217,79,141)',
+              'rgb(39,207,190)',
+              'rgb(151,156,58)',
+              'rgb(240,108,4)',
+              'rgb(73,157,205)',
             ],
             responsive: true
           }

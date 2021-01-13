@@ -1,5 +1,5 @@
 <div class="statistics-overview">
-  <div class="statistics p-2 mx-auto bg-light">
+  <div class="statistics p-2 mx-auto">
     <button class="pcx" routerLink="/admin/statistic-overview">Tổng hợp</button>
     <button class="pcx" routerLink="/admin/statistic-ticket">Thống kê vé</button>
     <button class="pcx" routerLink="/admin/statistic-revenue">Thống kê doanh thu</button>
@@ -30,15 +30,15 @@
             <h5>Thống Kê Hệ Thống</h5>
             <p class="mb-3">Dữ liệu Thống kê tổng hợp của hệ thống</p>
             <hr class="border border-warning">
-            <h6 class="mt-2">Số lượng Khách Hàng: {{totalCustomer}} khách</h6>
+            <h6 class="mt-2"><i class="fa fa-users"></i> Số lượng Khách Hàng: {{totalCustomer}} khách</h6>
             <hr>
-            <h6>Số lượng Nhân Viên: {{totalEmployee}} nhân viên</h6>
+            <h6><i class="fa fa-user"></i> Số lượng Nhân Viên: {{totalEmployee}} nhân viên</h6>
             <hr>
-            <h6>Số lượng Xe: {{totalCarParking}} xe</h6>
+            <h6><i class="fa fa-car"></i> Số lượng Xe: {{totalCarParking}} xe</h6>
             <hr>
-            <h6>Số lượng Vị Trí Đỗ: {{totalParkingSlot}} vị trí</h6>
+            <h6><i class="fa fa-map"></i> Số lượng Vị Trí Đỗ: {{totalParkingSlot}} vị trí</h6>
             <hr>
-            <h6>Số lượng Vé Hiện Tại</h6>
+            <h6><i class="fa fa-ticket"></i> Số lượng Vé Hiện Tại</h6>
             <table class="statistics table table-hover ml-3">
               <thead>
               <tr *ngFor="let totalMemberCardType of totalMemberCardTypes">

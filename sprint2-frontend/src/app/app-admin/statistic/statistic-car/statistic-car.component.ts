@@ -40,6 +40,18 @@ export class StatisticCarComponent implements OnInit {
         },
       },
 
+      lang: {
+        downloadCSV: 'Tải file CSV',
+        downloadJPEG: 'Tải hình ảnh JPEG',
+        downloadPDF: 'Tải file PDF',
+        downloadPNG: 'Tải hình ảnh PNG',
+        downloadSVG: 'Tải file SVG',
+        downloadXLS: 'Tải file XLS',
+        viewFullscreen: 'Hiện thị toàn màn hình',
+        printChart: 'In',
+        viewData: 'Hiện thị dữ liệu của bảng',
+      },
+      
       title: {
         text: 'Biểu đồ số lượng xe khách hàng',
         style: {
@@ -49,6 +61,13 @@ export class StatisticCarComponent implements OnInit {
       },
 
       xAxis: {
+        title: {
+          text: 'Tên khách hàng',
+          style: {
+            fontSize: '15px',
+            color: 'black',
+          }
+        },
         categories: this.totalCarOfCustomers.map(x => x.full_name),
         lineColor: 'black',
         labels: {
