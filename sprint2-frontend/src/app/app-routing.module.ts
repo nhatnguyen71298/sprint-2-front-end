@@ -1,10 +1,13 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
+// @ts-ignore
 import {RouterModule, Routes} from '@angular/router';
-import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { SideBarComponent } from './shared/side-bar/side-bar.component';
-import {ToastrModule} from 'ngx-toastr';
+import {NavBarComponent} from './shared/nav-bar/nav-bar.component';
+import {FooterComponent} from './shared/footer/footer.component';
+import {SideBarComponent} from './shared/side-bar/side-bar.component';
+import {AuthenticationRoutingModule} from './authentication/authentication-routing.module';
 
 
 export const routes: Routes = [
@@ -13,7 +16,7 @@ export const routes: Routes = [
   // {path: 'authen', component: LoginComponent},
   // {path: 'sign-up', component: SignUpComponent},
 
-  // {path: 'app-employee-list', component: EmployeeListComponent},
+  {path: 'side-bar/:id', component: SideBarComponent},
   // {path: '**', component: PageNotFoundComponent},
   // {
   //   path: '**',
@@ -26,11 +29,7 @@ export const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-center',
-      preventDuplicates: true,
-    } )
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule, NavBarComponent, FooterComponent, SideBarComponent]
 })

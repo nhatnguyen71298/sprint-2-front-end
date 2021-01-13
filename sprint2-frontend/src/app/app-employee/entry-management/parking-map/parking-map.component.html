@@ -1,1 +1,190 @@
-<p>parking-map works!</p>
+<!--parking lot-->
+<div class="container-fluid bg-white">
+  <div class="row">
+    <div class="col-12 border border-dark p-2">
+      <div class="row mb-5">
+        <div class="col-6 d-flex justify-content-start">
+          <span class="d-flex justify-content-center" id="entrance">Cửa vào</span>
+        </div>
+      </div>
+      <!--      parking slots-->
+      <div class="row">
+        <div class="col-md-1 col-sm-1"></div>
+        <!--        first column-->
+        <div class="col-md-2 col-sm-3">
+          <div class="col-parking d-flex">
+            <div class="col-odd">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-odd d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber < 6"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="odd-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-even">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-even d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 6 && slot.slotNumber < 11"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="even-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <!--        first column end-->
+        <!--        second column-->
+        <div class="col-md-2 col-sm-3">
+          <div class="col-parking d-flex">
+            <div class="col-odd">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-odd d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 11 && slot.slotNumber < 16"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="odd-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-even">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-even d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 16 && slot.slotNumber < 21"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="even-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <!--        second column end-->
+        <div class="col-md-2 col-sm-4">
+          <div class="col-parking d-flex">
+            <div class="col-odd">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-odd d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 21 && slot.slotNumber < 26"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="odd-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-even">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-even d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 26 && slot.slotNumber < 31"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="even-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-3">
+          <div class="col-parking d-flex">
+            <div class="col-odd">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-odd d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 31 && slot.slotNumber < 36"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="odd-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-even">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-even d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 36 && slot.slotNumber < 41"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="even-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-3">
+          <div class="col-parking d-flex">
+            <div class="col-odd">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-odd d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 41 && slot.slotNumber < 46"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="odd-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-even">
+              <ng-container *ngFor="let slot of parkingSlotList">
+                <div class="slot-even d-flex justify-content-center align-items-center"
+                     *ngIf="slot.slotNumber >= 46 && slot.slotNumber < 51"
+                     [class.not-available-not-register]="slot.status && !slot.reserved"
+                     [class.available-register]="slot.status && slot.reserved"
+                     [class.not-available-register]="!slot.status && slot.reserved"
+                     (click)="getSlotInfo(slot.id)">
+                  <span class="even-member">{{slot.slotNumber}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 col-sm-1"></div>
+      </div>
+      <!--      parking slots end-->
+      <div class="row mt-5">
+        <div class="col-6">Số chỗ trống: {{availableSlots}}</div>
+        <div class="col-6 d-flex justify-content-end">
+          <span class="d-flex justify-content-center" id="exit">Cửa ra</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--    pagination-->
+  <div class="row border border-dark border-top-0 p-1">
+    <div class="col-4">
+      <a class="btn btn-primary" routerLink="/employee/entry-view">Quay lại</a>
+    </div>
+    <div class="col-8">
+      <ul class="pagination">
+        <li class="page-item">Bản đồ tầng:</li>
+        <li class="page-item"><a class="page-link" (click)="findAllSlotByFloor(1)"><<</a></li>
+        <li class="page-item" [class.disabled]="currentFloor == 1">
+          <a class="page-link" (click)="findAllSlotByFloor(currentFloor - 1)"><</a></li>
+        <li class="page-item" *ngFor="let floor of floorList" [class.active]="currentFloor == floor">
+          <a class="page-link" (click)="findAllSlotByFloor(floor)">{{floor}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentFloor == floorList.length">
+          <a class="page-link" (click)="findAllSlotByFloor(currentFloor + 1)">></a></li>
+        <li class="page-item"><a class="page-link" (click)="findAllSlotByFloor(floorList.length)">>></a></li>
+      </ul>
+    </div>
+  </div>
+  <!--    pagination end-->
+</div>
+

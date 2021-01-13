@@ -1,1 +1,148 @@
-<p>entry-view works!</p>
+<!--quản lí xe ra vào-->
+<div class="container-fluid bg-white p-4">
+  <form (ngSubmit)="onSubmit()" [formGroup]="ticketForm">
+    <!--    car image and time-->
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="row d-flex justify-content-center">
+          <h1>Xe vào</h1>
+        </div>
+        <div class="row">
+          <app-camera-management></app-camera-management>
+        </div>
+        <div class="row form-group mt-2">
+          <div class="col-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ngày giờ vào</mat-label>
+              <input matInput type="datetime-local" formControlName="enterDate" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="row d-flex justify-content-center">
+          <h1>Xe ra</h1>
+        </div>
+        <div class="row">
+          <app-camera-management></app-camera-management>
+        </div>
+        <div class="row form-group mt-2">
+          <div class="col-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ngày giờ ra</mat-label>
+              <input matInput type="datetime-local" formControlName="exitDate" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 mb-2">
+        <mat-form-field class="example-full-width">
+          <mat-label>Biển số xe</mat-label>
+          <input matInput formControlName="plateNumber">
+          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('required') ||
+          ticketForm.get('plateNumber').hasError('whitespace')">Vui lòng nhập biển số
+          </mat-error>
+          <mat-error *ngIf="ticketForm.get('plateNumber').hasError('maxlength')">Biển số xe không quá 10 kí tự
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-primary" (click)="findCar()">Tìm xe</button>
+        <button class="btn btn-primary ml-1" routerLink="/employee/parking-map">Bản đồ</button>
+      </div>
+      <!--<div class="col-3">
+        <mat-error>{{message}}</mat-error>
+      </div>-->
+    </div>
+    <!--    car image and time end-->
+    <!--form-->
+    <div class="row">
+      <div class="col-3">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Họ tên</mat-label>
+              <input matInput formControlName="fullName" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Tầng</mat-label>
+              <input matInput formControlName="floor" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Vị trí đỗ</mat-label>
+              <input matInput formControlName="slot" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Loại xe</mat-label>
+              <mat-select formControlName="carType" [compareWith]="compareType">
+                <mat-option *ngFor="let type of carTypes" [value]="type.carTypeName">
+                  {{type.carTypeName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="ticketForm.get('carType').hasError('required')">Vui lòng chọn loại xe</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ngày bắt đầu</mat-label>
+              <input matInput type="datetime-local" formControlName="startDate" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Tổng tiền</mat-label>
+              <input matInput formControlName="price" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ngày kết thúc</mat-label>
+              <input matInput type="datetime-local" formControlName="endDate" readonly tabindex="-1">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2 d-flex justify-content-end">
+      <div class="col-3 d-flex justify-content-end">
+        <button class="btn btn-primary mr-1">Vào bãi</button>
+        <button type="button" class="btn btn-primary" (click)="checkout()">Rời bãi</button>
+      </div>
+    </div>
+  </form>
+  <!--    form end-->
+</div>

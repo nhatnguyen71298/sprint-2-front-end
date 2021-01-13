@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, timer} from 'rxjs';
 import {MemberCardAddDTO} from '../model/MemberCardAddDTO';
 import {AbstractControl, AsyncValidatorFn} from '@angular/forms';
 import {map, switchMap} from 'rxjs/operators';
 
-const URL = 'http://localhost:8080/lanh/member-card';
+const URL = 'http://localhost:8080/member-card';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberCardService {
-  private readonly API = 'http://localhost:8080/lanh/member-card';
+  private readonly API = 'http://localhost:8080/member-card';
 
   private options = {
     headers: new HttpHeaders({
@@ -21,8 +21,10 @@ export class MemberCardService {
   };
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
+  // Lanh start
   getMemberCardList(): Observable<any[]> {
     return this.http.get<any[]>(`${this.API}/list`, this.options);
   }
@@ -32,11 +34,11 @@ export class MemberCardService {
   }
 
   getMemberCardType(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API}/memberCardType`);
+    return this.http.get<any[]>(`${this.API}/member-card-type`);
   }
 
   getParkingSlot(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API}/parkingSlot`);
+    return this.http.get<any[]>(`${this.API}/parking-slot`);
   }
 
 
@@ -52,8 +54,8 @@ export class MemberCardService {
         );
     };
   }
+
   search(text) {
-    console.log(text);
     return timer(100)
       .pipe(
         switchMap(() => {
@@ -88,4 +90,25 @@ export class MemberCardService {
   searchPlateNumber(idSearch: any): Observable<any> {
     return this.http.get(this.API + '/search-plate-number/' + idSearch);
   }
+
+  // Lanh end
+
+  // Hoat start
+  findMemberCardByIdService(idMemberCard): Observable<any> {
+    return this.http.get(this.API + '/' + 'find-by-id/' + idMemberCard);
+  }
+
+  deleteMemberCardService(idMemberCard): Observable<any> {
+    return this.http.delete(this.API + '/delete/' + idMemberCard);
+  }
+
+  editTicketService(editForm): Observable<any> {
+    return this.http.put(this.API + '/edit', editForm);
+  }
+
+  getParkingSlotEdit(slotType): Observable<any> {
+    return this.http.get(this.API + '/slot-type-edit/' + slotType);
+  }
+
+  // Hoat end
 }

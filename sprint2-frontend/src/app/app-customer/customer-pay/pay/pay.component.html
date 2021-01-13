@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pt-2 pb-3">
   <div class="row" *ngIf="memberCardList.length != 0">
     <div class="container-xl">
       <div class="table-responsive">
@@ -41,8 +41,8 @@
     </div>
   </div>
   <div class="row" [hidden]="memberCardList.length == 0">
-    <div class="col-sm-8"></div>
-    <div class="col-sm-4">
+    <div class="col-sm-7"></div>
+    <div class="col-sm-5">
       <div class="row">
         <h5 class="choose">Vui lòng chọn hình thức thanh toán : </h5>
       </div>
@@ -57,7 +57,7 @@
       <div class="row">
         <div [hidden]="totalMoneyMoMo > 0">
           <img (click)="payNothing()" class="paypalIcon"
-               src="../../../assets/paypal.PNG" alt="icon"/>
+               src="../../../../assets/paypal.PNG" alt="icon"/>
         </div>
         <div class="paypal" [hidden]="totalMoneyMoMo <= 0">
           <p #paypalRef></p>
@@ -70,6 +70,6 @@
       Quý khách vui lòng liên hệ nhân viên để khắc phục. Mong quý khách thông cảm! Xin cảm ơn!</h3>
     <h3 class="notification" *ngIf="message == 'nothing'">
       Quý khách hiện tại chưa đăng ký thẻ thành viên nào.</h3>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div>
 </div>
-

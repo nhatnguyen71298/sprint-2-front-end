@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {DatePipe} from '@angular/common';
 
-import { AppEmployeeRoutingModule } from './app-employee-routing.module';
-import { CameraManagementComponent } from './camera/camera-management/camera-management.component';
-import { MessageFromCameraComponent } from './camera/message-from-camera/message-from-camera.component';
+import {AppEmployeeRoutingModule} from './app-employee-routing.module';
 import {MaterialModule} from '../material.module';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @NgModule({
-  declarations: [CameraManagementComponent, MessageFromCameraComponent],
+  declarations: [],
+  exports: [
+  ],
   imports: [
-    CommonModule,
     AppEmployeeRoutingModule,
     MaterialModule
-  ]
+  ],
+  providers: [DatePipe, MatSnackBar]
 })
 export class AppEmployeeModule { }

@@ -1,19 +1,17 @@
 <div id="background">
   <div id="main">
-    <p class="text-danger" id="message" [innerHtml]='msg' *ngIf="msg"></p>
+    <p id="message" [innerHtml]='msg' *ngIf="msg"></p>
     <img id="image" accept=".jpg,.png,.gif" [src]="url" *ngIf="url" alt=""><br><br>
-    <div  id="divInput">
-      <label id="label" style="margin-left: 60px" for="formFileLg" class=" label form-label text-danger test">
+      <label id="label" style="margin-left: 60px" for="formFileLg" class=" label form-label test">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z"/>
         </svg>
         <i class="bi bi-circle-fill"></i>
         Camera đang hoạt động
-      </label>
+      </label> 
       <input #takeInput class="input" (change)="selectFile($event)" id="formFileLg" type="file">
-    </div>
   </div>
-</div>
+</div> 
 
 
 

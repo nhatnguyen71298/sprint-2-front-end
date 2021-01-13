@@ -1,76 +1,111 @@
 <div class="accordion mb-2" id="accordionParkingManagement">
-  <div class="card">
-    <div class="card-header">
+	<div class="card">
+		<div class="card-header">
+			<h2 class="mb-0">
+				<a [routerLink]="['home-page/info']">
+					<span><i class="fa fa-home"></i> Trang chủ</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+  <div class="card" *ngIf="role == 'ROLE_ADMIN'">
+		<div class="card-header">
+			<h2 class="mb-0">
+        <a [routerLink]="['/admin/employee-list']">
+					<span><i class="fa fa-address-book-o"></i> Quản lý nhân viên</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+	<div class="card" *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_EMPLOYEE'">
+		<div class="card-header">
+			<h2 class="mb-0">
+        <a [routerLink]="['/admin/customer-list']">
+					<span><i class="fa fa-users"></i> Quản lý khách hàng</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+	<div class="card" *ngIf="role == 'ROLE_EMPLOYEE'">
+		<div class="card-header" >
+			<h2 class="mb-0">
+				<a href="#">
+					<span><i class="fa fa-car"></i> Quản lý xe đã đăng ký</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+	<div class="card" *ngIf="role == 'ROLE_EMPLOYEE'">
+		<div class="card-header">
+			<h2 class="mb-0">
+				<a routerLink="/employee/entry-view">
+					<span><i class="fa fa-video-camera"></i> Quản lý xe vào/ra</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+	<div class="card" *ngIf="role == 'ROLE_EMPLOYEE'">
+		<div class="card-header">
+			<h2 class="mb-0">
+				<a href="#" [routerLink]="'/employee/member-card-list'">
+					<span><i class="fa fa-id-card-o"></i> Quản lý vé</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+	<div class="card" *ngIf="role == 'ROLE_ADMIN'">
+		<div class="card-header">
+			<h2 class="mb-0">
+				<a [routerLink]="['/admin/list-parking-slot']">
+					<span><i class="fa fa-building-o"></i> Quản lý bãi đỗ</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+<!--  -->
+<!--	<div class="card">-->
+<!--		<div class="card-header" >-->
+<!--			<h2 class="mb-0">-->
+<!--				<a href="#">-->
+<!--					<span><i class="fa fa-dollar"></i> Quản lý thu chi</span>-->
+<!--				</a>-->
+<!--			</h2>-->
+<!--		</div>-->
+<!--	</div>-->
+	<div class="card" *ngIf="role == 'ROLE_ADMIN'">
+		<div class="card-header" >
+			<h2 class="mb-0">
+				<a routerLink="/admin/statistic-overview">
+					<span><i class="fa fa-bar-chart"></i> Thống kê</span>
+				</a>
+			</h2>
+		</div>
+	</div>
+  <div class="card" *ngIf="role == 'ROLE_CUSTOMER'">
+    <div class="card-header" >
       <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-address-book-o"></i> Quản lý nhân viên</span>
+        <a routerLink="/customer/changePassword">
+          <span><i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu</span>
         </a>
       </h2>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">
+  <div class="card" *ngIf="role == 'ROLE_CUSTOMER'">
+    <div class="card-header" >
       <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-users"></i> Quản lý khách hàng</span>
+        <a [routerLink]="['/customer/pay']">
+          <span><i class="fa fa-list" aria-hidden="true"></i> Danh sách xe cá nhân</span>
         </a>
       </h2>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">
+  <div class="card" *ngIf="role == 'ROLE_CUSTOMER'">
+    <div class="card-header" >
       <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-car"></i> Quản lý xe đã đăng ký</span>
+        <a routerLink="/customer/historyPayment">
+          <span><i class="fa fa-cc-discover" aria-hidden="true"></i> Lịch sử thanh toán</span>
         </a>
       </h2>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-video-camera"></i> Quản lý xe vào/ra</span>
-        </a>
-      </h2>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="mb-0">
-        <a [routerLink]="['/employee/member-card-list']">
-          <span><i class="fa fa-id-card-o"></i> Quản lý vé</span>
-        </a>
-      </h2>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="mb-0">
-        <a [routerLink]="['/admin/list-parking-slot']">
-          <span><i class="fa fa-building-o"></i> Quản lý bãi đỗ</span>
-        </a>
-      </h2>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-dollar"></i> Quản lý thu chi</span>
-        </a>
-      </h2>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      <h2 class="mb-0">
-        <a href="#">
-          <span><i class="fa fa-bar-chart"></i> Thống kê</span>
-        </a>
-      </h2>
-    </div>
-  </div>
-
 </div>

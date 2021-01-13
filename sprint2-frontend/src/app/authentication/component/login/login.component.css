@@ -1,0 +1,20 @@
+.loginPage {
+  background-image: url("https://sika.scene7.com/is/image/sika/glo-car-parking-garage-floor-03?wid=1280&crop=0%2C114%2C3840%2C2443");
+  background-size: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+* {
+  box-sizing: border-box;
+}
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+
+}

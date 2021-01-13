@@ -1,0 +1,28 @@
+div.mr-0 {
+  background-image: url("https://userscontent2.emaze.com/images/3fb92ced-e07c-43f9-a1e3-eed08d15eeca/611856779bb15f9361a0fa2865abd54b.jpeg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+.statistics .pcx {
+  font-weight: bolder;
+  font-size: 15px;
+  color: white;
+  margin-right: 24px;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.ng-star-inserted {
+  margin-top: 5px !important;
+}
+
+div.statistics.p-2.mx-auto {
+  background-color: #47475c
+}
+
+button.btn.btn-secondary {
+  margin-left: 220px
+}

@@ -21,21 +21,21 @@
             <input class="form-control" type="text"
                    formControlName="floor"/>
 
-            <p class="text-danger" style=" margin-left: -29%;"
+            <p class="text-danger" style=" margin-left: -30%;"
                *ngIf="formCreateNew.get('floor').hasError('required')
                                       && (formCreateNew.controls.floor?.dirty
                                       || formCreateNew.controls.floor?.touched)">
               Vui lòng nhập số tầng.
             </p>
 
-            <p class="text-danger" style=" margin-left: -5%;"
+            <p class="text-danger" style=" margin-left: -49%;"
                *ngIf="formCreateNew.get('floor').hasError('pattern')
                                       && (formCreateNew.controls.floor?.dirty
                                       || formCreateNew.controls.floor?.touched)">
-              Số tầng phải là số.
+              Số tầng phải là số dương.
             </p>
 
-            <p class="text-danger" style=" margin-left: -80%;"
+            <p class="text-danger" style=" margin-left: -82%;"
                *ngIf="formCreateNew.get('floor').hasError('max')
                                       && (formCreateNew.controls.floor?.dirty
                                       || formCreateNew.controls.floor?.touched)">
@@ -59,18 +59,18 @@
           </div>
           <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2 p-0 m-0">
             <input class="form-control" type="text" formControlName="slotNumber"/>
-            <p class="text-danger" style="margin-left: -11%;"
+            <p class="text-danger" style="margin-left: -15%;"
                *ngIf="formCreateNew.get('slotNumber').hasError('required')
                                       && (formCreateNew.controls.slotNumber?.dirty
                                       || formCreateNew.controls.slotNumber?.touched)">
               Vui lòng nhập vị trí.
             </p>
 
-            <p class="text-danger" style=" margin-left: 12%;"
+            <p class="text-danger" style=" margin-left: -30%;"
                *ngIf="formCreateNew.get('slotNumber').hasError('pattern')
                                       && (formCreateNew.controls.slotNumber?.dirty
                                       || formCreateNew.controls.slotNumber?.touched)">
-              Vị trí phải là số.
+              Vị trí phải là số dương.
             </p>
 
             <p class="text-danger" style=" margin-left: -77%;"
@@ -98,11 +98,9 @@
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
             <input type="radio" name="slotType" (click)="displayHeightWidth('S')"> 4 - 7 chỗ
           </div>
-
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
             <input type="radio" name="slotType" (click)="displayHeightWidth('M')"> 9 chỗ - bán tải
           </div>
-
           <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3 p-0 m-0 mt-2">
             <input type="radio" name="slotType" (click)="displayHeightWidth('L')"> > Tải 500 kg
           </div>
@@ -111,10 +109,10 @@
         <div class="form-row mt-4">
           <div class="col-sm-4"></div>
           <div class="col-sm-2 mt-3">
-            <button type="submit" class="btn btn-secondary" [routerLink]="['/admin/list-parking-slot']">Quay Lại</button>
+            <button type="button" class="btn btn-secondary" [routerLink]="['/admin/list-parking-slot']">Quay Lại</button>
           </div>
           <div class="col-sm-2 mt-3">
-            <button type="submit" class="btn btn-success" (click)="createParkingSlot()">Thêm Mới</button>
+            <button type="button" class="btn btn-success" (click)="createParkingSlot()">Thêm Mới</button>
           </div>
           <div class="col-sm-4"></div>
         </div>
