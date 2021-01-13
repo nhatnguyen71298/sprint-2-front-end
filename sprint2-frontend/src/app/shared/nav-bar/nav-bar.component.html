@@ -10,10 +10,10 @@
       <!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>-->
       <div class="nav-item dropdown login-dropdown">
         <div class="d-flex ml-auto">
-          <a *ngIf="check" href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
-            class="fa fa-user-o"></i>&nbsp;{{user.username}}</a>
+          <a *ngIf="currentUser" href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
+            class="fa fa-user-o"></i>&nbsp;{{currentUser.username}}</a>
 
-          <ng-container *ngIf="!check">
+          <ng-container *ngIf="!currentUser">
             <a [routerLink]="['/home-page/login']" class="nav-item nav-link dropdown-toggle mr-3">
               <i class="fa fa-sign-in"></i> Đăng Nhập</a>
             <a [routerLink]="['/home-page/sign-up']" class="nav-item nav-link dropdown-toggle">

@@ -5,6 +5,7 @@ import {AuthenticationService} from '../../authentication/service/auth/authentic
 import {User} from '../../authentication/model/User';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {QuanService} from '../../quan.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,16 +17,23 @@ export class NavBarComponent implements OnInit {
   role: string;
   user: User;
   check: boolean;
+  currentUser;
+
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private token: TokenStorageService,
               private toastr: ToastrService,
               private authenticationService: AuthenticationService,
+              public quanService: QuanService
   ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit(): void {
+    this.quanService.name.subscribe(val => {
+      this.currentUser = val;
+    });
     if (this.token.getUser() != null) {
       this.authenticationService.findBy(this.token.getUser().username).subscribe(data => {
         console.log(data);
@@ -43,8 +51,11 @@ export class NavBarComponent implements OnInit {
 
   logout(): void {
     this.toastr.success('Đăng xuất', 'Toastr fun!');
-    this.token.signOut();
-    this.reloadPage();
+    // this.token.signOut();
+    // this.reloadPage();
+    this.quanService.logout();
+    this.currentUser = null;
+    this.quanService.broadcastLoginChange(this.currentUser);
   }
 
   login() {
