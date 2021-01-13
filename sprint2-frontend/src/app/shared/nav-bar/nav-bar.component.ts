@@ -6,6 +6,7 @@ import {User} from '../../authentication/model/User';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {QuanService} from '../../quan.service';
+import {SideBarComponent} from '../side-bar/side-bar.component';
 
 @Component({
   selector: 'app-nav-bar',

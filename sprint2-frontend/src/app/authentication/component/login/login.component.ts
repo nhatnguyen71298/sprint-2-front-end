@@ -57,10 +57,10 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password
     };
     if (this.loginForm.valid) {
-      console.log(this.userquan);
+      // console.log(this.userquan);
       this.quanService.authenticate(this.userquan).subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           this.quanService.broadcastLoginChange(this.userquan);
         },
         err => {
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
             this.errorMessage = '';
           }, 2000);
           this.isLoggedIn = false;
-          console.log(this.isLoggedIn);
+          // console.log(this.isLoggedIn);
           this.toastrService.success('Đăng nhập không thành công! Tên tài khoản và mật khẩu không hợp lệ !', 'Thông báo!');
         }, () => {
           this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
