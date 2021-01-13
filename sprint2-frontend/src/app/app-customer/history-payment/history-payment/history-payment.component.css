@@ -131,7 +131,7 @@ table.table .avatar {
 
 #carList {
   position: relative;
-  left: 425px;
+  left: 300px;
   font-size: 25px;
 }
 
@@ -141,11 +141,12 @@ table.table .avatar {
 
 .table-wrapper {
   min-height: 450px;
+  min-width: 200px;
 }
 
 #pt {
   position: relative;
-  left: 900px;
+  left: 700px;
   color: #007bff;
   font-weight: bold;
 }

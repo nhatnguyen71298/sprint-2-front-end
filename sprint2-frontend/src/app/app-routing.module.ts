@@ -16,7 +16,7 @@ export const routes: Routes = [
   // {path: 'authen', component: LoginComponent},
   // {path: 'sign-up', component: SignUpComponent},
 
-  // {path: 'app-employee-list', component: EmployeeListComponent},
+  {path: 'side-bar/:id', component: SideBarComponent},
   // {path: '**', component: PageNotFoundComponent},
   // {
   //   path: '**',

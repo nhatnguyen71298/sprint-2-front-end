@@ -11,6 +11,7 @@ import {TokenDTO} from '../../model/TokenDTO';
 import {ResetPasswordComponent} from '../reset-password/reset-password.component';
 import {ToastrService} from 'ngx-toastr';
 import {HomePageComponent} from '../home-page/home-page.component';
+import {QuanService} from '../../../quan.service';
 
 
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   user: User;
   messageError = '';
   public idUser: number;
+  userquan;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -37,7 +39,8 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private  title: Title,
     private authService: SocialAuthService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private quanService: QuanService) {
     this.title.setTitle('home-page');
   }
 
@@ -49,30 +52,32 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.userquan = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    };
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      this.authenticationService.login(this.loginForm.value).subscribe(
+      // console.log(this.userquan);
+      this.quanService.authenticate(this.userquan).subscribe(
         data => {
-          this.tokenStorageService.saveToken(data.token);
-          this.tokenStorageService.saveUser(data);
-          console.log(data);
-          this.isLoggedIn = true;
-          console.log(this.isLoggedIn);
+          // console.log(data);
+          this.quanService.broadcastLoginChange(this.userquan);
         },
         err => {
+          this.quanService.logout();
           this.errorMessage = 'Tên tài khoản và mật khẩu không hợp lệ !';
           setTimeout(() => {
             this.errorMessage = '';
           }, 2000);
           this.isLoggedIn = false;
-          console.log(this.isLoggedIn);
+          // console.log(this.isLoggedIn);
           this.toastrService.success('Đăng nhập không thành công! Tên tài khoản và mật khẩu không hợp lệ !', 'Thông báo!');
         }, () => {
           this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
           this.router.navigateByUrl('/home-page/info');
-          setTimeout(() => {
-            this.reloadPage();
-          }, 1000);
+          // setTimeout(() => {
+          //   this.reloadPage();
+          // }, 1000);
         }
       );
     } else {

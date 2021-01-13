@@ -1,11 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {HttpClient} from "@angular/common/http";
-import {SuccessfullyPayComponent} from "../successfully-pay/successfully-pay.component";
-import {PayService} from "../../../service/pay.service";
-import {ActivatedRoute} from "@angular/router";
-import {PayMomoComponent} from "../pay-momo/pay-momo.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http';
+import {SuccessfullyPayComponent} from '../successfully-pay/successfully-pay.component';
+import {PayService} from '../../../service/pay.service';
+import {ActivatedRoute} from '@angular/router';
+import {PayMomoComponent} from '../pay-momo/pay-momo.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TokenStorageService} from '../../../authentication/service/token-storage/token-storage.service';
+import {QuanService} from '../../../quan.service';
 
 @Component({
   selector: 'app-pay',
@@ -20,27 +22,26 @@ export class PayComponent implements OnInit {
   public totalMoneyPayPal = 0;
   public totalMoneyMoMo = 0;
   public isChecked: boolean;
-  private idCustomer;
+  private idAccount;
 
   constructor(
     private payService: PayService,
     private dialog: MatDialog,
     protected http: HttpClient,
     private activedRouter: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private quanService: QuanService
   ) {
   }
 
   ngOnInit(): void {
+    this.idAccount = this.quanService.currentUserValue.id;
     this.displayPayPalButton();
     this.getListMemberCard();
   }
 
   getListMemberCard() {
-    this.activedRouter.params.subscribe(data => {
-      this.idCustomer = data.idCustomer;
-    });
-    this.payService.getListMemberCardByIDCustomer(this.idCustomer).subscribe(
+    this.payService.getListMemberCardByIDCustomer(this.idAccount).subscribe(
       (data) => {
         this.memberCardList = data;
       },

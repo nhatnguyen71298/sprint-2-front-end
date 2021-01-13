@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {AppAccount} from '../../../model/AppAccount';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -8,7 +10,17 @@ const USER_KEY = 'auth-user';
 })
 export class TokenStorageService {
   id;
+  name;
+  private currentUserSubject: BehaviorSubject<AppAccount>;
+  parsingUser;
+
   constructor() {
+    this.parsingUser = JSON.parse(window.sessionStorage.getItem('USER_KEY'));
+    this.currentUserSubject = new BehaviorSubject<AppAccount>(this.parsingUser);
+  }
+
+  broadcastLoginChange(text: string) {
+    this.name.next(text);
   }
 
   signOut(): void {
