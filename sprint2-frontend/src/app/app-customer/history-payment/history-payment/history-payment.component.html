@@ -13,7 +13,7 @@
         <tr>
           <th>STT</th>
           <th>Ngày thanh toán</th>
-          <th>Tổng tiền(VND)</th>
+          <th>Tổng tiền (VNĐ)</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
           totalItems: totalElements} index as i">
           <td>{{(i +1) + (currentPage-1)*5}}</td>
           <td>{{invoice.payDate | date:'dd/MM/yyyy'}}</td>
-          <td class="text-right">{{invoice.totalAmount | currency: 'VND'}}</td>
+          <td class="text-right">{{invoice.totalAmount | currency: ' '}}</td>
         </tr>
         </tbody>
       </table>
