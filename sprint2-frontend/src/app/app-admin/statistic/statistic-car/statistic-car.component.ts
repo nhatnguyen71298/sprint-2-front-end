@@ -51,7 +51,9 @@ export class StatisticCarComponent implements OnInit {
         printChart: 'In',
         viewData: 'Hiện thị dữ liệu của bảng',
       },
-      
+      exporting: {
+        filename: 'Số lượng xe của khách hàng',
+      },
       title: {
         text: 'Biểu đồ số lượng xe khách hàng',
         style: {

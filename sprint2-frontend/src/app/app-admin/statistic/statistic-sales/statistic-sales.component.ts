@@ -109,7 +109,9 @@ export class StatisticSalesComponent implements OnInit {
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
       },
-
+      exporting: {
+        filename: 'Doanh thu vé thành viên',
+      },
       lang: {
         downloadCSV: 'Tải file CSV',
         downloadJPEG: 'Tải hình ảnh JPEG',
@@ -197,6 +199,9 @@ export class StatisticSalesComponent implements OnInit {
           color: '#435d7d',
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
+      },
+      exporting: {
+        filename: 'Doanh thu vé ngày',
       },
       lang: {
         downloadCSV: 'Tải file CSV',

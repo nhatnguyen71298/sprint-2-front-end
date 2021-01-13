@@ -154,7 +154,13 @@ export class EntryViewComponent implements OnInit {
           // car registered
           this.ticketService.findMemberCardsByCar(car).subscribe(next2 => {
             let memberCard = next2[next2.length - 1];
-            this.ticketService.findSlotByCarId(memberCard.car).subscribe(next3 => {
+            let id = 0;
+            if (typeof  memberCard.car === 'object') {
+              id = memberCard.car.id;
+            } else {
+              id = memberCard.car;
+            }
+            this.ticketService.findSlotByCarId(id).subscribe(next3 => {
               const parkingSlot = next3;
               const memberCardList = parkingSlot.car.memberCardList;
               memberCard = memberCardList[memberCardList.length - 1];
@@ -221,7 +227,7 @@ export class EntryViewComponent implements OnInit {
           // if car not registered or member card invalid
           if (!isRegistered || !isValid) {
             if (next2.parkingSlot == null) {
-              this.snackBar.open('Xe ko nằm trong bãi', 'OK', {
+              this.snackBar.open('Xe không nằm trong bãi', 'OK', {
                 duration: 1000
               });
               return;

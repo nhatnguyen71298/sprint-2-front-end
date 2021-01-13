@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MAT_DATE_FORMATS} from "@angular/material/core";
-import {StatisticsService} from "../../../service/statistics.service";
-import * as Highcharts from "highcharts";
-import {MatDialog} from "@angular/material/dialog";
-import {StatisticNotifyComponent} from "../statistic-notify/statistic-notify.component";
+import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {StatisticsService} from '../../../service/statistics.service';
+import * as Highcharts from 'highcharts';
+import {MatDialog} from '@angular/material/dialog';
+import {StatisticNotifyComponent} from '../statistic-notify/statistic-notify.component';
 
 declare var require: any;
 require('highcharts/modules/exporting')(Highcharts);
@@ -238,6 +238,9 @@ export class StatisticTicketComponent implements OnInit {
       chart: {
         backgroundColor: 'none',
       },
+      exporting: {
+        filename: 'Số lượng vé theo tuần',
+      },
       legend: {
         layout: 'vertical',
         align: 'right',
@@ -291,6 +294,9 @@ export class StatisticTicketComponent implements OnInit {
       },
       chart: {
         backgroundColor: 'none',
+      },
+      exporting: {
+        filename: 'Số lượng vé theo tháng',
       },
       yAxis: {
         title: {
@@ -361,6 +367,9 @@ export class StatisticTicketComponent implements OnInit {
           color: '#435d7d',
           font: 'bold 20px "Arial", Verdana, sans-serif'
         }
+      },
+      exporting: {
+        filename: 'Số lượng vé theo năm',
       },
       lang: {
         downloadCSV: 'Tải file CSV',
