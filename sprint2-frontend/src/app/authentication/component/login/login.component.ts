@@ -75,9 +75,9 @@ export class LoginComponent implements OnInit {
         }, () => {
           this.toastrService.success('Đăng nhập thành công!', 'Thông báo!');
           this.router.navigateByUrl('/home-page/info');
-          setTimeout(() => {
-            this.reloadPage();
-          }, 1000);
+          // setTimeout(() => {
+          //   this.reloadPage();
+          // }, 1000);
         }
       );
     } else {

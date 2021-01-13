@@ -34,15 +34,15 @@ export class NavBarComponent implements OnInit {
     this.quanService.name.subscribe(val => {
       this.currentUser = val;
     });
-    if (this.token.getUser() != null) {
-      this.authenticationService.findBy(this.token.getUser().username).subscribe(data => {
-        console.log(data);
-        this.user = data;
-        if (this.user != null) {
-          this.check = true;
-        }
-      });
-    }
+    // if (this.token.getUser() != null) {
+    //   this.authenticationService.findBy(this.token.getUser().username).subscribe(data => {
+    //     console.log(data);
+    //     this.user = data;
+    //     if (this.user != null) {
+    //       this.check = true;
+    //     }
+    //   });
+    // }
   }
 
   reloadPage(): void {
@@ -59,6 +59,7 @@ export class NavBarComponent implements OnInit {
   }
 
   login() {
+    this.quanService.broadcastLoginChange(this.currentUser);
     this.router.navigateByUrl('/home-page/login');
   }
 
