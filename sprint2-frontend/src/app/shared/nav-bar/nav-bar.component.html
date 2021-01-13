@@ -1,59 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a [routerLink]="['/home-page']" class="navbar-brand"><b>QUẢN LÝ BÃI ĐỖ XE Ô TÔ</b></a>
-	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-		<div class="navbar-nav ml-auto">
-<!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> Đăng nhập</a>-->
-<!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>-->
-			<div class="nav-item dropdown login-dropdown">
-
-          <a *ngIf="check" href="#"  data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
+  <a [routerLink]="['/home-page']" class="navbar-brand"><b>QUẢN LÝ BÃI ĐỖ XE Ô TÔ</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+    <div class="navbar-nav ml-auto">
+      <!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/login']"><i class="fa fa-sign-in"></i> Đăng nhập</a>-->
+      <!--			<a href="#" class="nav-item nav-link" [routerLink]="['/authentication/sign-up']"><i class="fa fa-user-o"></i> Đăng ký</a>-->
+      <div class="nav-item dropdown login-dropdown">
+        <div class="d-flex ml-auto">
+          <a *ngIf="check" href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i
             class="fa fa-user-o"></i>&nbsp;{{user.username}}</a>
 
-			  <div  *ngIf="!check">
-          <a [routerLink]="['/home-page/login']" class="nav-item nav-link dropdown-toggle mr-3">
-            <i class="fa fa-sign-in"></i> Đăng Nhập</a>
-          <a [routerLink]="['/home-page/sign-up']" class="nav-item nav-link dropdown-toggle">
-            <i class="fa fa-user-o"></i> Đăng Ký</a>
+          <ng-container *ngIf="!check">
+            <a [routerLink]="['/home-page/login']" class="nav-item nav-link dropdown-toggle mr-3">
+              <i class="fa fa-sign-in"></i> Đăng Nhập</a>
+            <a [routerLink]="['/home-page/sign-up']" class="nav-item nav-link dropdown-toggle">
+              <i class="fa fa-user-o"></i> Đăng Ký</a>
+          </ng-container>
+          <div class="dropdown-menu">
+
+            <a href="#" class="dropdown-item" [routerLink]="['/admin/employee-list']">
+              <span><i class="fa fa-address-book-o"></i> Quản lý nhân viên</span>
+            </a>
+            <a href="#" class="dropdown-item" [routerLink]="['/employee/customer-management']">
+              <span><i class="fa fa-users"></i> Quản lý khách hàng</span>
+            </a>
+            <a href="#" class="dropdown-item" [routerLink]="['/employee/registered-car-management']">
+              <span><i class="fa fa-car"></i> Quản lý xe đã đăng ký</span>
+            </a>
+            <a href="#" class="dropdown-item" [routerLink]="['/employee/entry-management']">
+              <span><i class="fa fa-video-camera"></i> Quản lý xe vào/ra</span>
+            </a>
+            <a href="#" class="dropdown-item" [routerLink]="['/employee/member-card-list']">
+              <span><i class="fa fa-id-card-o"></i> Quản lý vé</span>
+            </a>
+            <a class="dropdown-item" [routerLink]="['/admin/list-parking-slot']">
+              <span><i class="fa fa-building-o"></i> Quản lý bãi đỗ</span>
+            </a>
+            <!--          <a href="#" class="dropdown-item" [routerLink]="['/employee/member-card-list']">-->
+            <!--            <span><i class="fa fa-id-card-o"></i> Quản lý thẻ thành viên</span>-->
+            <!--          </a>-->
+            <!--					<a href="#" class="dropdown-item" [routerLink]="['/employee/sales-management']">-->
+            <!--						<span><i class="fa fa-dollar"></i> Quản lý thu chi</span>-->
+            <!--					</a>-->
+            <a href="#" class="dropdown-item" [routerLink]="['/admin/statistic']">
+              <span><i class="fa fa-bar-chart"></i> Thống kê</span> </a>
+            <a href="#" class="dropdown-item" (click)="logout()">
+              <span><i class="fa fa-sign-out"></i> Đăng xuất</span>
+            </a>
+          </div>
         </div>
 
-				<div class="dropdown-menu">
-
-					<a href="#" class="dropdown-item" [routerLink]="['/admin/employee-list']">
-						<span><i class="fa fa-address-book-o" ></i> Quản lý nhân viên</span>
-					</a>
-					<a href="#" class="dropdown-item" [routerLink]="['/employee/customer-management']">
-						<span><i class="fa fa-users" ></i> Quản lý khách hàng</span>
-					</a>
-					<a href="#" class="dropdown-item" [routerLink]="['/employee/registered-car-management']">
-						<span><i class="fa fa-car"></i> Quản lý xe đã đăng ký</span>
-					</a>
-					<a href="#" class="dropdown-item" [routerLink]="['/employee/entry-management']">
-						<span><i class="fa fa-video-camera"></i> Quản lý xe vào/ra</span>
-					</a>
-					<a href="#" class="dropdown-item" [routerLink]="['/employee/member-card-list']">
-						<span><i class="fa fa-id-card-o"></i> Quản lý vé</span>
-					</a>
-					<a class="dropdown-item" [routerLink]="['/admin/list-parking-slot']">
-						<span><i class="fa fa-building-o"></i> Quản lý bãi đỗ</span>
-					</a>
-<!--          <a href="#" class="dropdown-item" [routerLink]="['/employee/member-card-list']">-->
-<!--            <span><i class="fa fa-id-card-o"></i> Quản lý thẻ thành viên</span>-->
-<!--          </a>-->
-<!--					<a href="#" class="dropdown-item" [routerLink]="['/employee/sales-management']">-->
-<!--						<span><i class="fa fa-dollar"></i> Quản lý thu chi</span>-->
-<!--					</a>-->
-					<a href="#" class="dropdown-item" [routerLink]="['/admin/statistic']">
-						<span><i class="fa fa-bar-chart"></i> Thống kê</span> </a>
-					<a href="#" class="dropdown-item" (click)="logout()">
-						<span><i class="fa fa-sign-out"></i> Đăng xuất</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </nav>
 
