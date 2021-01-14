@@ -8,7 +8,7 @@
           <h1>Xe vào</h1>
         </div>
         <div class="row">
-          <app-camera-management></app-camera-management>
+          <app-camera-management (sendCarInfor)="getCarInfor($event)" (reset)="reset()"></app-camera-management>
         </div>
         <div class="row form-group mt-2">
           <div class="col-12">
@@ -24,7 +24,7 @@
           <h1>Xe ra</h1>
         </div>
         <div class="row">
-          <app-camera-management></app-camera-management>
+          <app-camera-management (sendCarInfor)="getCarInfor($event)" (reset)="reset()"></app-camera-management>
         </div>
         <div class="row form-group mt-2">
           <div class="col-12">
@@ -37,10 +37,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-3 mb-2">
+      <div class="col-3 mb-2" >
         <mat-form-field class="example-full-width">
           <mat-label>Biển số xe</mat-label>
           <input matInput formControlName="plateNumber">
+<!--          <input matInput formControlName="plateNumber" *ngIf="plateNumberFromCamera" [(ngModel)]="plateNumberFromCamera">-->
           <mat-error *ngIf="ticketForm.get('plateNumber').hasError('required') ||
           ticketForm.get('plateNumber').hasError('whitespace')">Vui lòng nhập biển số
           </mat-error>

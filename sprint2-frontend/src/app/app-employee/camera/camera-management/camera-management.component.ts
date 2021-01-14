@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 // @ts-ignore
 import {MatDialog} from '@angular/material/dialog';
@@ -16,6 +16,11 @@ export class CameraManagementComponent implements OnInit {
   url;
   msg = 'Hãy chọn một ảnh !';
   srcImgForm: FormGroup;
+  @Output()
+  sendCarInfor = new EventEmitter<any>();
+  // tslint:disable-next-line:no-output-native
+  @Output()
+  reset = new EventEmitter<string>();
   constructor(
     public cameraService: NhatService,
     public formBuilder: FormBuilder,
@@ -60,12 +65,12 @@ export class CameraManagementComponent implements OnInit {
             dialogMessage.close();
           }, 3600);
         });
-        if (message.message === 'Can\'t read' || message.message === 'Database error'){
+        if (message.message === 'Can\'t read'){
           dialogMessage.afterClosed().subscribe(result => {
-              this.resetImg();
           });
         } else {
           dialogMessage.afterClosed().subscribe(result => {
+            this.sendCarInfor.emit(message);
           });
         }
       });
@@ -75,5 +80,6 @@ export class CameraManagementComponent implements OnInit {
     this.url = '';
     this.msg = 'Hãy chọn một ảnh !';
     this.takeInput.nativeElement.value = '';
+    this.reset.emit();
   }
 }

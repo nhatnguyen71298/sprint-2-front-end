@@ -14,7 +14,7 @@ export class EntryViewComponent implements OnInit {
   ticketForm: FormGroup;
   carTypes;
   message;
-
+  plateNumberFromCamera;
   constructor(private formBuilder: FormBuilder,
               private ticketService: TicketService,
               private datePipe: DatePipe,
@@ -335,5 +335,17 @@ export class EntryViewComponent implements OnInit {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : {whitespace: true};
+  }
+
+  getCarInfor($event: any) {
+    console.log($event);
+    this.ticketForm.controls['plateNumber'].setValue($event.plateNumber);
+    console.log(this.plateNumberFromCamera);
+    this.findCar();
+  }
+
+  reset() {
+    this.ticketForm.controls['plateNumber'].setValue('');
+    this.ticketForm.reset();
   }
 }

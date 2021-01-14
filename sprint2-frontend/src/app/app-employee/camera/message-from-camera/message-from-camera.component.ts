@@ -39,7 +39,6 @@ export class MessageFromCameraComponent implements OnInit {
         }
         break;
     }
-    console.log(this.data.data1);
   }
   close() {
     this.dialogMessage.close();
