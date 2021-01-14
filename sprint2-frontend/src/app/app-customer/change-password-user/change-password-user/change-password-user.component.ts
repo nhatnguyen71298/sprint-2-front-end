@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmEmailComponent} from '../confirm-email/confirm-email.component';
 import {ChangePasswordService} from '../../../service/nqkhanh/change-password.service';
+import {TokenStorageService} from "../../../authentication/service/token-storage/token-storage.service";
 
 // @ts-ignore
 @Component({
@@ -22,7 +23,8 @@ export class ChangePasswordUserComponent implements OnInit {
   public message: string;
 
   constructor(public formBuilder: FormBuilder, public changePasswordService: ChangePasswordService, public route: Router,
-              public dialog: MatDialog, private el: ElementRef) {
+              public dialog: MatDialog, private el: ElementRef, public token: TokenStorageService) {
+    this.idAccount = this.token.getIdAppAccount();
     this.confirmPassWordForm = this.formBuilder.group({
       passwordOld: ['', Validators.required],
       passwordNew: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$')]],
@@ -40,7 +42,7 @@ export class ChangePasswordUserComponent implements OnInit {
   }
 
   confirmPassWordFunction() {
-    this.changePasswordService.findAppAccountById(1).subscribe(dataAccount => {
+    this.changePasswordService.findAppAccountById(this.idAccount).subscribe(dataAccount => {
       this.account = {
         passwordOld: this.confirmPassWordForm.controls.passwordOld.value,
         passwordNew: this.confirmPassWordForm.controls.passwordNew.value
@@ -49,7 +51,7 @@ export class ChangePasswordUserComponent implements OnInit {
         console.log(dataConfirmPassword);
         if (dataConfirmPassword.message === 'Wright password') {
           if (this.confirmPassWordForm.valid) {
-            this.changePasswordService.setVerifyAndSendMail(1).subscribe();
+            this.changePasswordService.setVerifyAndSendMail(this.idAccount).subscribe();
             const dialogA = this.dialog.open(ConfirmEmailComponent, {
               width: '800px',
               position: {

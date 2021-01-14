@@ -5,9 +5,9 @@
 
 
       <div class="form-group px-3 d-flex justify-content-end">
-        <label class="col-3 ml-3">Biển số xe<span class="text-danger"> *</span></label>
+        <label for="plateNumber" class="col-3 ml-3">Biển số xe<span class="text-danger"> *</span></label>
         <div class="col-9">
-          <input class="form-control" type="text" formControlName="plateNumber">
+          <input class="form-control" id="plateNumber" type="text" formControlName="plateNumber">
           <p class="text-danger" *ngIf="memberCardForm.get('plateNumber').hasError('pattern')
           && (memberCardForm.controls.plateNumber?.dirty || memberCardForm.controls.plateNumber?.touched)">
             Sai định dạng. Biển số xe có định dạng vd: RK755AJ.
@@ -107,14 +107,14 @@
         <label class="col-3 ml-3">Vị trí<span class="text-danger"> *</span></label>
         <mat-form-field class="col-9">
           <mat-label>Chọn vị trí</mat-label>
-          <mat-select formControlName="slotNumber">
-            <mat-option *ngFor="let par of parkingSlotList" [value]="par.id">
-                {{par.floor}} - {{par.slotNumber}}
-            </mat-option>
-          </mat-select>
+          <input matInput formControlName="slotNumber">
+<!--            <mat-option *ngFor="let par of parkingSlotList" [value]="par.id">-->
+<!--                {{par.floor}} - {{par.slotNumber}}-->
+<!--            </mat-option>-->
         </mat-form-field>
-      </div>
 
+      </div>
+      <button (click)="openMap()">Mở bản đồ</button>
 
       <div class="form-group px-3 d-flex justify-content-end">
         <label class="col-3 ml-3">Giá tiền<span class="text-danger"> *</span></label>

@@ -37,6 +37,7 @@ import {MatInputModule} from '@angular/material/input';
 // @ts-ignore
 import {MatSelectModule} from '@angular/material/select';
 import {SlotInfoComponent} from './entry-management/slot-info/slot-info.component';
+import { OpenParkingMapComponent } from './entry-management/open-parking-map/open-parking-map.component';
 
 
 export const routes: Routes = [
@@ -64,6 +65,7 @@ export const routes: Routes = [
     SalesViewComponent, SalesDeleteComponent, CameraManagementComponent , MessageFromCameraComponent,
     MemberCardListComponent, MemberCardCreateComponent, DeleteMemberCardDialogComponent,
     UpdateMemberCardDialogComponent,
+    OpenParkingMapComponent,
   ],
   entryComponents: [DeleteMemberCardDialogComponent]
 })

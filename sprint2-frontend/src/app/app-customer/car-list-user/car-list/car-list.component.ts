@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
-import {CarService} from "../../../service/nqkhanh/car.service";
-import {CustomerService} from "../../../service/nqkhanh/customer.service";
+import {CarService} from '../../../service/nqkhanh/car.service';
+import {CustomerService} from '../../../service/nqkhanh/customer.service';
+import {TokenStorageService} from '../../../authentication/service/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-car-list',
@@ -15,8 +16,10 @@ export class CarListComponent implements OnInit {
   public totalElements: number;
   public pageSize: number;
   public currentPage = 0;
+  public idAccount;
 
-  constructor(public carService: CarService, public  customerService: CustomerService) {
+  constructor(public carService: CarService, public  customerService: CustomerService,  public token: TokenStorageService) {
+    this.idAccount = this.token.getIdAppAccount();
   }
 
   ngOnInit(): void {
@@ -25,7 +28,7 @@ export class CarListComponent implements OnInit {
   }
 
   getPage(page: number) {
-    this.customerService.getCustomerByAccountId(1).subscribe(dataCustomer => {
+    this.customerService.getCustomerByAccountId(this.idAccount).subscribe(dataCustomer => {
       this.customerId = dataCustomer.id;
       this.lisCar = this.carService.getAllCarByCustomerId(this.customerId, page).pipe(
         tap(res => {

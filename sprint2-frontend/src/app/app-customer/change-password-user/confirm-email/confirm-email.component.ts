@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ChangePasswordSuccessfullyComponent} from '../change-password-successfully/change-password-successfully.component';
 import {ChangePasswordService} from '../../../service/nqkhanh/change-password.service';
+import {TokenStorageService} from '../../../authentication/service/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-confirm-email',
@@ -13,11 +14,15 @@ import {ChangePasswordService} from '../../../service/nqkhanh/change-password.se
 export class ConfirmEmailComponent implements OnInit {
   public savePassWordForm: FormGroup;
   public account;
+  public idAccount;
   public messageFalse: string;
 
   constructor(public dialogRef: MatDialogRef<ConfirmEmailComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, public changePasswordService: ChangePasswordService,
-              public formBuilder: FormBuilder, public router: Router, public dialog: MatDialog, private el: ElementRef) {
+              public formBuilder: FormBuilder, public router: Router, public dialog: MatDialog, private el: ElementRef,
+              public token: TokenStorageService
+  ) {
+    this.idAccount = this.token.getIdAppAccount();
     this.savePassWordForm = this.formBuilder.group({
       verificationCode: ['', Validators.required]
     });
@@ -27,7 +32,7 @@ export class ConfirmEmailComponent implements OnInit {
   }
 
   savePassword() {
-    this.changePasswordService.findAppAccountById(1).subscribe(dataSavePassword => {
+    this.changePasswordService.findAppAccountById( this.idAccount).subscribe(dataSavePassword => {
         this.account = {
           verificationCode: this.savePassWordForm.controls.verificationCode.value,
           passwordNew: this.data.dataAccount
@@ -58,7 +63,7 @@ export class ConfirmEmailComponent implements OnInit {
             }
             if (this.savePassWordForm.controls.verificationCode.value === '') {
               this.messageFalse = 'Vui long nhập mã xác nhận';
-            }else {
+            } else {
               this.messageFalse = 'Mã xác nhận chưa chính xác, vui lòng nhập lại!';
             }
           }

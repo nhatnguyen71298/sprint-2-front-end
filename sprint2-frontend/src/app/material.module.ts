@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MY_FORMATS} from './app-admin/statistic/statistic-customer/statistic-customer.component';
 import {StatisticCarComponent} from './app-admin/statistic/statistic-car/statistic-car.component';
 import {StatisticNotifyComponent} from './app-admin/statistic/statistic-notify/statistic-notify.component';
+import {OpenParkingMapComponent} from "./app-employee/entry-management/open-parking-map/open-parking-map.component";
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import {StatisticNotifyComponent} from './app-admin/statistic/statistic-notify/s
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ],
-  entryComponents: [StatisticCarComponent, StatisticNotifyComponent]
+  entryComponents: [StatisticCarComponent, StatisticNotifyComponent, OpenParkingMapComponent]
 })
 
 export class MaterialModule {

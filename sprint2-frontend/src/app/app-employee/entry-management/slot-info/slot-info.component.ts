@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TicketService} from '../../../service/ticket.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-slot-info',
@@ -16,11 +17,12 @@ export class SlotInfoComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data,
               private ticketService: TicketService,
               private formBuilder: FormBuilder,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe, private route: Router) {
   }
 
   ngOnInit(): void {
     this.slotInfoForm = this.formBuilder.group({
+      id: [''],
       floor: [''],
       slotNumber: [''],
       status: [''],
@@ -50,6 +52,7 @@ export class SlotInfoComponent implements OnInit {
           enterDate = entryLog.enterDate;
         }
         const slot = {
+          id : next.id,
           floor: next.floor,
           slotNumber: next.slotNumber,
           status: next.status,
@@ -63,4 +66,9 @@ export class SlotInfoComponent implements OnInit {
     });
   }
 
+  getId(id: any) {
+    console.log(id);
+    this.route.navigate(['app-member-card-create', {message: id}]).then(r => {
+    });
+  }
 }

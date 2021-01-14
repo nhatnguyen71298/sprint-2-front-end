@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MemberCardAddDTO} from '../../../model/MemberCardAddDTO';
 import {Router} from '@angular/router';
+import {OpenParkingMapComponent} from '../../entry-management/open-parking-map/open-parking-map.component';
 
 @Component({
   selector: 'app-member-card-create',
@@ -53,7 +54,7 @@ export class MemberCardCreateComponent implements OnInit {
         ]],
 
       memberTypeID: ['', [Validators.required]],
-      startDate: ['', [Validators.required]],
+      startDate: ['16/01/2021', [Validators.required]],
       endDate: ['', [Validators.required]],
       // floor: ['', [Validators.required]],
       slotNumber: ['', [Validators.required]],
@@ -123,5 +124,11 @@ export class MemberCardCreateComponent implements OnInit {
       this.endDateAuto.setDate(this.startDateInput.getDate() + 365);
       this.memberCardForm.controls.memberTypeID.setValue(3);
     }
+  }
+
+  openMap() {
+    const dialogA = this.dialog.open(OpenParkingMapComponent, {
+      width: '800px',
+    });
   }
 }

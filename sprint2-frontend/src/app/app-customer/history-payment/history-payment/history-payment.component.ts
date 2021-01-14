@@ -4,6 +4,7 @@ import {map, tap} from 'rxjs/operators';
 import {HistoryPaymentService} from '../../../service/nqkhanh/history-payment.service';
 import {CustomerService} from '../../../service/nqkhanh/customer.service';
 import {Observable} from 'rxjs';
+import {TokenStorageService} from "../../../authentication/service/token-storage/token-storage.service";
 
 @Component({
   selector: 'app-history-payment',
@@ -16,8 +17,11 @@ export class HistoryPaymentComponent implements OnInit {
   public totalElements: number;
   public pageSize: number;
   public currentPage = 0;
+  public idAccount;
 
-  constructor(public customerService: CustomerService, public historyPaymentService: HistoryPaymentService) {
+  constructor(public customerService: CustomerService, public historyPaymentService: HistoryPaymentService,
+              public token: TokenStorageService) {
+    this.idAccount = this.token.getIdAppAccount();
   }
 
   ngOnInit(): void {
@@ -25,7 +29,7 @@ export class HistoryPaymentComponent implements OnInit {
   }
 
   getPage(page: number) {
-    this.customerService.getCustomerByAccountId(1).subscribe(dataCustomer => {
+    this.customerService.getCustomerByAccountId(this.idAccount ).subscribe(dataCustomer => {
       this.customerId = dataCustomer.id;
       this.historyPayments = this.historyPaymentService.getAllInvoiceByCustomerId(this.customerId, page).pipe(
         tap(res => {
