@@ -68,7 +68,5 @@ export class SlotInfoComponent implements OnInit {
 
   getId(id: any) {
     console.log(id);
-    this.route.navigate(['app-member-card-create', {message: id}]).then(r => {
-    });
   }
 }
