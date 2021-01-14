@@ -60,11 +60,9 @@ export class CameraManagementComponent implements OnInit {
             dialogMessage.close();
           }, 3600);
         });
-        if (message.message !== 'Can\'t read' && message.message !== 'Not member'){
+        if (message.message === 'Can\'t read' || message.message === 'Database error'){
           dialogMessage.afterClosed().subscribe(result => {
-            this.url = '';
-            this.msg = 'Hãy chọn một ảnh !';
-            this.takeInput.nativeElement.value = '';
+              this.resetImg();
           });
         } else {
           dialogMessage.afterClosed().subscribe(result => {
@@ -72,5 +70,10 @@ export class CameraManagementComponent implements OnInit {
         }
       });
     };
+  }
+  resetImg(){
+    this.url = '';
+    this.msg = 'Hãy chọn một ảnh !';
+    this.takeInput.nativeElement.value = '';
   }
 }

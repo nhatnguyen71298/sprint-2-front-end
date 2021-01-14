@@ -3,6 +3,16 @@
   width: 450px;
   height: 300px;
 }
+#reset{
+  color: green;
+  position: relative;
+  top: 4px;
+  right: -428px;
+  -webkit-animation: reset 1500ms infinite;
+  -moz-animation: reset 1500ms infinite;
+  -o-animation: reset 1500ms infinite;
+  animation: reset 1500ms infinite;
+}
 #main{
   position: absolute;
   top: 80%;
@@ -42,9 +52,9 @@
 
 #label {
   position: absolute;
-  right: 133px;
+  right: 121px;
   bottom: 112px;
-  width: 181px;
+  width: 190px;
   font-size:14px;
   font-weight:bold;
   -webkit-animation: glowing 1500ms infinite;
@@ -124,4 +134,52 @@
   0% { color: #660000; }
   50% { color: #ff0000; }
   100% { color: #660000;  }
+}
+
+@-webkit-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@-moz-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@-o-keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+
+@keyframes glowing {
+  0% { color: #660000; }
+  50% { color: #ff0000; }
+  100% { color: #660000;  }
+}
+/* reset */
+@-webkit-keyframes reset {
+  0% { color: #003300		; }
+  50% { color: #00FF00; }
+  100% { color: #003300		;  }
+}
+
+@-moz-keyframes reset {
+  0% { color: #003300	; }
+  50% { color: #00FF00; }
+  100% { color: #003300	;  }
+}
+
+@-o-keyframes reset {
+  0% { color: #003300		; }
+  50% { color: #00FF00; }
+  100% { color: #003300		;  }
+}
+
+@keyframes reset {
+  0% { color: #003300	; }
+  50% { color: #00FF00; }
+  100% { color: #003300		;  }
 }
