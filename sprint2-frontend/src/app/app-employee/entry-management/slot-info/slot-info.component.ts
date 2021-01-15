@@ -32,7 +32,6 @@ export class SlotInfoComponent implements OnInit {
       enterDate: [''],
     });
     this.ticketService.findSlotById(this.data.id).subscribe(next => {
-      console.log(next);
       // empty slot
       if (next.car == null) {
         this.slotInfoForm.patchValue(next);
@@ -52,7 +51,7 @@ export class SlotInfoComponent implements OnInit {
           enterDate = entryLog.enterDate;
         }
         const slot = {
-          id : next.id,
+          id: next.id,
           floor: next.floor,
           slotNumber: next.slotNumber,
           status: next.status,
@@ -67,6 +66,9 @@ export class SlotInfoComponent implements OnInit {
   }
 
   getId(id: any) {
-    console.log(id);
+    if (id === 0 ){
+      this.data.id = 0;
+    }
+    this.dialogRef.close();
   }
 }

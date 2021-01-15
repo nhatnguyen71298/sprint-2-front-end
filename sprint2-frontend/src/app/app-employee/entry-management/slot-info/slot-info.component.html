@@ -55,6 +55,9 @@
         </mat-form-field>
       </div>
     </div>
-    <button (click)="getId(slotInfoForm.controls.id.value)">Lấy id chơi</button>
+    <div class="row d-flex justify-content-end">
+      <button class="btn btn-success mr-2" (click)="getId(slotInfoForm.controls.id.value)">Lấy id chơi</button>
+      <button class="btn btn-secondary" (click)="getId(0)">Hủy</button>
+    </div>
   </form>
 </div>

@@ -6,6 +6,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {MemberCardAddDTO} from '../../../model/MemberCardAddDTO';
 import {Router} from '@angular/router';
 import {OpenParkingMapComponent} from '../../entry-management/open-parking-map/open-parking-map.component';
+import {TicketService} from '../../../service/ticket.service';
 
 @Component({
   selector: 'app-member-card-create',
@@ -14,8 +15,9 @@ import {OpenParkingMapComponent} from '../../entry-management/open-parking-map/o
 })
 export class MemberCardCreateComponent implements OnInit {
   public memberCardForm: FormGroup;
-  memberType: any;
-  parkingSlotList: any;
+  memberType;
+  parkingSlotList;
+  id: number;
   private memberCardAddDTO: MemberCardAddDTO = {
     plateNumber: null,
     fullName: null,
@@ -38,10 +40,13 @@ export class MemberCardCreateComponent implements OnInit {
               private router: Router,
               public dialog: MatDialog,
               public formBuilder: FormBuilder,
-              private el: ElementRef) {
+              private el: ElementRef,
+              private ticketService: TicketService) {
+    console.log('con');
   }
 
   ngOnInit(): void {
+    console.log('init');
     this.memberCardForm = this.formBuilder.group({
       plateNumber: ['',
         [Validators.required, Validators.pattern('^([A-Z]|\\d){6,10}$')],
@@ -63,10 +68,6 @@ export class MemberCardCreateComponent implements OnInit {
     this.memberCardService.getMemberCardType().subscribe(value =>
       this.memberType = value, error => this.memberType = [],
     );
-    this.memberCardService.getParkingSlot().subscribe(value => {
-      // tslint:disable-next-line:no-unused-expression
-      this.parkingSlotList = value, error => this.parkingSlotList = [];
-    });
   }
 
   keyDownFunction(event) {
@@ -108,7 +109,6 @@ export class MemberCardCreateComponent implements OnInit {
   }
 
   setEndDate() {
-    console.log('vô');
     this.startDateInput = new Date(this.startDateInput);
     this.endDateAuto = new Date(this.startDateInput);
     if (this.radio === 'Tuần') {
@@ -129,6 +129,18 @@ export class MemberCardCreateComponent implements OnInit {
   openMap() {
     const dialogA = this.dialog.open(OpenParkingMapComponent, {
       width: '800px',
+      data: {id: this.id}
+    });
+    // dialogA.componentInstance.id;
+    dialogA.beforeClosed().subscribe(() => {
+      this.id = dialogA.componentInstance.id;
+      if (this.id !== undefined) {
+        this.memberCardForm.get('slotNumber').setValue(this.id);
+        this.ticketService.findSlotById(this.id).subscribe(data => {
+          this.parkingSlotList = data;
+        });
+      }
+      console.log(this.parkingSlotList);
     });
   }
 }
