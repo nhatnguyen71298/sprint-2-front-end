@@ -20,6 +20,9 @@ export class TicketService {
   API_PARK_CAR = 'http://localhost:8080/parking-slot/park-registered-car';
   API_CHECKOUT = 'http://localhost:8080/parking-slot/checkout-registered-car';
   API_FLOOR_ALL = 'http://localhost:8080/parking-slot/find-all-floor';
+  API_EXTEND_DURATION = 'http://localhost:8080/member-card/extend-duration';
+  API_UNREGISTER = 'http://localhost:8080/parking-slot/unregister-car';
+  API_ARRANGE_SLOT_REGISTER_CAR = 'http://localhost:8080/parking-slot/arrange-slot-registered-car';
 
   constructor(private http: HttpClient) {
   }
@@ -78,5 +81,17 @@ export class TicketService {
 
   findAllAvailableSlots(floor): Observable<any> {
     return this.http.get(this.API_SLOT_AVAILABLE_FIND_BY_FLOOR + '/' + floor);
+  }
+
+  extendDuration(memberCardId): Observable<any> {
+    return this.http.get(this.API_EXTEND_DURATION + '/' + memberCardId);
+  }
+
+  unregisterCar(plateNumber): Observable<any> {
+    return this.http.get(this.API_UNREGISTER + '/' + plateNumber);
+  }
+
+  arrangeSlotRegisterCar(plateNumber): Observable<any> {
+    return this.http.get(this.API_ARRANGE_SLOT_REGISTER_CAR + '/' + plateNumber);
   }
 }

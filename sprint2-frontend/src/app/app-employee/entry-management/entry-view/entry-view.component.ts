@@ -15,6 +15,9 @@ export class EntryViewComponent implements OnInit {
   carTypes;
   message;
   plateNumberFromCamera;
+  invalidMemberCard = false;
+  memberCard;
+
   constructor(private formBuilder: FormBuilder,
               private ticketService: TicketService,
               private datePipe: DatePipe,
@@ -67,7 +70,11 @@ export class EntryViewComponent implements OnInit {
         };
         const isRegistered = this.ticketForm.value.startDate !== '';
         const isValid = this.checkMemberCardValid(endDate);
-        console.log(endDate);
+        if (!isValid) {
+          this.ticketService.unregisterCar(ticket.car.plateNumber).subscribe(next => {
+            console.log(next);
+          });
+        }
         // if car not register or member card expired
         if (!isRegistered || !isValid) {
           this.ticketService.saveTicket(ticket).subscribe(next => {
@@ -135,6 +142,12 @@ export class EntryViewComponent implements OnInit {
           duration: 1000
         });
         const currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-ddTHH:mm');
+        this.ticketService.findMemberCardsByCar(car).subscribe(next2 => {
+          const memberCard = next2[next2.length - 1];
+          this.memberCard = memberCard;
+          // check valid member card
+          this.invalidMemberCard = !this.checkMemberCardValid(memberCard.endDate);
+        });
         // car not register parked
         if (next.parkingSlot != null && !next.parkingSlot.reserved) {
           const ticketList = next.parkingSlot.car.ticketList;
@@ -154,12 +167,15 @@ export class EntryViewComponent implements OnInit {
           // car registered
           this.ticketService.findMemberCardsByCar(car).subscribe(next2 => {
             let memberCard = next2[next2.length - 1];
+            this.memberCard = memberCard;
             let id = 0;
-            if (typeof  memberCard.car === 'object') {
+            if (typeof memberCard.car === 'object') {
               id = memberCard.car.id;
             } else {
               id = memberCard.car;
             }
+            // check valid member card
+            this.invalidMemberCard = !this.checkMemberCardValid(memberCard.endDate);
             this.ticketService.findSlotByCarId(id).subscribe(next3 => {
               const parkingSlot = next3;
               const memberCardList = parkingSlot.car.memberCardList;
@@ -337,15 +353,34 @@ export class EntryViewComponent implements OnInit {
     return isValid ? null : {whitespace: true};
   }
 
-  getCarInfor($event: any) {
+  getCarInfo($event: any) {
     console.log($event);
-    this.ticketForm.controls['plateNumber'].setValue($event.plateNumber);
+    this.ticketForm.controls.plateNumber.setValue($event.plateNumber);
     console.log(this.plateNumberFromCamera);
     this.findCar();
   }
 
   reset() {
-    this.ticketForm.controls['plateNumber'].setValue('');
+    this.ticketForm.controls.plateNumber.setValue('');
     this.ticketForm.reset();
+  }
+
+  extend() {
+    console.log(this.ticketForm.value.slot);
+    if (this.ticketForm.value.slot == null) {
+      this.ticketService.arrangeSlotRegisterCar(this.ticketForm.value.plateNumber).subscribe(next => {
+        this.extendDuration();
+      });
+    } else {
+      this.extendDuration();
+    }
+  }
+
+  extendDuration() {
+    this.ticketService.extendDuration(this.memberCard.id).subscribe(next => {
+      console.log(next);
+      this.invalidMemberCard = false;
+      this.findCar();
+    });
   }
 }
